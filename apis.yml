@@ -1,0 +1,43 @@
+name: Google Display & Video 360 API
+description: >-
+  The Display & Video 360 API enables programmatic management of display, video,
+  and audio advertising campaigns. It provides access to advertisers, campaigns,
+  insertion orders, line items, creatives, targeting, and audience management for
+  enterprise-scale programmatic buying.
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/google-display-video-360/refs/heads/main/apis.yml
+created: '2026-03-13'
+modified: '2026-03-13'
+specificationVersion: '0.18'
+tags:
+  - Programmatic Advertising
+  - Display Ads
+  - Video Ads
+  - Campaign Management
+  - Targeting
+  - DV360
+apis:
+  - name: Google Display & Video 360 API
+    description: >-
+      The DV360 API provides programmatic access to manage advertisers,
+      campaigns, insertion orders, line items, creatives, targeting options,
+      and audience segments for programmatic media buying.
+    humanURL: https://developers.google.com/display-video/api/guides/getting-started/overview
+    baseURL: https://displayvideo.googleapis.com
+    properties:
+      - type: OpenAPI
+        url: openapi/openapi.yml
+      - type: JSONSchema
+        url: json-schema/json-schema.yml
+      - type: JSONLD
+        url: json-ld/json-ld.yml
+common:
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+  - type: Pricing
+    url: https://marketingplatform.google.com/about/display-video-360/
+  - type: JSONLD
+    url: json-ld/json-ld.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

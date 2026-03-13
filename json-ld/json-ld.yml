@@ -1,0 +1,16 @@
+"@context":
+  "@vocab": https://schema.org/
+  dv360: https://developers.google.com/display-video/api/reference/rest/v4/
+  name: schema:name
+  description: schema:description
+  url: schema:url
+  advertiserId: dv360:advertiserId
+  campaignId: dv360:campaignId
+  insertionOrderId: dv360:insertionOrderId
+  lineItemId: dv360:lineItemId
+  creativeId: dv360:creativeId
+  displayName: dv360:displayName
+  entityStatus: dv360:entityStatus
+  partnerId: dv360:partnerId
+  lineItemType: dv360:lineItemType
+  creativeType: dv360:creativeType

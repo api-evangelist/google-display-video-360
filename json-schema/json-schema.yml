@@ -1,0 +1,97 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://raw.githubusercontent.com/api-evangelist/google-display-video-360/refs/heads/main/json-schema/json-schema.yml
+title: Google Display & Video 360 API Schema
+description: >-
+  JSON Schema for the Display & Video 360 API covering advertisers, campaigns,
+  insertion orders, line items, and creatives.
+type: object
+properties:
+  Advertiser:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Resource name of the advertiser.
+      advertiserId:
+        type: string
+        description: The unique ID of the advertiser.
+      displayName:
+        type: string
+        description: The display name of the advertiser.
+      entityStatus:
+        type: string
+        enum:
+          - ENTITY_STATUS_ACTIVE
+          - ENTITY_STATUS_PAUSED
+          - ENTITY_STATUS_ARCHIVED
+      partnerId:
+        type: string
+        description: The ID of the partner the advertiser belongs to.
+    required:
+      - name
+      - advertiserId
+  Campaign:
+    type: object
+    properties:
+      name:
+        type: string
+      campaignId:
+        type: string
+      displayName:
+        type: string
+      entityStatus:
+        type: string
+    required:
+      - name
+      - campaignId
+  InsertionOrder:
+    type: object
+    properties:
+      name:
+        type: string
+      insertionOrderId:
+        type: string
+      displayName:
+        type: string
+      entityStatus:
+        type: string
+    required:
+      - name
+      - insertionOrderId
+  LineItem:
+    type: object
+    properties:
+      name:
+        type: string
+      lineItemId:
+        type: string
+      displayName:
+        type: string
+      lineItemType:
+        type: string
+      entityStatus:
+        type: string
+    required:
+      - name
+      - lineItemId
+  Creative:
+    type: object
+    properties:
+      name:
+        type: string
+      creativeId:
+        type: string
+      displayName:
+        type: string
+      creativeType:
+        type: string
+      dimensions:
+        type: object
+        properties:
+          widthPixels:
+            type: integer
+          heightPixels:
+            type: integer
+    required:
+      - name
+      - creativeId

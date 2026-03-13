@@ -1,0 +1,269 @@
+openapi: 3.1.0
+info:
+  title: Google Display & Video 360 API
+  description: >-
+    The Display & Video 360 API enables programmatic management of display,
+    video, and audio advertising campaigns including advertisers, campaigns,
+    insertion orders, line items, creatives, targeting, and audiences.
+  version: v4
+  contact:
+    name: Google
+    url: https://developers.google.com/display-video/api/reference/rest
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+servers:
+  - url: https://displayvideo.googleapis.com
+    description: Display & Video 360 API server
+paths:
+  /v4/advertisers:
+    get:
+      summary: List advertisers
+      description: Lists advertisers accessible to the current user.
+      operationId: listAdvertisers
+      parameters:
+        - name: partnerId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+        - name: pageToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAdvertisersResponse'
+  /v4/advertisers/{advertiserId}/campaigns:
+    get:
+      summary: List campaigns
+      description: Lists campaigns in an advertiser.
+      operationId: listCampaigns
+      parameters:
+        - name: advertiserId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCampaignsResponse'
+  /v4/advertisers/{advertiserId}/insertionOrders:
+    get:
+      summary: List insertion orders
+      description: Lists insertion orders in an advertiser.
+      operationId: listInsertionOrders
+      parameters:
+        - name: advertiserId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInsertionOrdersResponse'
+  /v4/advertisers/{advertiserId}/lineItems:
+    get:
+      summary: List line items
+      description: Lists line items in an advertiser.
+      operationId: listLineItems
+      parameters:
+        - name: advertiserId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLineItemsResponse'
+  /v4/advertisers/{advertiserId}/creatives:
+    get:
+      summary: List creatives
+      description: Lists creatives in an advertiser.
+      operationId: listCreatives
+      parameters:
+        - name: advertiserId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCreativesResponse'
+components:
+  schemas:
+    Advertiser:
+      type: object
+      properties:
+        name:
+          type: string
+        advertiserId:
+          type: string
+        displayName:
+          type: string
+        entityStatus:
+          type: string
+          enum:
+            - ENTITY_STATUS_ACTIVE
+            - ENTITY_STATUS_PAUSED
+            - ENTITY_STATUS_ARCHIVED
+        partnerId:
+          type: string
+    ListAdvertisersResponse:
+      type: object
+      properties:
+        advertisers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Advertiser'
+        nextPageToken:
+          type: string
+    Campaign:
+      type: object
+      properties:
+        name:
+          type: string
+        campaignId:
+          type: string
+        displayName:
+          type: string
+        entityStatus:
+          type: string
+        campaignGoal:
+          type: object
+          properties:
+            campaignGoalType:
+              type: string
+            performanceGoal:
+              type: object
+              properties:
+                performanceGoalType:
+                  type: string
+                performanceGoalAmountMicros:
+                  type: string
+    ListCampaignsResponse:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+        nextPageToken:
+          type: string
+    InsertionOrder:
+      type: object
+      properties:
+        name:
+          type: string
+        insertionOrderId:
+          type: string
+        displayName:
+          type: string
+        entityStatus:
+          type: string
+        budget:
+          type: object
+          properties:
+            budgetUnit:
+              type: string
+            automationType:
+              type: string
+    ListInsertionOrdersResponse:
+      type: object
+      properties:
+        insertionOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsertionOrder'
+        nextPageToken:
+          type: string
+    LineItem:
+      type: object
+      properties:
+        name:
+          type: string
+        lineItemId:
+          type: string
+        displayName:
+          type: string
+        lineItemType:
+          type: string
+        entityStatus:
+          type: string
+        budget:
+          type: object
+          properties:
+            budgetAllocationType:
+              type: string
+    ListLineItemsResponse:
+      type: object
+      properties:
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        nextPageToken:
+          type: string
+    Creative:
+      type: object
+      properties:
+        name:
+          type: string
+        creativeId:
+          type: string
+        displayName:
+          type: string
+        creativeType:
+          type: string
+        dimensions:
+          type: object
+          properties:
+            widthPixels:
+              type: integer
+            heightPixels:
+              type: integer
+    ListCreativesResponse:
+      type: object
+      properties:
+        creatives:
+          type: array
+          items:
+            $ref: '#/components/schemas/Creative'
+        nextPageToken:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/display-video: Manage Display & Video 360 data
+security:
+  - oauth2:
+      - https://www.googleapis.com/auth/display-video
