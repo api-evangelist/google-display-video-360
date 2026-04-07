@@ -12,12 +12,12 @@ modified: '2026-03-16'
 specificationVersion: '0.19'
 type: Index
 tags:
-  - Programmatic Advertising
-  - Display Ads
-  - Video Ads
   - Campaign Management
-  - Targeting
+  - Display Ads
   - DV360
+  - Programmatic Advertising
+  - Targeting
+  - Video Ads
 apis:
   - name: Google Display & Video 360 API
     description: >-

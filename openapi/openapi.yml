@@ -42,6 +42,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListAdvertisersResponse'
+      tags:
+        - Advertisers
   /v4/advertisers/{advertiserId}/campaigns:
     get:
       summary: Google Display & Video 360 List campaigns
@@ -60,6 +62,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListCampaignsResponse'
+      tags:
+        - Advertisers
   /v4/advertisers/{advertiserId}/insertionOrders:
     get:
       summary: Google Display & Video 360 List insertion orders
@@ -78,6 +82,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListInsertionOrdersResponse'
+      tags:
+        - Advertisers
   /v4/advertisers/{advertiserId}/lineItems:
     get:
       summary: Google Display & Video 360 List line items
@@ -96,6 +102,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListLineItemsResponse'
+      tags:
+        - Advertisers
   /v4/advertisers/{advertiserId}/creatives:
     get:
       summary: Google Display & Video 360 List creatives
@@ -114,6 +122,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListCreativesResponse'
+      tags:
+        - Advertisers
 components:
   schemas:
     Advertiser:
@@ -267,3 +277,5 @@ components:
 security:
   - oauth2:
       - https://www.googleapis.com/auth/display-video
+tags:
+  - name: Advertisers
