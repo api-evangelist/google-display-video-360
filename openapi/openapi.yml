@@ -18,7 +18,7 @@ servers:
 paths:
   /v4/advertisers:
     get:
-      summary: List advertisers
+      summary: Google Display & Video 360 List advertisers
       description: Lists advertisers accessible to the current user.
       operationId: listAdvertisers
       parameters:
@@ -44,7 +44,7 @@ paths:
                 $ref: '#/components/schemas/ListAdvertisersResponse'
   /v4/advertisers/{advertiserId}/campaigns:
     get:
-      summary: List campaigns
+      summary: Google Display & Video 360 List campaigns
       description: Lists campaigns in an advertiser.
       operationId: listCampaigns
       parameters:
@@ -62,7 +62,7 @@ paths:
                 $ref: '#/components/schemas/ListCampaignsResponse'
   /v4/advertisers/{advertiserId}/insertionOrders:
     get:
-      summary: List insertion orders
+      summary: Google Display & Video 360 List insertion orders
       description: Lists insertion orders in an advertiser.
       operationId: listInsertionOrders
       parameters:
@@ -80,7 +80,7 @@ paths:
                 $ref: '#/components/schemas/ListInsertionOrdersResponse'
   /v4/advertisers/{advertiserId}/lineItems:
     get:
-      summary: List line items
+      summary: Google Display & Video 360 List line items
       description: Lists line items in an advertiser.
       operationId: listLineItems
       parameters:
@@ -98,7 +98,7 @@ paths:
                 $ref: '#/components/schemas/ListLineItemsResponse'
   /v4/advertisers/{advertiserId}/creatives:
     get:
-      summary: List creatives
+      summary: Google Display & Video 360 List creatives
       description: Lists creatives in an advertiser.
       operationId: listCreatives
       parameters:
