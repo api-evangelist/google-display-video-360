@@ -1,0 +1,276 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Display & Video 360 API
+  description: The Display & Video 360 API enables programmatic management of display, video, and audio advertising campaigns
+    including advertisers, campaigns, insertion orders, line items, creatives, targeting, and audiences.
+  tags:
+  - Google
+  - Display
+  - Video
+  - '360'
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: google-display-video-360
+    baseUri: https://displayvideo.googleapis.com
+    description: Google Display & Video 360 API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{GOOGLE_DISPLAY_VIDEO_360_TOKEN}}'
+    resources:
+    - name: v4-advertisers
+      path: /v4/advertisers
+      operations:
+      - name: listadvertisers
+        method: GET
+        description: Google Display & Video 360 List advertisers
+        inputParameters:
+        - name: partnerId
+          in: query
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+        - name: pageToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v4-advertisers-advertiserid-campaigns
+      path: /v4/advertisers/{advertiserId}/campaigns
+      operations:
+      - name: listcampaigns
+        method: GET
+        description: Google Display & Video 360 List campaigns
+        inputParameters:
+        - name: advertiserId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v4-advertisers-advertiserid-insertionorders
+      path: /v4/advertisers/{advertiserId}/insertionOrders
+      operations:
+      - name: listinsertionorders
+        method: GET
+        description: Google Display & Video 360 List insertion orders
+        inputParameters:
+        - name: advertiserId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v4-advertisers-advertiserid-lineitems
+      path: /v4/advertisers/{advertiserId}/lineItems
+      operations:
+      - name: listlineitems
+        method: GET
+        description: Google Display & Video 360 List line items
+        inputParameters:
+        - name: advertiserId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v4-advertisers-advertiserid-creatives
+      path: /v4/advertisers/{advertiserId}/creatives
+      operations:
+      - name: listcreatives
+        method: GET
+        description: Google Display & Video 360 List creatives
+        inputParameters:
+        - name: advertiserId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: google-display-video-360-rest
+    description: REST adapter for Google Display & Video 360 API.
+    resources:
+    - path: /v4/advertisers
+      name: listadvertisers
+      operations:
+      - method: GET
+        name: listadvertisers
+        description: Google Display & Video 360 List advertisers
+        call: google-display-video-360.listadvertisers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v4/advertisers/{advertiserId}/campaigns
+      name: listcampaigns
+      operations:
+      - method: GET
+        name: listcampaigns
+        description: Google Display & Video 360 List campaigns
+        call: google-display-video-360.listcampaigns
+        with:
+          advertiserId: rest.advertiserId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v4/advertisers/{advertiserId}/insertionOrders
+      name: listinsertionorders
+      operations:
+      - method: GET
+        name: listinsertionorders
+        description: Google Display & Video 360 List insertion orders
+        call: google-display-video-360.listinsertionorders
+        with:
+          advertiserId: rest.advertiserId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v4/advertisers/{advertiserId}/lineItems
+      name: listlineitems
+      operations:
+      - method: GET
+        name: listlineitems
+        description: Google Display & Video 360 List line items
+        call: google-display-video-360.listlineitems
+        with:
+          advertiserId: rest.advertiserId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v4/advertisers/{advertiserId}/creatives
+      name: listcreatives
+      operations:
+      - method: GET
+        name: listcreatives
+        description: Google Display & Video 360 List creatives
+        call: google-display-video-360.listcreatives
+        with:
+          advertiserId: rest.advertiserId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: google-display-video-360-mcp
+    transport: http
+    description: MCP adapter for Google Display & Video 360 API for AI agent use.
+    tools:
+    - name: listadvertisers
+      description: Google Display & Video 360 List advertisers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-display-video-360.listadvertisers
+      with:
+        partnerId: tools.partnerId
+        pageSize: tools.pageSize
+        pageToken: tools.pageToken
+      inputParameters:
+      - name: partnerId
+        type: string
+        description: partnerId
+        required: true
+      - name: pageSize
+        type: integer
+        description: pageSize
+      - name: pageToken
+        type: string
+        description: pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listcampaigns
+      description: Google Display & Video 360 List campaigns
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-display-video-360.listcampaigns
+      with:
+        advertiserId: tools.advertiserId
+      inputParameters:
+      - name: advertiserId
+        type: string
+        description: advertiserId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listinsertionorders
+      description: Google Display & Video 360 List insertion orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-display-video-360.listinsertionorders
+      with:
+        advertiserId: tools.advertiserId
+      inputParameters:
+      - name: advertiserId
+        type: string
+        description: advertiserId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listlineitems
+      description: Google Display & Video 360 List line items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-display-video-360.listlineitems
+      with:
+        advertiserId: tools.advertiserId
+      inputParameters:
+      - name: advertiserId
+        type: string
+        description: advertiserId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listcreatives
+      description: Google Display & Video 360 List creatives
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-display-video-360.listcreatives
+      with:
+        advertiserId: tools.advertiserId
+      inputParameters:
+      - name: advertiserId
+        type: string
+        description: advertiserId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    GOOGLE_DISPLAY_VIDEO_360_TOKEN: GOOGLE_DISPLAY_VIDEO_360_TOKEN
