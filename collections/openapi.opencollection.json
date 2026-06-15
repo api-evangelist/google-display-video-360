@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Display & Video 360 API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Advertisers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Display & Video 360 List advertisers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://displayvideo.googleapis.com/v4/advertisers",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists advertisers accessible to the current user."
+        },
+        {
+          "info": {
+            "name": "Google Display & Video 360 List campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://displayvideo.googleapis.com/v4/advertisers/:advertiserId/campaigns",
+            "params": [
+              {
+                "name": "advertiserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists campaigns in an advertiser."
+        },
+        {
+          "info": {
+            "name": "Google Display & Video 360 List insertion orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://displayvideo.googleapis.com/v4/advertisers/:advertiserId/insertionOrders",
+            "params": [
+              {
+                "name": "advertiserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists insertion orders in an advertiser."
+        },
+        {
+          "info": {
+            "name": "Google Display & Video 360 List line items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://displayvideo.googleapis.com/v4/advertisers/:advertiserId/lineItems",
+            "params": [
+              {
+                "name": "advertiserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists line items in an advertiser."
+        },
+        {
+          "info": {
+            "name": "Google Display & Video 360 List creatives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://displayvideo.googleapis.com/v4/advertisers/:advertiserId/creatives",
+            "params": [
+              {
+                "name": "advertiserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists creatives in an advertiser."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,563 @@
+{
+  "item": [
+    {
+      "id": "68687407-5dfd-4515-b6d9-c2dc96a94f4f",
+      "name": "Advertisers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fc829a5-001e-42d9-bfbe-418060590d19",
+          "name": "Google Display & Video 360 List advertisers",
+          "request": {
+            "name": "Google Display & Video 360 List advertisers",
+            "description": {
+              "content": "Lists advertisers accessible to the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "advertisers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c07da60-2682-4ee3-96a4-d7677ff56935",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "advertisers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"advertisers\": [\n    {\n      \"name\": \"string\",\n      \"advertiserId\": \"string\",\n      \"displayName\": \"string\",\n      \"entityStatus\": \"ENTITY_STATUS_PAUSED\",\n      \"partnerId\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"advertiserId\": \"string\",\n      \"displayName\": \"string\",\n      \"entityStatus\": \"ENTITY_STATUS_ACTIVE\",\n      \"partnerId\": \"string\"\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d004bff-5dab-49b2-8470-29a058c21a29",
+          "name": "Google Display & Video 360 List campaigns",
+          "request": {
+            "name": "Google Display & Video 360 List campaigns",
+            "description": {
+              "content": "Lists campaigns in an advertiser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "advertisers",
+                ":advertiserId",
+                "campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "advertiserId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab324cd8-1127-4ff0-ac08-9d0d229c2c09",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "advertisers",
+                    ":advertiserId",
+                    "campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "advertiserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaigns\": [\n    {\n      \"name\": \"string\",\n      \"campaignId\": \"string\",\n      \"displayName\": \"string\",\n      \"entityStatus\": \"string\",\n      \"campaignGoal\": {\n        \"campaignGoalType\": \"string\",\n        \"performanceGoal\": {\n          \"performanceGoalType\": \"string\",\n          \"performanceGoalAmountMicros\": \"string\"\n        }\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"campaignId\": \"string\",\n      \"displayName\": \"string\",\n      \"entityStatus\": \"string\",\n      \"campaignGoal\": {\n        \"campaignGoalType\": \"string\",\n        \"performanceGoal\": {\n          \"performanceGoalType\": \"string\",\n          \"performanceGoalAmountMicros\": \"string\"\n        }\n      }\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ad0700a-e39d-4770-b3b7-25d0ee185294",
+          "name": "Google Display & Video 360 List insertion orders",
+          "request": {
+            "name": "Google Display & Video 360 List insertion orders",
+            "description": {
+              "content": "Lists insertion orders in an advertiser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "advertisers",
+                ":advertiserId",
+                "insertionOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "advertiserId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cd10606-06e9-4210-a741-22aa5285ec1f",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "advertisers",
+                    ":advertiserId",
+                    "insertionOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "advertiserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"insertionOrders\": [\n    {\n      \"name\": \"string\",\n      \"insertionOrderId\": \"string\",\n      \"displayName\": \"string\",\n      \"entityStatus\": \"string\",\n      \"budget\": {\n        \"budgetUnit\": \"string\",\n        \"automationType\": \"string\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"insertionOrderId\": \"string\",\n      \"displayName\": \"string\",\n      \"entityStatus\": \"string\",\n      \"budget\": {\n        \"budgetUnit\": \"string\",\n        \"automationType\": \"string\"\n      }\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e75e7d5-5c98-49d3-80de-d2009f2ef411",
+          "name": "Google Display & Video 360 List line items",
+          "request": {
+            "name": "Google Display & Video 360 List line items",
+            "description": {
+              "content": "Lists line items in an advertiser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "advertisers",
+                ":advertiserId",
+                "lineItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "advertiserId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c05a711f-26d0-45f2-8185-34f8f568a8fb",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "advertisers",
+                    ":advertiserId",
+                    "lineItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "advertiserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lineItems\": [\n    {\n      \"name\": \"string\",\n      \"lineItemId\": \"string\",\n      \"displayName\": \"string\",\n      \"lineItemType\": \"string\",\n      \"entityStatus\": \"string\",\n      \"budget\": {\n        \"budgetAllocationType\": \"string\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"lineItemId\": \"string\",\n      \"displayName\": \"string\",\n      \"lineItemType\": \"string\",\n      \"entityStatus\": \"string\",\n      \"budget\": {\n        \"budgetAllocationType\": \"string\"\n      }\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "068b5c05-6efb-4673-a861-99ee3121aeca",
+          "name": "Google Display & Video 360 List creatives",
+          "request": {
+            "name": "Google Display & Video 360 List creatives",
+            "description": {
+              "content": "Lists creatives in an advertiser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "advertisers",
+                ":advertiserId",
+                "creatives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "advertiserId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8dd1fe44-ad74-4e5c-8a7a-83d510d646ef",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "advertisers",
+                    ":advertiserId",
+                    "creatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "advertiserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"creatives\": [\n    {\n      \"name\": \"string\",\n      \"creativeId\": \"string\",\n      \"displayName\": \"string\",\n      \"creativeType\": \"string\",\n      \"dimensions\": {\n        \"widthPixels\": 7023,\n        \"heightPixels\": 9560\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"creativeId\": \"string\",\n      \"displayName\": \"string\",\n      \"creativeType\": \"string\",\n      \"dimensions\": {\n        \"widthPixels\": 9003,\n        \"heightPixels\": 4328\n      }\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://displayvideo.googleapis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/display-video"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0923c6ec-c12f-4994-ad4d-2a161c5efada",
+    "name": "Google Display & Video 360 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Display & Video 360 API enables programmatic management of display, video, and audio advertising campaigns including advertisers, campaigns, insertion orders, line items, creatives, targeting, and audiences.\n\nContact Support:\n Name: Google",
+      "type": "text/plain"
+    }
+  }
+}
