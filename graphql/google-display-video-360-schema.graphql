@@ -1,0 +1,1905 @@
+"""
+Google Display & Video 360 GraphQL Schema
+Conceptual schema derived from the DV360 REST API surface.
+Covers advertiser management, campaigns, insertion orders, line items,
+targeting options, creatives, channels, audiences, and reporting.
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+scalar Long
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum EntityStatus {
+  ENTITY_STATUS_UNSPECIFIED
+  ENTITY_STATUS_ACTIVE
+  ENTITY_STATUS_ARCHIVED
+  ENTITY_STATUS_DRAFT
+  ENTITY_STATUS_PAUSED
+  ENTITY_STATUS_SCHEDULED_FOR_DELETION
+}
+
+enum BillingConfig {
+  BILLING_CONFIG_UNSPECIFIED
+  BILLING_CONFIG_PARTNER
+  BILLING_CONFIG_ADVERTISER
+}
+
+enum CurrencyCode {
+  USD
+  EUR
+  GBP
+  JPY
+  CAD
+  AUD
+  BRL
+  INR
+  CNY
+  KRW
+}
+
+enum PacingType {
+  PACING_TYPE_UNSPECIFIED
+  PACING_TYPE_AHEAD
+  PACING_TYPE_ASAP
+  PACING_TYPE_EVEN
+}
+
+enum PacingPeriod {
+  PACING_PERIOD_UNSPECIFIED
+  PACING_PERIOD_DAILY
+  PACING_PERIOD_FLIGHT
+}
+
+enum FrequencyCapTimeUnit {
+  TIME_UNIT_UNSPECIFIED
+  TIME_UNIT_LIFETIME
+  TIME_UNIT_MONTHS
+  TIME_UNIT_WEEKS
+  TIME_UNIT_DAYS
+  TIME_UNIT_HOURS
+  TIME_UNIT_MINUTES
+}
+
+enum LineItemType {
+  LINE_ITEM_TYPE_UNSPECIFIED
+  LINE_ITEM_TYPE_DISPLAY_DEFAULT
+  LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INSTALL
+  LINE_ITEM_TYPE_VIDEO_DEFAULT
+  LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INSTALL
+  LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INVENTORY
+  LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INVENTORY
+  LINE_ITEM_TYPE_AUDIO_DEFAULT
+  LINE_ITEM_TYPE_VIDEO_OVER_THE_TOP
+}
+
+enum BidStrategy {
+  BID_STRATEGY_UNSPECIFIED
+  BID_STRATEGY_FIXED
+  BID_STRATEGY_MAXIMIZE_CONVERSIONS
+  BID_STRATEGY_TARGET_CPA
+  BID_STRATEGY_TARGET_ROAS
+  BID_STRATEGY_MINIMIZE_VIEWABLE_CPM
+}
+
+enum CreativeType {
+  CREATIVE_TYPE_UNSPECIFIED
+  CREATIVE_TYPE_STANDARD
+  CREATIVE_TYPE_EXPANDABLE
+  CREATIVE_TYPE_VIDEO
+  CREATIVE_TYPE_NATIVE
+  CREATIVE_TYPE_TEMPLATED_APP_INSTALL
+  CREATIVE_TYPE_INTERSTITIAL
+  CREATIVE_TYPE_LIGHTBOX
+  CREATIVE_TYPE_RICH_MEDIA
+  CREATIVE_TYPE_AUDIO
+  CREATIVE_TYPE_CONNECTED_TV
+  CREATIVE_TYPE_NATIVE_SITE
+}
+
+enum CreativeReviewStatus {
+  REVIEW_STATUS_UNSPECIFIED
+  REVIEW_STATUS_APPROVED
+  REVIEW_STATUS_REJECTED
+  REVIEW_STATUS_PENDING
+  REVIEW_STATUS_APPROVED_LIMITED
+}
+
+enum TargetingType {
+  TARGETING_TYPE_UNSPECIFIED
+  TARGETING_TYPE_CHANNEL
+  TARGETING_TYPE_APP_CATEGORY
+  TARGETING_TYPE_APP
+  TARGETING_TYPE_URL
+  TARGETING_TYPE_DAY_AND_TIME
+  TARGETING_TYPE_AGE_RANGE
+  TARGETING_TYPE_REGIONAL_LOCATION_LIST
+  TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+  TARGETING_TYPE_GENDER
+  TARGETING_TYPE_VIDEO_PLAYER_SIZE
+  TARGETING_TYPE_USER_REWARDED_CONTENT
+  TARGETING_TYPE_PARENTAL_STATUS
+  TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+  TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+  TARGETING_TYPE_DEVICE_TYPE
+  TARGETING_TYPE_AUDIENCE_GROUP
+  TARGETING_TYPE_BROWSER
+  TARGETING_TYPE_HOUSEHOLD_INCOME
+  TARGETING_TYPE_ON_SCREEN_POSITION
+  TARGETING_TYPE_THIRD_PARTY_VERIFIER
+  TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+  TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+  TARGETING_TYPE_ENVIRONMENT
+  TARGETING_TYPE_CARRIER_AND_ISP
+  TARGETING_TYPE_OPERATING_SYSTEM
+  TARGETING_TYPE_DEVICE_MAKE_MODEL
+  TARGETING_TYPE_KEYWORD
+  TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+  TARGETING_TYPE_VIEWABILITY
+  TARGETING_TYPE_CATEGORY
+  TARGETING_TYPE_LANGUAGE
+  TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+  TARGETING_TYPE_GEO_REGION
+  TARGETING_TYPE_INVENTORY_SOURCE
+  TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+  TARGETING_TYPE_EXCHANGE
+  TARGETING_TYPE_SUB_EXCHANGE
+  TARGETING_TYPE_YOUTUBE_VIDEO
+  TARGETING_TYPE_YOUTUBE_CHANNEL
+  TARGETING_TYPE_SESSION_POSITION
+  TARGETING_TYPE_CONTENT_GENRE
+}
+
+enum AgeRange {
+  AGE_RANGE_UNSPECIFIED
+  AGE_RANGE_18_24
+  AGE_RANGE_25_34
+  AGE_RANGE_35_44
+  AGE_RANGE_45_54
+  AGE_RANGE_55_64
+  AGE_RANGE_65_PLUS
+  AGE_RANGE_UNKNOWN
+}
+
+enum Gender {
+  GENDER_UNSPECIFIED
+  GENDER_MALE
+  GENDER_FEMALE
+  GENDER_UNKNOWN
+}
+
+enum DeviceType {
+  DEVICE_TYPE_UNSPECIFIED
+  DEVICE_TYPE_COMPUTER
+  DEVICE_TYPE_CONNECTED_TV
+  DEVICE_TYPE_SMART_PHONE
+  DEVICE_TYPE_TABLET
+}
+
+enum Environment {
+  ENVIRONMENT_UNSPECIFIED
+  ENVIRONMENT_WEB_OPTIMIZED
+  ENVIRONMENT_WEB_NOT_OPTIMIZED
+  ENVIRONMENT_APP
+}
+
+enum HouseholdIncome {
+  HOUSEHOLD_INCOME_UNSPECIFIED
+  HOUSEHOLD_INCOME_LOWER_50_PERCENT
+  HOUSEHOLD_INCOME_TOP_41_TO_50_PERCENT
+  HOUSEHOLD_INCOME_TOP_31_TO_40_PERCENT
+  HOUSEHOLD_INCOME_TOP_21_TO_30_PERCENT
+  HOUSEHOLD_INCOME_TOP_11_TO_20_PERCENT
+  HOUSEHOLD_INCOME_TOP_10_PERCENT
+  HOUSEHOLD_INCOME_UNKNOWN
+}
+
+enum ParentalStatus {
+  PARENTAL_STATUS_UNSPECIFIED
+  PARENTAL_STATUS_PARENT
+  PARENTAL_STATUS_NOT_A_PARENT
+  PARENTAL_STATUS_UNKNOWN
+}
+
+enum ReportType {
+  REPORT_TYPE_UNSPECIFIED
+  REPORT_TYPE_STANDARD
+  REPORT_TYPE_INVENTORY_AVAILABILITY
+  REPORT_TYPE_AUDIENCE_COMPOSITION
+  REPORT_TYPE_FLOODLIGHT
+  REPORT_TYPE_YOUTUBE
+  REPORT_TYPE_GRP
+  REPORT_TYPE_YOUTUBE_PROGRAMMATIC_GUARANTEED
+  REPORT_TYPE_REACH
+}
+
+enum ReportStatus {
+  REPORT_STATUS_UNSPECIFIED
+  REPORT_STATUS_QUEUED
+  REPORT_STATUS_RUNNING
+  REPORT_STATUS_DONE
+  REPORT_STATUS_FAILED
+}
+
+enum ChannelType {
+  CHANNEL_TYPE_UNSPECIFIED
+  CHANNEL_TYPE_DISPLAY
+  CHANNEL_TYPE_VIDEO
+  CHANNEL_TYPE_AUDIO
+}
+
+enum InsertionOrderType {
+  INSERTION_ORDER_TYPE_UNSPECIFIED
+  INSERTION_ORDER_TYPE_RTB
+  INSERTION_ORDER_TYPE_OVER_THE_TOP
+}
+
+enum InventorySourceType {
+  INVENTORY_SOURCE_TYPE_UNSPECIFIED
+  INVENTORY_SOURCE_TYPE_PRIVATE
+  INVENTORY_SOURCE_TYPE_AUCTION_PACKAGE
+  INVENTORY_SOURCE_TYPE_DIRECT_DEAL
+  INVENTORY_SOURCE_TYPE_DATA_PARTNER_SEGMENT
+}
+
+enum FloodlightActivityType {
+  FLOODLIGHT_ACTIVITY_TYPE_UNSPECIFIED
+  FLOODLIGHT_ACTIVITY_TYPE_SALE
+  FLOODLIGHT_ACTIVITY_TYPE_COUNTER
+}
+
+enum PerformanceGoalType {
+  PERFORMANCE_GOAL_TYPE_UNSPECIFIED
+  PERFORMANCE_GOAL_TYPE_CPM
+  PERFORMANCE_GOAL_TYPE_CPC
+  PERFORMANCE_GOAL_TYPE_CPA
+  PERFORMANCE_GOAL_TYPE_CTR
+  PERFORMANCE_GOAL_TYPE_VIEWABILITY
+  PERFORMANCE_GOAL_TYPE_CPIAVC
+  PERFORMANCE_GOAL_TYPE_CPE
+  PERFORMANCE_GOAL_TYPE_CPV
+  PERFORMANCE_GOAL_TYPE_CLICK_CVR
+  PERFORMANCE_GOAL_TYPE_IMPRESSION_CVR
+  PERFORMANCE_GOAL_TYPE_VCPM
+  PERFORMANCE_GOAL_TYPE_VTR
+  PERFORMANCE_GOAL_TYPE_AUDIO_COMPLETION_RATE
+  PERFORMANCE_GOAL_TYPE_VIDEO_COMPLETION_RATE
+  PERFORMANCE_GOAL_TYPE_CPCL
+  PERFORMANCE_GOAL_TYPE_CPCV
+  PERFORMANCE_GOAL_TYPE_TOS10
+  PERFORMANCE_GOAL_TYPE_MAXIMIZE_PACING
+  PERFORMANCE_GOAL_TYPE_CUSTOM_IMPRESSION_VALUE_OVER_COST
+}
+
+# ---------------------------------------------------------------------------
+# Supporting / Value Object Types
+# ---------------------------------------------------------------------------
+
+type Money {
+  currencyCode: CurrencyCode!
+  units: Long!
+  nanos: Int!
+}
+
+type DateRange {
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+type FrequencyCap {
+  unlimited: Boolean!
+  timeUnit: FrequencyCapTimeUnit
+  timeUnitCount: Int
+  maxImpressions: Int
+  maxViews: Int
+}
+
+type Pacing {
+  pacingType: PacingType!
+  pacingPeriod: PacingPeriod!
+  dailyMaxMicros: Long
+  dailyMaxImpressions: Long
+}
+
+type PerformanceGoal {
+  performanceGoalType: PerformanceGoalType!
+  performanceGoalAmountMicros: Long
+  performanceGoalPercentageMicros: Long
+  performanceGoalString: String
+}
+
+type BudgetSegment {
+  budgetAmountMicros: Long!
+  description: String
+  dateRange: DateRange!
+  campaignBudgetId: Long
+}
+
+type PartnerCost {
+  costType: String!
+  feeType: String!
+  feeAmount: Long
+  feePercentageMillis: Long
+  invoiceType: String
+}
+
+type GeoRegion {
+  geoRegionId: Long!
+  displayName: String!
+  countryCode: String
+  regionCode: String
+  geoRegionType: String!
+  targetingOptionId: String!
+}
+
+type ExchangeConfig {
+  enabledExchanges: [ExchangeReviewStatus!]!
+}
+
+type ExchangeReviewStatus {
+  exchange: String!
+  status: CreativeReviewStatus!
+}
+
+type AssetAssociation {
+  asset: Asset!
+  role: String!
+}
+
+type Asset {
+  mediaId: Long!
+  content: String!
+}
+
+type BiddingStrategy {
+  fixedBid: FixedBidStrategy
+  maximizeSpendAutoBid: MaximizeSpendBidStrategy
+  performanceGoalAutoBid: PerformanceGoalBidStrategy
+  youtubeAndPartnersBid: YoutubeAndPartnersBiddingStrategy
+}
+
+type FixedBidStrategy {
+  bidAmountMicros: Long!
+}
+
+type MaximizeSpendBidStrategy {
+  performanceGoalType: PerformanceGoalType!
+  maxAverageCpmBidAmountMicros: Long
+  raiseBidForDeals: Boolean
+  customBiddingAlgorithmId: Long
+}
+
+type PerformanceGoalBidStrategy {
+  performanceGoalType: PerformanceGoalType!
+  performanceGoalAmountMicros: Long!
+  maxAverageCpmBidAmountMicros: Long
+  customBiddingAlgorithmId: Long
+}
+
+type YoutubeAndPartnersBiddingStrategy {
+  type: BidStrategy!
+  value: Long
+  adGroupEffectiveTargetCpaSource: String
+  adGroupEffectiveTargetCpaValue: Long
+}
+
+type IntegrationDetails {
+  integrationCode: String
+  details: String
+}
+
+type TargetingOption {
+  targetingOptionId: String!
+  targetingType: TargetingType!
+  ageRangeDetails: AgeRangeTargetingOption
+  appCategoryDetails: AppCategoryTargetingOption
+  geoRegionDetails: GeoRegionTargetingOption
+  deviceTypeDetails: DeviceTypeTargetingOption
+  browserDetails: BrowserTargetingOption
+  languageDetails: LanguageTargetingOption
+  environmentDetails: EnvironmentTargetingOption
+  genderDetails: GenderTargetingOption
+  householdIncomeDetails: HouseholdIncomeTargetingOption
+  parentalStatusDetails: ParentalStatusTargetingOption
+  exchangeDetails: ExchangeTargetingOption
+}
+
+type AgeRangeTargetingOption {
+  ageRange: AgeRange!
+}
+
+type AppCategoryTargetingOption {
+  displayName: String!
+}
+
+type GeoRegionTargetingOption {
+  displayName: String!
+  geoRegionType: String!
+}
+
+type DeviceTypeTargetingOption {
+  deviceType: DeviceType!
+}
+
+type BrowserTargetingOption {
+  displayName: String!
+}
+
+type LanguageTargetingOption {
+  displayName: String!
+}
+
+type EnvironmentTargetingOption {
+  environment: Environment!
+}
+
+type GenderTargetingOption {
+  gender: Gender!
+}
+
+type HouseholdIncomeTargetingOption {
+  householdIncome: HouseholdIncome!
+}
+
+type ParentalStatusTargetingOption {
+  parentalStatus: ParentalStatus!
+}
+
+type ExchangeTargetingOption {
+  exchange: String!
+}
+
+type AssignedTargetingOption {
+  name: String!
+  assignedTargetingOptionId: String!
+  targetingType: TargetingType!
+  inheritance: String
+  channelDetails: ChannelAssignedTargetingOption
+  appCategoryDetails: AppCategoryAssignedTargetingOption
+  appDetails: AppAssignedTargetingOption
+  urlDetails: UrlAssignedTargetingOption
+  keywordDetails: KeywordAssignedTargetingOption
+  geoRegionDetails: GeoRegionAssignedTargetingOption
+  genderDetails: GenderAssignedTargetingOption
+  ageRangeDetails: AgeRangeAssignedTargetingOption
+  deviceTypeDetails: DeviceTypeAssignedTargetingOption
+  audienceGroupDetails: AudienceGroupAssignedTargetingOption
+  environmentDetails: EnvironmentAssignedTargetingOption
+  languageDetails: LanguageAssignedTargetingOption
+}
+
+type ChannelAssignedTargetingOption {
+  channelId: Long!
+  negative: Boolean!
+}
+
+type AppCategoryAssignedTargetingOption {
+  displayName: String
+  targetingOptionId: String!
+  negative: Boolean!
+}
+
+type AppAssignedTargetingOption {
+  appId: String!
+  displayName: String
+  negative: Boolean!
+  appPlatform: String
+}
+
+type UrlAssignedTargetingOption {
+  url: String!
+  negative: Boolean!
+}
+
+type KeywordAssignedTargetingOption {
+  keyword: String!
+  negative: Boolean!
+}
+
+type GeoRegionAssignedTargetingOption {
+  displayName: String
+  targetingOptionId: String!
+  geoRegionType: String
+  negative: Boolean!
+}
+
+type GenderAssignedTargetingOption {
+  gender: Gender!
+}
+
+type AgeRangeAssignedTargetingOption {
+  ageRange: AgeRange!
+}
+
+type DeviceTypeAssignedTargetingOption {
+  deviceType: DeviceType!
+  youtubeAndPartnersBidMultiplier: Float
+}
+
+type AudienceGroupAssignedTargetingOption {
+  includedFirstAndThirdPartyAudienceGroups: [FirstAndThirdPartyAudienceGroup!]
+  includedGoogleAudienceGroup: GoogleAudienceGroup
+  includedCustomListGroup: CustomListGroup
+  includedCombinedAudienceGroup: CombinedAudienceGroup
+  excludedFirstAndThirdPartyAudienceGroup: FirstAndThirdPartyAudienceGroup
+  excludedGoogleAudienceGroup: GoogleAudienceGroup
+}
+
+type FirstAndThirdPartyAudienceGroup {
+  settings: [FirstAndThirdPartyAudienceSetting!]!
+}
+
+type FirstAndThirdPartyAudienceSetting {
+  firstAndThirdPartyAudienceId: Long!
+  recency: String
+}
+
+type GoogleAudienceGroup {
+  settings: [GoogleAudienceSetting!]!
+}
+
+type GoogleAudienceSetting {
+  googleAudienceId: Long!
+}
+
+type CustomListGroup {
+  settings: [CustomListSetting!]!
+}
+
+type CustomListSetting {
+  customListId: Long!
+}
+
+type CombinedAudienceGroup {
+  settings: [CombinedAudienceSetting!]!
+}
+
+type CombinedAudienceSetting {
+  combinedAudienceId: Long!
+}
+
+type EnvironmentAssignedTargetingOption {
+  environment: Environment!
+}
+
+type LanguageAssignedTargetingOption {
+  displayName: String
+  targetingOptionId: String!
+  negative: Boolean!
+}
+
+# ---------------------------------------------------------------------------
+# Core Resource Types
+# ---------------------------------------------------------------------------
+
+type Partner {
+  name: String!
+  partnerId: Long!
+  displayName: String!
+  entityStatus: EntityStatus!
+  updateTime: DateTime!
+  generalConfig: PartnerGeneralConfig!
+  adServerConfig: PartnerAdServerConfig!
+  exchangeConfig: ExchangeConfig
+  dataAccessConfig: PartnerDataAccessConfig
+  billingConfig: PartnerBillingConfig
+}
+
+type PartnerGeneralConfig {
+  timeZone: String!
+  currencyCode: CurrencyCode!
+}
+
+type PartnerAdServerConfig {
+  measurementConfig: MeasurementConfig
+  thirdPartyOnlyConfig: ThirdPartyOnlyConfig
+  cmHybridConfig: CmHybridConfig
+}
+
+type MeasurementConfig {
+  dv360ToCmDataSharingEnabled: Boolean!
+  dv360ToCmCostReportingEnabled: Boolean!
+}
+
+type ThirdPartyOnlyConfig {
+  pixelOrderIdReportingEnabled: Boolean!
+}
+
+type CmHybridConfig {
+  cmAccountId: Long!
+  cmFloodlightConfigId: Long!
+  cmAdvertiserIds: [Long!]!
+  cmSyncableSiteIds: [Long!]!
+  dv360ToCmDataSharingEnabled: Boolean!
+  dv360ToCmCostReportingEnabled: Boolean!
+}
+
+type PartnerDataAccessConfig {
+  sdfConfig: SdfConfig
+}
+
+type SdfConfig {
+  version: String!
+  adminEmail: String
+}
+
+type PartnerBillingConfig {
+  billingProfileId: Long!
+}
+
+type Advertiser {
+  name: String!
+  advertiserId: Long!
+  partnerId: Long!
+  displayName: String!
+  entityStatus: EntityStatus!
+  updateTime: DateTime!
+  generalConfig: AdvertiserGeneralConfig!
+  adServerConfig: AdvertiserAdServerConfig!
+  creativeConfig: AdvertiserCreativeConfig
+  dataAccessConfig: AdvertiserDataAccessConfig
+  integrationDetails: IntegrationDetails
+  servingConfig: AdvertiserTargetingConfig
+  billingConfig: AdvertiserBillingConfig!
+}
+
+type AdvertiserGeneralConfig {
+  timeZone: String!
+  currencyCode: CurrencyCode!
+  domainUrl: String!
+}
+
+type AdvertiserAdServerConfig {
+  thirdPartyOnlyConfig: ThirdPartyOnlyConfig
+  cmHybridConfig: CmHybridConfig
+}
+
+type AdvertiserCreativeConfig {
+  iasClientId: Long
+  obaComplianceDisabled: Boolean!
+  dynamicCreativeEnabled: Boolean!
+  videoCreativeDataSharingAuthorized: Boolean!
+}
+
+type AdvertiserDataAccessConfig {
+  sdfConfig: AdvertiserSdfConfig
+}
+
+type AdvertiserSdfConfig {
+  overridePartnerSdfConfig: Boolean!
+  sdfConfig: SdfConfig
+}
+
+type AdvertiserTargetingConfig {
+  exemptTvFromViewabilityTargeting: Boolean!
+}
+
+type AdvertiserBillingConfig {
+  billingProfileId: Long
+}
+
+type Campaign {
+  name: String!
+  campaignId: Long!
+  advertiserId: Long!
+  displayName: String!
+  entityStatus: EntityStatus!
+  updateTime: DateTime!
+  campaignGoal: CampaignGoal!
+  campaignFlight: CampaignFlight!
+  frequencyCap: FrequencyCap!
+  campaignBudgets: [CampaignBudget!]
+}
+
+type CampaignGoal {
+  campaignGoalType: String!
+  performanceGoal: PerformanceGoal!
+}
+
+type CampaignFlight {
+  plannedSpendAmountMicros: Long
+  plannedDates: DateRange!
+}
+
+type CampaignBudget {
+  budgetId: Long!
+  displayName: String!
+  budgetUnit: String!
+  budgetAmountMicros: Long!
+  dateRange: DateRange!
+  externalBudgetSource: String
+  externalBudgetId: String
+  invoiceGroupingId: String
+  prismaConfig: PrismaConfig
+}
+
+type PrismaConfig {
+  prismaType: String!
+  prismaCpeCode: PrismaCpeCode!
+  supplier: String!
+}
+
+type PrismaCpeCode {
+  prismaClientCode: String
+  prismaProductCode: String
+  prismaEstimateCode: String
+}
+
+type InsertionOrder {
+  name: String!
+  insertionOrderId: Long!
+  advertiserId: Long!
+  campaignId: Long!
+  displayName: String!
+  entityStatus: EntityStatus!
+  updateTime: DateTime!
+  partnerCosts: [PartnerCost!]
+  pacing: Pacing!
+  frequencyCap: FrequencyCap!
+  integrationDetails: IntegrationDetails
+  performanceGoal: PerformanceGoal!
+  budget: InsertionOrderBudget!
+  insertionOrderType: InsertionOrderType!
+  reservationType: String
+}
+
+type InsertionOrderBudget {
+  budgetUnit: String!
+  automationType: String!
+  budgetSegments: [BudgetSegment!]!
+}
+
+type LineItem {
+  name: String!
+  lineItemId: Long!
+  advertiserId: Long!
+  campaignId: Long!
+  insertionOrderId: Long!
+  displayName: String!
+  lineItemType: LineItemType!
+  entityStatus: EntityStatus!
+  updateTime: DateTime!
+  partnerCosts: [PartnerCost!]
+  pacing: Pacing!
+  frequencyCap: FrequencyCap!
+  partnerRevenueModel: PartnerRevenueModel!
+  conversionCounting: ConversionCountingConfig
+  creativeIds: [Long!]
+  bidStrategy: BiddingStrategy!
+  integrationDetails: IntegrationDetails
+  targetingExpansion: TargetingExpansionConfig
+  warningMessages: [String!]
+  mobileApp: MobileApp
+  reservationType: String
+  excludeNewExchanges: Boolean
+  budget: LineItemBudget!
+  flight: LineItemFlight!
+}
+
+type PartnerRevenueModel {
+  markupType: String!
+  markupAmount: Long
+}
+
+type ConversionCountingConfig {
+  postViewCountPercentageMillis: Long!
+  floodlightActivityConfigs: [TrackingFloodlightActivityConfig!]
+}
+
+type TrackingFloodlightActivityConfig {
+  floodlightActivityId: Long!
+  postClickLookbackWindowDays: Int!
+  postViewLookbackWindowDays: Int!
+}
+
+type TargetingExpansionConfig {
+  targetingExpansionLevel: String!
+  excludeFirstPartyAudience: Boolean!
+}
+
+type MobileApp {
+  appId: String!
+  platform: String
+  displayName: String
+  publisher: String
+}
+
+type LineItemBudget {
+  budgetAllocationType: String!
+  budgetUnit: String!
+  maxAmount: Long
+}
+
+type LineItemFlight {
+  flightDateType: String!
+  dateRange: DateRange
+  triggerId: Long
+}
+
+type Creative {
+  name: String!
+  creativeId: Long!
+  advertiserId: Long!
+  displayName: String!
+  entityStatus: EntityStatus!
+  updateTime: DateTime!
+  createTime: DateTime!
+  creativeType: CreativeType!
+  hostingSource: String!
+  dynamic: Boolean!
+  dimensions: Dimensions!
+  assets: [AssetAssociation!]!
+  exitEvents: [ExitEvent!]
+  timerEvents: [TimerEvent!]
+  counterEvents: [CounterEvent!]
+  appendedTag: String
+  integrationCode: String
+  notes: String
+  iasCampaignMonitoring: Boolean!
+  skippable: Boolean
+  skipOffset: AudioVideoOffset
+  progressOffset: AudioVideoOffset
+  universalAdId: UniversalAdId
+  thirdPartyUrls: [ThirdPartyUrl!]
+  transcodes: [Transcode!]
+  reviewStatus: ReviewStatusInfo
+  expandOnHover: Boolean
+  expandingDirection: String
+  requireHtml5: Boolean
+  requireMraid: Boolean
+  requirePingForAttribution: Boolean
+  lineItemIds: [Long!]
+}
+
+type Dimensions {
+  widthPixels: Int!
+  heightPixels: Int!
+}
+
+type ExitEvent {
+  type: String!
+  url: String!
+  name: String
+  reportingName: String
+}
+
+type TimerEvent {
+  name: String!
+  reportingName: String!
+}
+
+type CounterEvent {
+  name: String!
+  reportingName: String!
+}
+
+type AudioVideoOffset {
+  percentage: Long
+  seconds: Long
+}
+
+type UniversalAdId {
+  id: String!
+  registry: String!
+}
+
+type ThirdPartyUrl {
+  type: String!
+  url: String!
+}
+
+type Transcode {
+  name: String!
+  mimeType: String!
+  transcoded: Boolean!
+  dimensions: Dimensions
+  fileSizeBytes: Long
+  frameRate: Float
+  audioBitRateKbps: Long
+  videoBitRateKbps: Long
+  audioDurationMillis: Long
+}
+
+type ReviewStatusInfo {
+  approvalStatus: CreativeReviewStatus!
+  contentAndPolicyReviewStatus: CreativeReviewStatus!
+  creativeAndLandingPageReviewStatus: CreativeReviewStatus!
+  exchangeReviewStatuses: [ExchangeReviewStatus!]
+  publisherReviewStatuses: [PublisherReviewStatus!]
+}
+
+type PublisherReviewStatus {
+  publisherName: String!
+  status: CreativeReviewStatus!
+}
+
+type Channel {
+  name: String!
+  channelId: Long!
+  displayName: String!
+  partnerId: Long
+  advertiserId: Long
+  positivelyTargetedLineItemCount: Long!
+  negativelyTargetedLineItemCount: Long!
+}
+
+type Site {
+  name: String!
+  urlOrAppId: String!
+}
+
+type CombinedAudience {
+  name: String!
+  combinedAudienceId: Long!
+  displayName: String!
+  entityStatus: EntityStatus!
+}
+
+type CustomList {
+  name: String!
+  customListId: Long!
+  displayName: String!
+  entityStatus: EntityStatus!
+}
+
+type FirstAndThirdPartyAudience {
+  name: String!
+  firstAndThirdPartyAudienceId: Long!
+  displayName: String!
+  description: String
+  firstAndThirdPartyAudienceType: String!
+  audienceType: String!
+  audienceSource: String!
+  membershipDurationDays: Long
+  displayDesktopAudienceSize: Long
+  displayMobileWebAudienceSize: Long
+  displayMobileAppAudienceSize: Long
+  youtubeAudienceSize: Long
+  gmailAudienceSize: Long
+  totalAudienceSize: Long
+  activeDisplayAudienceSize: Long
+}
+
+type GoogleAudience {
+  name: String!
+  googleAudienceId: Long!
+  displayName: String!
+  googleAudienceType: String!
+}
+
+type InventorySource {
+  name: String!
+  inventorySourceId: Long!
+  displayName: String!
+  inventorySourceType: InventorySourceType!
+  inventorySourceProductType: String
+  commitment: String
+  deliveryMethod: String
+  dealId: String
+  status: InventorySourceStatus!
+  exchange: String
+  updateTime: DateTime!
+  rateDetails: RateDetails
+  publisherName: String
+  timeRange: TimeRange
+  creativeConfigs: [CreativeConfig!]
+  guaranteedOrderId: String
+  readWriteAccessors: InventorySourceAccessors
+  readAdvertiserIds: [Long!]
+  readPartnerIds: [Long!]
+}
+
+type InventorySourceStatus {
+  entityStatus: EntityStatus!
+  sellerStatus: EntityStatus
+  sellerPauseReason: String
+  configStatus: String
+}
+
+type RateDetails {
+  inventorySourceRateType: String!
+  rate: Money
+  unitsPurchased: Long
+  minimumSpend: Money
+}
+
+type TimeRange {
+  startTime: DateTime!
+  endTime: DateTime!
+}
+
+type CreativeConfig {
+  creativeType: CreativeType!
+  displayCreativeConfig: DisplayCreativeConfig
+  videoCreativeConfig: VideoCreativeConfig
+}
+
+type DisplayCreativeConfig {
+  creativeSize: Dimensions!
+}
+
+type VideoCreativeConfig {
+  duration: String!
+}
+
+type InventorySourceAccessors {
+  partner: PartnerAccessor
+  advertisers: AdvertiserAccessors
+}
+
+type PartnerAccessor {
+  partnerId: Long!
+}
+
+type AdvertiserAccessors {
+  advertiserIds: [Long!]!
+}
+
+type InventorySourceGroup {
+  name: String!
+  inventorySourceGroupId: Long!
+  displayName: String!
+}
+
+type NegativeKeywordList {
+  name: String!
+  negativeKeywordListId: Long!
+  advertiserId: Long!
+  displayName: String!
+  targetedLineItemCount: Long!
+}
+
+type NegativeKeyword {
+  keywordValue: String!
+}
+
+type LocationList {
+  name: String!
+  locationListId: Long!
+  advertiserId: Long!
+  displayName: String!
+  locationType: String!
+  targetedLineItemCount: Long!
+}
+
+type TargetedLocation {
+  name: String!
+  targetingOptionId: String!
+  displayName: String
+  assignedLocationId: Long!
+}
+
+type FloodlightGroup {
+  name: String!
+  floodlightGroupId: Long!
+  displayName: String!
+  webTagType: String
+  activeViewConfig: ActiveViewVideoViewabilityMetricConfig
+  lookbackWindow: LookbackWindow
+  customVariables: JSON
+}
+
+type ActiveViewVideoViewabilityMetricConfig {
+  displayName: String!
+  minimumViewability: String
+  minimumVolume: String
+  minimumDuration: String
+}
+
+type LookbackWindow {
+  clickDays: Int!
+  impressionDays: Int!
+}
+
+type FloodlightActivity {
+  name: String!
+  floodlightActivityId: Long!
+  displayName: String!
+  floodlightGroupId: Long!
+  floodlightActivityGroupName: String!
+  floodlightGroupDisplayName: String!
+  advertiserId: Long!
+  sslRequired: Boolean!
+  countingMethod: FloodlightActivityType!
+  expectedUrlParameters: String
+  remarketingConfigs: [RemarketingConfig!]
+}
+
+type RemarketingConfig {
+  advertiserId: Long!
+  remarketingEnabled: Boolean!
+}
+
+type CustomBiddingAlgorithm {
+  name: String!
+  customBiddingAlgorithmId: Long!
+  displayName: String!
+  advertiserId: Long
+  partnerId: Long
+  entityStatus: EntityStatus!
+  customBiddingAlgorithmType: String!
+  modelReadiness: String!
+  modelDetails: [CustomBiddingModelDetails!]
+  sharedAdvertiserIds: [Long!]
+}
+
+type CustomBiddingModelDetails {
+  advertiserId: Long!
+  readinessState: String!
+  suspensionState: String!
+}
+
+type Report {
+  key: ReportKey!
+  params: ReportParams
+  schedule: ReportSchedule
+  metadata: ReportMetadata!
+}
+
+type ReportKey {
+  queryId: Long!
+  reportId: Long!
+}
+
+type ReportParams {
+  type: ReportType!
+  groupBys: [String!]
+  filters: [FilterPair!]
+  metrics: [String!]
+  options: ReportOptions
+  dataRange: DataRange
+}
+
+type FilterPair {
+  type: String!
+  value: String!
+}
+
+type ReportOptions {
+  pathQueryOptions: PathQueryOptions
+  includeOnlyTargetedUserLists: Boolean
+}
+
+type PathQueryOptions {
+  channelGrouping: ChannelGrouping
+  pathFilters: [PathFilter!]
+}
+
+type ChannelGrouping {
+  name: String!
+  rules: [Rule!]!
+  fallbackName: String
+}
+
+type Rule {
+  name: String!
+  disjunctiveMatchStatements: [DisjunctiveMatchStatement!]!
+}
+
+type DisjunctiveMatchStatement {
+  eventFilters: [EventFilter!]!
+}
+
+type EventFilter {
+  dimensionFilter: PathQueryOptionsFilter
+}
+
+type PathQueryOptionsFilter {
+  filter: String!
+  match: String!
+  values: [String!]!
+}
+
+type PathFilter {
+  pathMatchPosition: String
+  eventFilters: [EventFilter!]!
+}
+
+type DataRange {
+  range: String!
+  customStartDate: DateTime
+  customEndDate: DateTime
+}
+
+type ReportSchedule {
+  frequency: String!
+  endTimeMs: Long
+  nextRunMinuteOfDay: Int
+  nextRunTimezoneCode: String
+}
+
+type ReportMetadata {
+  status: ReportMetadataStatus!
+  reportDataStartTimeMs: Long!
+  reportDataEndTimeMs: Long!
+  googleCloudStoragePath: String
+}
+
+type ReportMetadataStatus {
+  state: ReportStatus!
+  format: String
+  finishTimeMs: Long
+  failure: ReportFailure
+}
+
+type ReportFailure {
+  errorCode: String!
+}
+
+type Query {
+  name: String!
+  queryId: Long!
+  metadata: QueryMetadata!
+  params: ReportParams!
+  schedule: ReportSchedule
+}
+
+type QueryMetadata {
+  title: String!
+  dataRange: DataRange!
+  format: String!
+  sendNotification: Boolean!
+  shareEmailAddress: [String!]
+  locale: String
+}
+
+# ---------------------------------------------------------------------------
+# Connection / Pagination Types
+# ---------------------------------------------------------------------------
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type AdvertiserConnection {
+  nodes: [Advertiser!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type CampaignConnection {
+  nodes: [Campaign!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type InsertionOrderConnection {
+  nodes: [InsertionOrder!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type LineItemConnection {
+  nodes: [LineItem!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type CreativeConnection {
+  nodes: [Creative!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type ChannelConnection {
+  nodes: [Channel!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type InventorySourceConnection {
+  nodes: [InventorySource!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type TargetingOptionConnection {
+  nodes: [TargetingOption!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type AssignedTargetingOptionConnection {
+  nodes: [AssignedTargetingOption!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type FirstAndThirdPartyAudienceConnection {
+  nodes: [FirstAndThirdPartyAudience!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type FloodlightActivityConnection {
+  nodes: [FloodlightActivity!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type NegativeKeywordListConnection {
+  nodes: [NegativeKeywordList!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+type PartnerConnection {
+  nodes: [Partner!]!
+  pageInfo: PageInfo!
+  nextPageToken: String
+}
+
+# ---------------------------------------------------------------------------
+# Input Types
+# ---------------------------------------------------------------------------
+
+input CreateAdvertiserInput {
+  partnerId: Long!
+  displayName: String!
+  entityStatus: EntityStatus
+  generalConfig: AdvertiserGeneralConfigInput!
+  adServerConfig: AdvertiserAdServerConfigInput!
+  billingConfig: AdvertiserBillingConfigInput!
+  creativeConfig: AdvertiserCreativeConfigInput
+}
+
+input AdvertiserGeneralConfigInput {
+  timeZone: String!
+  currencyCode: CurrencyCode!
+  domainUrl: String!
+}
+
+input AdvertiserAdServerConfigInput {
+  thirdPartyOnlyConfig: ThirdPartyOnlyConfigInput
+}
+
+input ThirdPartyOnlyConfigInput {
+  pixelOrderIdReportingEnabled: Boolean
+}
+
+input AdvertiserBillingConfigInput {
+  billingProfileId: Long
+}
+
+input AdvertiserCreativeConfigInput {
+  iasClientId: Long
+  obaComplianceDisabled: Boolean
+  dynamicCreativeEnabled: Boolean
+}
+
+input UpdateAdvertiserInput {
+  advertiserId: Long!
+  displayName: String
+  entityStatus: EntityStatus
+  updateMask: String!
+}
+
+input CreateCampaignInput {
+  advertiserId: Long!
+  displayName: String!
+  entityStatus: EntityStatus
+  campaignGoal: CampaignGoalInput!
+  campaignFlight: CampaignFlightInput!
+  frequencyCap: FrequencyCapInput!
+  campaignBudgets: [CampaignBudgetInput!]
+}
+
+input CampaignGoalInput {
+  campaignGoalType: String!
+  performanceGoal: PerformanceGoalInput!
+}
+
+input PerformanceGoalInput {
+  performanceGoalType: PerformanceGoalType!
+  performanceGoalAmountMicros: Long
+  performanceGoalPercentageMicros: Long
+  performanceGoalString: String
+}
+
+input CampaignFlightInput {
+  plannedDates: DateRangeInput!
+  plannedSpendAmountMicros: Long
+}
+
+input DateRangeInput {
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+input FrequencyCapInput {
+  unlimited: Boolean!
+  timeUnit: FrequencyCapTimeUnit
+  timeUnitCount: Int
+  maxImpressions: Int
+  maxViews: Int
+}
+
+input CampaignBudgetInput {
+  displayName: String!
+  budgetUnit: String!
+  budgetAmountMicros: Long!
+  dateRange: DateRangeInput!
+  externalBudgetSource: String
+  externalBudgetId: String
+}
+
+input UpdateCampaignInput {
+  campaignId: Long!
+  advertiserId: Long!
+  displayName: String
+  entityStatus: EntityStatus
+  updateMask: String!
+}
+
+input CreateInsertionOrderInput {
+  advertiserId: Long!
+  campaignId: Long!
+  displayName: String!
+  entityStatus: EntityStatus
+  insertionOrderType: InsertionOrderType
+  pacing: PacingInput!
+  frequencyCap: FrequencyCapInput!
+  performanceGoal: PerformanceGoalInput!
+  budget: InsertionOrderBudgetInput!
+}
+
+input PacingInput {
+  pacingType: PacingType!
+  pacingPeriod: PacingPeriod!
+  dailyMaxMicros: Long
+  dailyMaxImpressions: Long
+}
+
+input InsertionOrderBudgetInput {
+  budgetUnit: String!
+  automationType: String!
+  budgetSegments: [BudgetSegmentInput!]!
+}
+
+input BudgetSegmentInput {
+  budgetAmountMicros: Long!
+  description: String
+  dateRange: DateRangeInput!
+  campaignBudgetId: Long
+}
+
+input UpdateInsertionOrderInput {
+  insertionOrderId: Long!
+  advertiserId: Long!
+  displayName: String
+  entityStatus: EntityStatus
+  updateMask: String!
+}
+
+input CreateLineItemInput {
+  advertiserId: Long!
+  insertionOrderId: Long!
+  displayName: String!
+  lineItemType: LineItemType!
+  entityStatus: EntityStatus
+  pacing: PacingInput!
+  frequencyCap: FrequencyCapInput!
+  budget: LineItemBudgetInput!
+  flight: LineItemFlightInput!
+  bidStrategy: BiddingStrategyInput!
+}
+
+input LineItemBudgetInput {
+  budgetAllocationType: String!
+  budgetUnit: String!
+  maxAmount: Long
+}
+
+input LineItemFlightInput {
+  flightDateType: String!
+  dateRange: DateRangeInput
+  triggerId: Long
+}
+
+input BiddingStrategyInput {
+  fixedBid: FixedBidStrategyInput
+  maximizeSpendAutoBid: MaximizeSpendBidStrategyInput
+  performanceGoalAutoBid: PerformanceGoalBidStrategyInput
+}
+
+input FixedBidStrategyInput {
+  bidAmountMicros: Long!
+}
+
+input MaximizeSpendBidStrategyInput {
+  performanceGoalType: PerformanceGoalType!
+  maxAverageCpmBidAmountMicros: Long
+  raiseBidForDeals: Boolean
+}
+
+input PerformanceGoalBidStrategyInput {
+  performanceGoalType: PerformanceGoalType!
+  performanceGoalAmountMicros: Long!
+  maxAverageCpmBidAmountMicros: Long
+}
+
+input UpdateLineItemInput {
+  lineItemId: Long!
+  advertiserId: Long!
+  displayName: String
+  entityStatus: EntityStatus
+  updateMask: String!
+}
+
+input CreateCreativeInput {
+  advertiserId: Long!
+  displayName: String!
+  creativeType: CreativeType!
+  dimensions: DimensionsInput!
+  assets: [AssetAssociationInput!]!
+  exitEvents: [ExitEventInput!]
+  integrationCode: String
+  notes: String
+}
+
+input DimensionsInput {
+  widthPixels: Int!
+  heightPixels: Int!
+}
+
+input AssetAssociationInput {
+  asset: AssetInput!
+  role: String!
+}
+
+input AssetInput {
+  mediaId: Long
+  content: String
+}
+
+input ExitEventInput {
+  type: String!
+  url: String!
+  name: String
+}
+
+input UpdateCreativeInput {
+  creativeId: Long!
+  advertiserId: Long!
+  displayName: String
+  entityStatus: EntityStatus
+  updateMask: String!
+}
+
+input AssignedTargetingOptionInput {
+  targetingType: TargetingType!
+  channelDetails: ChannelAssignedTargetingOptionInput
+  keywordDetails: KeywordAssignedTargetingOptionInput
+  urlDetails: UrlAssignedTargetingOptionInput
+  geoRegionDetails: GeoRegionAssignedTargetingOptionInput
+  audienceGroupDetails: AudienceGroupAssignedTargetingOptionInput
+  ageRangeDetails: AgeRangeAssignedTargetingOptionInput
+  genderDetails: GenderAssignedTargetingOptionInput
+  deviceTypeDetails: DeviceTypeAssignedTargetingOptionInput
+  environmentDetails: EnvironmentAssignedTargetingOptionInput
+}
+
+input ChannelAssignedTargetingOptionInput {
+  channelId: Long!
+  negative: Boolean
+}
+
+input KeywordAssignedTargetingOptionInput {
+  keyword: String!
+  negative: Boolean
+}
+
+input UrlAssignedTargetingOptionInput {
+  url: String!
+  negative: Boolean
+}
+
+input GeoRegionAssignedTargetingOptionInput {
+  targetingOptionId: String!
+  negative: Boolean
+}
+
+input AudienceGroupAssignedTargetingOptionInput {
+  includedFirstAndThirdPartyAudienceGroups: [FirstAndThirdPartyAudienceGroupInput!]
+  includedGoogleAudienceGroup: GoogleAudienceGroupInput
+  excludedFirstAndThirdPartyAudienceGroup: FirstAndThirdPartyAudienceGroupInput
+}
+
+input FirstAndThirdPartyAudienceGroupInput {
+  settings: [FirstAndThirdPartyAudienceSettingInput!]!
+}
+
+input FirstAndThirdPartyAudienceSettingInput {
+  firstAndThirdPartyAudienceId: Long!
+  recency: String
+}
+
+input GoogleAudienceGroupInput {
+  settings: [GoogleAudienceSettingInput!]!
+}
+
+input GoogleAudienceSettingInput {
+  googleAudienceId: Long!
+}
+
+input AgeRangeAssignedTargetingOptionInput {
+  ageRange: AgeRange!
+}
+
+input GenderAssignedTargetingOptionInput {
+  gender: Gender!
+}
+
+input DeviceTypeAssignedTargetingOptionInput {
+  deviceType: DeviceType!
+}
+
+input EnvironmentAssignedTargetingOptionInput {
+  environment: Environment!
+}
+
+input CreateChannelInput {
+  advertiserId: Long
+  partnerId: Long
+  displayName: String!
+}
+
+input CreateNegativeKeywordListInput {
+  advertiserId: Long!
+  displayName: String!
+}
+
+input CreateQueryInput {
+  metadata: QueryMetadataInput!
+  params: ReportParamsInput!
+  schedule: ReportScheduleInput
+}
+
+input QueryMetadataInput {
+  title: String!
+  dataRange: DataRangeInput!
+  format: String!
+  sendNotification: Boolean
+  shareEmailAddress: [String!]
+}
+
+input DataRangeInput {
+  range: String!
+  customStartDate: DateTime
+  customEndDate: DateTime
+}
+
+input ReportParamsInput {
+  type: ReportType!
+  groupBys: [String!]
+  filters: [FilterPairInput!]
+  metrics: [String!]
+}
+
+input FilterPairInput {
+  type: String!
+  value: String!
+}
+
+input ReportScheduleInput {
+  frequency: String!
+  endTimeMs: Long
+  nextRunMinuteOfDay: Int
+  nextRunTimezoneCode: String
+}
+
+# ---------------------------------------------------------------------------
+# Mutation Result Types
+# ---------------------------------------------------------------------------
+
+type BulkEditResult {
+  createdAssignedTargetingOptions: [AssignedTargetingOption!]
+  deletedAssignedTargetingOptions: [String!]
+  errors: [BulkEditError!]
+}
+
+type BulkEditError {
+  targetingType: TargetingType!
+  assignedTargetingOptionId: String
+  error: String!
+}
+
+# ---------------------------------------------------------------------------
+# Query Root
+# ---------------------------------------------------------------------------
+
+type QueryRoot {
+  # Partners
+  partner(partnerId: Long!): Partner
+  partners(pageSize: Int, pageToken: String, orderBy: String, filter: String): PartnerConnection!
+
+  # Advertisers
+  advertiser(advertiserId: Long!): Advertiser
+  advertisers(partnerId: Long!, pageSize: Int, pageToken: String, orderBy: String, filter: String): AdvertiserConnection!
+
+  # Campaigns
+  campaign(advertiserId: Long!, campaignId: Long!): Campaign
+  campaigns(advertiserId: Long!, pageSize: Int, pageToken: String, orderBy: String, filter: String): CampaignConnection!
+
+  # Insertion Orders
+  insertionOrder(advertiserId: Long!, insertionOrderId: Long!): InsertionOrder
+  insertionOrders(advertiserId: Long!, pageSize: Int, pageToken: String, orderBy: String, filter: String): InsertionOrderConnection!
+
+  # Line Items
+  lineItem(advertiserId: Long!, lineItemId: Long!): LineItem
+  lineItems(advertiserId: Long!, pageSize: Int, pageToken: String, orderBy: String, filter: String): LineItemConnection!
+  lineItemsForInsertionOrder(advertiserId: Long!, insertionOrderId: Long!, pageSize: Int, pageToken: String): LineItemConnection!
+
+  # Creatives
+  creative(advertiserId: Long!, creativeId: Long!): Creative
+  creatives(advertiserId: Long!, pageSize: Int, pageToken: String, orderBy: String, filter: String): CreativeConnection!
+
+  # Channels
+  channel(channelId: Long!, advertiserId: Long, partnerId: Long): Channel
+  channels(advertiserId: Long, partnerId: Long, pageSize: Int, pageToken: String): ChannelConnection!
+  sitesByChannel(channelId: Long!, advertiserId: Long, partnerId: Long, pageSize: Int, pageToken: String): [Site!]!
+
+  # Targeting Options
+  targetingOption(targetingType: TargetingType!, targetingOptionId: String!): TargetingOption
+  targetingOptions(targetingType: TargetingType!, pageSize: Int, pageToken: String, filter: String): TargetingOptionConnection!
+
+  # Assigned Targeting Options
+  assignedTargetingOption(
+    targetingType: TargetingType!
+    assignedTargetingOptionId: String!
+    advertiserId: Long
+    lineItemId: Long
+    insertionOrderId: Long
+    campaignId: Long
+  ): AssignedTargetingOption
+  assignedTargetingOptions(
+    targetingType: TargetingType!
+    advertiserId: Long
+    lineItemId: Long
+    insertionOrderId: Long
+    campaignId: Long
+    pageSize: Int
+    pageToken: String
+  ): AssignedTargetingOptionConnection!
+
+  # Audiences
+  firstAndThirdPartyAudience(firstAndThirdPartyAudienceId: Long!): FirstAndThirdPartyAudience
+  firstAndThirdPartyAudiences(advertiserId: Long!, pageSize: Int, pageToken: String, orderBy: String, filter: String): FirstAndThirdPartyAudienceConnection!
+  googleAudience(googleAudienceId: Long!): GoogleAudience
+  combinedAudience(combinedAudienceId: Long!): CombinedAudience
+  customList(customListId: Long!): CustomList
+
+  # Inventory Sources
+  inventorySource(inventorySourceId: Long!): InventorySource
+  inventorySources(partnerId: Long!, pageSize: Int, pageToken: String, filter: String): InventorySourceConnection!
+  inventorySourceGroup(inventorySourceGroupId: Long!, advertiserId: Long, partnerId: Long): InventorySourceGroup
+
+  # Negative Keywords
+  negativeKeywordList(advertiserId: Long!, negativeKeywordListId: Long!): NegativeKeywordList
+  negativeKeywordLists(advertiserId: Long!, pageSize: Int, pageToken: String): NegativeKeywordListConnection!
+  negativeKeywords(advertiserId: Long!, negativeKeywordListId: Long!, pageSize: Int, pageToken: String): [NegativeKeyword!]!
+
+  # Location Lists
+  locationList(advertiserId: Long!, locationListId: Long!): LocationList
+  locationLists(advertiserId: Long!, pageSize: Int, pageToken: String, filter: String): [LocationList!]!
+
+  # Floodlight
+  floodlightGroup(floodlightGroupId: Long!, partnerId: Long!): FloodlightGroup
+  floodlightActivities(advertiserId: Long!, pageSize: Int, pageToken: String): FloodlightActivityConnection!
+  floodlightActivity(advertiserId: Long!, floodlightActivityId: Long!): FloodlightActivity
+
+  # Custom Bidding
+  customBiddingAlgorithm(customBiddingAlgorithmId: Long!): CustomBiddingAlgorithm
+
+  # Reporting
+  query(queryId: Long!): Query
+  queries(pageSize: Int, pageToken: String): [Query!]!
+  report(queryId: Long!, reportId: Long!): Report
+  reports(queryId: Long!, pageSize: Int, pageToken: String): [Report!]!
+}
+
+# ---------------------------------------------------------------------------
+# Mutation Root
+# ---------------------------------------------------------------------------
+
+type MutationRoot {
+  # Advertisers
+  createAdvertiser(input: CreateAdvertiserInput!): Advertiser!
+  updateAdvertiser(input: UpdateAdvertiserInput!): Advertiser!
+  deleteAdvertiser(advertiserId: Long!): Boolean!
+
+  # Campaigns
+  createCampaign(input: CreateCampaignInput!): Campaign!
+  updateCampaign(input: UpdateCampaignInput!): Campaign!
+  deleteCampaign(advertiserId: Long!, campaignId: Long!): Boolean!
+
+  # Insertion Orders
+  createInsertionOrder(input: CreateInsertionOrderInput!): InsertionOrder!
+  updateInsertionOrder(input: UpdateInsertionOrderInput!): InsertionOrder!
+  deleteInsertionOrder(advertiserId: Long!, insertionOrderId: Long!): Boolean!
+
+  # Line Items
+  createLineItem(input: CreateLineItemInput!): LineItem!
+  updateLineItem(input: UpdateLineItemInput!): LineItem!
+  deleteLineItem(advertiserId: Long!, lineItemId: Long!): Boolean!
+  duplicateLineItem(advertiserId: Long!, lineItemId: Long!, displayName: String!): LineItem!
+  generateDefaultLineItemForInsertionOrder(advertiserId: Long!, insertionOrderId: Long!): LineItem!
+  bulkUpdateLineItems(advertiserId: Long!, lineItemIds: [Long!]!, targetEntities: JSON): [LineItem!]!
+
+  # Creatives
+  createCreative(input: CreateCreativeInput!): Creative!
+  updateCreative(input: UpdateCreativeInput!): Creative!
+  deleteCreative(advertiserId: Long!, creativeId: Long!): Boolean!
+
+  # Channels
+  createChannel(input: CreateChannelInput!): Channel!
+  updateChannel(channelId: Long!, advertiserId: Long, partnerId: Long, displayName: String!, updateMask: String!): Channel!
+  bulkEditSites(channelId: Long!, advertiserId: Long, partnerId: Long, createdSites: [String!], deletedSites: [String!]): [Site!]!
+
+  # Targeting Options
+  assignTargetingOption(
+    advertiserId: Long!
+    lineItemId: Long
+    insertionOrderId: Long
+    campaignId: Long
+    targetingType: TargetingType!
+    assignedTargetingOption: AssignedTargetingOptionInput!
+  ): AssignedTargetingOption!
+
+  deleteAssignedTargetingOption(
+    advertiserId: Long!
+    lineItemId: Long
+    insertionOrderId: Long
+    campaignId: Long
+    targetingType: TargetingType!
+    assignedTargetingOptionId: String!
+  ): Boolean!
+
+  bulkEditAssignedTargetingOptions(
+    advertiserId: Long!
+    lineItemId: Long!
+    createRequests: [AssignedTargetingOptionInput!]
+    deleteRequests: [String!]
+  ): BulkEditResult!
+
+  # Negative Keywords
+  createNegativeKeywordList(input: CreateNegativeKeywordListInput!): NegativeKeywordList!
+  updateNegativeKeywordList(advertiserId: Long!, negativeKeywordListId: Long!, displayName: String!, updateMask: String!): NegativeKeywordList!
+  deleteNegativeKeywordList(advertiserId: Long!, negativeKeywordListId: Long!): Boolean!
+  bulkEditNegativeKeywords(advertiserId: Long!, negativeKeywordListId: Long!, createdNegativeKeywords: [String!], deletedNegativeKeywords: [String!]): [NegativeKeyword!]!
+
+  # Inventory Sources
+  createInventorySourceGroup(partnerId: Long!, displayName: String!): InventorySourceGroup!
+  updateInventorySourceGroup(inventorySourceGroupId: Long!, partnerId: Long, advertiserId: Long, displayName: String!, updateMask: String!): InventorySourceGroup!
+  deleteInventorySourceGroup(inventorySourceGroupId: Long!, partnerId: Long, advertiserId: Long): Boolean!
+  editInventorySourceGroupAssignedInventorySources(inventorySourceGroupId: Long!, partnerId: Long, advertiserId: Long, addedInventorySources: [Long!], removedInventorySources: [Long!]): [InventorySource!]!
+
+  # First and Third Party Audiences
+  createFirstAndThirdPartyAudience(advertiserId: Long!, displayName: String!, description: String, membershipDurationDays: Long, audienceType: String!): FirstAndThirdPartyAudience!
+  updateFirstAndThirdPartyAudience(firstAndThirdPartyAudienceId: Long!, advertiserId: Long!, displayName: String, description: String, membershipDurationDays: Long, updateMask: String!): FirstAndThirdPartyAudience!
+  editFirstAndThirdPartyAudienceMembers(firstAndThirdPartyAudienceId: Long!, advertiserId: Long!, addedContactInfoList: JSON, removedContactInfoList: JSON): FirstAndThirdPartyAudience!
+
+  # Floodlight
+  updateFloodlightGroup(floodlightGroupId: Long!, partnerId: Long!, displayName: String, updateMask: String!): FloodlightGroup!
+
+  # Reporting / Queries
+  createQuery(input: CreateQueryInput!): Query!
+  deleteQuery(queryId: Long!): Boolean!
+  runQuery(queryId: Long!): Report!
+}
+
+schema {
+  query: QueryRoot
+  mutation: MutationRoot
+}
