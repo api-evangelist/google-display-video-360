@@ -40,6 +40,12 @@ apis:
   - url: graphql/google-display-video-360-graphql.md
     type: GraphQL
 common:
+- type: VulnerabilityDisclosure
+  url: security/google-display-video-360-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/google-display-video-360-domain-security.yml
+- type: Authentication
+  url: authentication/google-display-video-360-authentication.yml
 - type: OAuthScopes
   url: scopes/google-display-video-360-scopes.yml
 - type: GitHubOrganization
