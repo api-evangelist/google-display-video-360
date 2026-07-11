@@ -40,6 +40,8 @@ apis:
   - url: graphql/google-display-video-360-graphql.md
     type: GraphQL
 common:
+- type: OAuthScopes
+  url: scopes/google-display-video-360-scopes.yml
 - type: GitHubOrganization
   url: https://github.com/googleads
 - type: Portal
