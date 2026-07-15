@@ -40,6 +40,8 @@ apis:
   - url: graphql/google-display-video-360-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/google-display-video-360-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/google-display-video-360-vulnerability-disclosure.yml
 - type: DomainSecurity
