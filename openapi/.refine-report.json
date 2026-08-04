@@ -1,0 +1,14 @@
+{
+  "provider": "google-display-video-360",
+  "sources": [
+    "google-display-video-360-advertisers-api-openapi.yml"
+  ],
+  "outputs": [
+    "google-display-video-360-advertisers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

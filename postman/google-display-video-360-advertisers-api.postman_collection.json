@@ -1,0 +1,581 @@
+{
+  "info": {
+    "_postman_id": "0dec2e37-931e-4cbd-84ca-5033cb31968b",
+    "name": "Google Display & Video 360 Advertisers API",
+    "description": "The Display & Video 360 API enables programmatic management of display, video, and audio advertising campaigns including advertisers, campaigns, insertion orders, line items, creatives, targeting, and audiences.\n\nContact Support:\n Name: Google",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:49:11.000Z",
+    "updatedAt": "2026-07-28T01:49:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0dec2e37-931e-4cbd-84ca-5033cb31968b"
+  },
+  "item": [
+    {
+      "name": "v4",
+      "item": [
+        {
+          "name": "advertisers",
+          "item": [
+            {
+              "name": "{advertiserId}",
+              "item": [
+                {
+                  "name": "campaigns",
+                  "item": [
+                    {
+                      "name": "Google Display & Video 360 List campaigns",
+                      "id": "341126ea-fd6a-4ca7-9b48-61f228430fe3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/campaigns",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v4",
+                            "advertisers",
+                            ":advertiserId",
+                            "campaigns"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3617efa4-9398-4825-94b0-4a774d67a569",
+                              "key": "advertiserId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Lists campaigns in an advertiser."
+                      },
+                      "response": [
+                        {
+                          "id": "6eb85af2-16a9-4316-86f7-34657bad3f13",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/campaigns",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v4",
+                                "advertisers",
+                                ":advertiserId",
+                                "campaigns"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "advertiserId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"campaigns\": [\n    {\n      \"name\": \"<string>\",\n      \"campaignId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"entityStatus\": \"<string>\",\n      \"campaignGoal\": {\n        \"campaignGoalType\": \"<string>\",\n        \"performanceGoal\": {\n          \"performanceGoalType\": \"<string>\",\n          \"performanceGoalAmountMicros\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"campaignId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"entityStatus\": \"<string>\",\n      \"campaignGoal\": {\n        \"campaignGoalType\": \"<string>\",\n        \"performanceGoal\": {\n          \"performanceGoalType\": \"<string>\",\n          \"performanceGoalAmountMicros\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:49:11.000Z",
+                          "updatedAt": "2026-07-28T01:49:11.000Z",
+                          "uid": "35240-6eb85af2-16a9-4316-86f7-34657bad3f13"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:49:11.000Z",
+                      "updatedAt": "2026-07-28T01:49:11.000Z",
+                      "uid": "35240-341126ea-fd6a-4ca7-9b48-61f228430fe3"
+                    }
+                  ],
+                  "id": "04a5b756-4036-4d1b-a4c9-573b25593f62",
+                  "createdAt": "2026-07-28T01:49:11.000Z",
+                  "updatedAt": "2026-07-28T01:49:11.000Z",
+                  "uid": "35240-04a5b756-4036-4d1b-a4c9-573b25593f62"
+                },
+                {
+                  "name": "insertionOrders",
+                  "item": [
+                    {
+                      "name": "Google Display & Video 360 List insertion orders",
+                      "id": "40d9a764-1c42-4bd7-8843-b07fe7c1bdb5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/insertionOrders",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v4",
+                            "advertisers",
+                            ":advertiserId",
+                            "insertionOrders"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c9e51ea5-0650-4524-b9fd-f4fb3ee4777c",
+                              "key": "advertiserId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Lists insertion orders in an advertiser."
+                      },
+                      "response": [
+                        {
+                          "id": "40b5231c-5368-4d96-98a0-93867dec128f",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/insertionOrders",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v4",
+                                "advertisers",
+                                ":advertiserId",
+                                "insertionOrders"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "advertiserId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"insertionOrders\": [\n    {\n      \"name\": \"<string>\",\n      \"insertionOrderId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"entityStatus\": \"<string>\",\n      \"budget\": {\n        \"budgetUnit\": \"<string>\",\n        \"automationType\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"insertionOrderId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"entityStatus\": \"<string>\",\n      \"budget\": {\n        \"budgetUnit\": \"<string>\",\n        \"automationType\": \"<string>\"\n      }\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:49:11.000Z",
+                          "updatedAt": "2026-07-28T01:49:11.000Z",
+                          "uid": "35240-40b5231c-5368-4d96-98a0-93867dec128f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:49:11.000Z",
+                      "updatedAt": "2026-07-28T01:49:11.000Z",
+                      "uid": "35240-40d9a764-1c42-4bd7-8843-b07fe7c1bdb5"
+                    }
+                  ],
+                  "id": "20e56e4b-aa40-49e4-a200-900ec12e4012",
+                  "createdAt": "2026-07-28T01:49:11.000Z",
+                  "updatedAt": "2026-07-28T01:49:11.000Z",
+                  "uid": "35240-20e56e4b-aa40-49e4-a200-900ec12e4012"
+                },
+                {
+                  "name": "lineItems",
+                  "item": [
+                    {
+                      "name": "Google Display & Video 360 List line items",
+                      "id": "29a00eab-a06c-4ceb-8065-c7000d4ecae7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/lineItems",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v4",
+                            "advertisers",
+                            ":advertiserId",
+                            "lineItems"
+                          ],
+                          "variable": [
+                            {
+                              "id": "eae810fa-ad68-4f11-bb66-f058feac7f8d",
+                              "key": "advertiserId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Lists line items in an advertiser."
+                      },
+                      "response": [
+                        {
+                          "id": "fd31ffa6-387f-4c4e-a321-98bccbd386be",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/lineItems",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v4",
+                                "advertisers",
+                                ":advertiserId",
+                                "lineItems"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "advertiserId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"lineItems\": [\n    {\n      \"name\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"lineItemType\": \"<string>\",\n      \"entityStatus\": \"<string>\",\n      \"budget\": {\n        \"budgetAllocationType\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"lineItemType\": \"<string>\",\n      \"entityStatus\": \"<string>\",\n      \"budget\": {\n        \"budgetAllocationType\": \"<string>\"\n      }\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:49:11.000Z",
+                          "updatedAt": "2026-07-28T01:49:11.000Z",
+                          "uid": "35240-fd31ffa6-387f-4c4e-a321-98bccbd386be"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:49:11.000Z",
+                      "updatedAt": "2026-07-28T01:49:11.000Z",
+                      "uid": "35240-29a00eab-a06c-4ceb-8065-c7000d4ecae7"
+                    }
+                  ],
+                  "id": "c6356de0-7dc4-4e70-957e-ca512c1d18dd",
+                  "createdAt": "2026-07-28T01:49:11.000Z",
+                  "updatedAt": "2026-07-28T01:49:11.000Z",
+                  "uid": "35240-c6356de0-7dc4-4e70-957e-ca512c1d18dd"
+                },
+                {
+                  "name": "creatives",
+                  "item": [
+                    {
+                      "name": "Google Display & Video 360 List creatives",
+                      "id": "c664abe9-803f-4487-92ca-71892b0f6b66",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/creatives",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v4",
+                            "advertisers",
+                            ":advertiserId",
+                            "creatives"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ca06b241-1284-4f6c-8a96-40adaddae48b",
+                              "key": "advertiserId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Lists creatives in an advertiser."
+                      },
+                      "response": [
+                        {
+                          "id": "ca1ef316-79b5-490a-bd6d-84c209fd171f",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v4/advertisers/:advertiserId/creatives",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v4",
+                                "advertisers",
+                                ":advertiserId",
+                                "creatives"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "advertiserId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"creatives\": [\n    {\n      \"name\": \"<string>\",\n      \"creativeId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"creativeType\": \"<string>\",\n      \"dimensions\": {\n        \"widthPixels\": \"<integer>\",\n        \"heightPixels\": \"<integer>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"creativeId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"creativeType\": \"<string>\",\n      \"dimensions\": {\n        \"widthPixels\": \"<integer>\",\n        \"heightPixels\": \"<integer>\"\n      }\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:49:11.000Z",
+                          "updatedAt": "2026-07-28T01:49:11.000Z",
+                          "uid": "35240-ca1ef316-79b5-490a-bd6d-84c209fd171f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:49:11.000Z",
+                      "updatedAt": "2026-07-28T01:49:11.000Z",
+                      "uid": "35240-c664abe9-803f-4487-92ca-71892b0f6b66"
+                    }
+                  ],
+                  "id": "3beef3fa-861a-49fb-9760-59c1a3190406",
+                  "createdAt": "2026-07-28T01:49:11.000Z",
+                  "updatedAt": "2026-07-28T01:49:11.000Z",
+                  "uid": "35240-3beef3fa-861a-49fb-9760-59c1a3190406"
+                }
+              ],
+              "id": "120c60da-853f-4d76-9376-6d8a96342d8a",
+              "createdAt": "2026-07-28T01:49:11.000Z",
+              "updatedAt": "2026-07-28T01:49:11.000Z",
+              "uid": "35240-120c60da-853f-4d76-9376-6d8a96342d8a"
+            },
+            {
+              "name": "Google Display & Video 360 List advertisers",
+              "id": "3f8d1f6a-d8aa-4ec1-8dbc-ed7f2c091864",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v4/advertisers?partnerId=<string>&pageSize=<integer>&pageToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v4",
+                    "advertisers"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "partnerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Lists advertisers accessible to the current user."
+              },
+              "response": [
+                {
+                  "id": "f5aa5230-f240-491f-963f-37fee324cabd",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v4/advertisers?partnerId=<string>&pageSize=<integer>&pageToken=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v4",
+                        "advertisers"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "partnerId",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "pageToken",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"advertisers\": [\n    {\n      \"name\": \"<string>\",\n      \"advertiserId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"entityStatus\": \"ENTITY_STATUS_ACTIVE\",\n      \"partnerId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"advertiserId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"entityStatus\": \"ENTITY_STATUS_ACTIVE\",\n      \"partnerId\": \"<string>\"\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:49:11.000Z",
+                  "updatedAt": "2026-07-28T01:49:11.000Z",
+                  "uid": "35240-f5aa5230-f240-491f-963f-37fee324cabd"
+                }
+              ],
+              "createdAt": "2026-07-28T01:49:11.000Z",
+              "updatedAt": "2026-07-28T01:49:11.000Z",
+              "uid": "35240-3f8d1f6a-d8aa-4ec1-8dbc-ed7f2c091864"
+            }
+          ],
+          "id": "2baabbeb-2f4f-44d5-84c1-a6b40a5dbbcb",
+          "createdAt": "2026-07-28T01:49:11.000Z",
+          "updatedAt": "2026-07-28T01:49:11.000Z",
+          "uid": "35240-2baabbeb-2f4f-44d5-84c1-a6b40a5dbbcb"
+        }
+      ],
+      "id": "474ed7dd-4a34-4210-85ab-c8f1aed38457",
+      "createdAt": "2026-07-28T01:49:11.000Z",
+      "updatedAt": "2026-07-28T01:49:11.000Z",
+      "uid": "35240-474ed7dd-4a34-4210-85ab-c8f1aed38457"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/display-video",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://displayvideo.googleapis.com"
+    }
+  ]
+}
