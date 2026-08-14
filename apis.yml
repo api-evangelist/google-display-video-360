@@ -1,26 +1,37 @@
 aid: google-display-video-360
 name: Google Display & Video 360
-description: The Display & Video 360 API enables programmatic management of display,
-  video, and audio advertising campaigns. It provides access to advertisers, campaigns,
-  insertion orders, line items, creatives, targeting, and audience management for
-  enterprise-scale programmatic buying.
+description: Display & Video 360 is Google's enterprise demand-side platform for programmatic
+  media buying, sold through Google Marketing Platform. Its API automates the whole buying
+  structure — partners and advertisers, campaigns, insertion orders, line items, ad groups and
+  ads, creatives and ad assets, first-party and Customer Match audiences, guaranteed orders and
+  inventory sources, and the assigned targeting options that decide what a line item actually
+  buys — plus Structured Data File bulk export and import. One REST surface at
+  displayvideo.googleapis.com, version v4, 179 operations across 16 resource families,
+  described by a first-party Google API Discovery Document. Google OAuth 2.0 only; there is no
+  API key, and an access token is not sufficient on its own — the calling Google Account must
+  also hold a Display & Video 360 user profile with permission on the partner or advertiser
+  being addressed.
 accessModel:
-  pricing: freemium
-  onboarding: self-serve
+  pricing: enterprise
+  onboarding: sales
   trial: false
-  try_now: true
+  try_now: false
   public: false
-  label: Freemium · Self-serve signup
+  label: Enterprise · Contact sales
   confidence: high
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
-  method: derived
+  generated: '2026-08-13'
+  method: searched
+  note: Corrected 2026-08-13 from a derived "freemium / self-serve" reading. Display & Video 360
+    publishes no plans, no free tier, no trial and no self-serve signup; it is sold through
+    Google sales or a Google Marketing Platform reseller. See
+    plans/google-display-video-360-plans-pricing.yml.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/google-display-video-360.png
 url: https://raw.githubusercontent.com/api-evangelist/google-display-video-360/refs/heads/main/apis.yml
 created: '2026-03-13'
-modified: '2026-05-19'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 type: Index
 tags:
@@ -30,10 +41,49 @@ tags:
 - Programmatic Advertising
 - Targeting
 - Video Ads
+- Advertising
+- AdTech
+- Demand Side Platform
+- Media Buying
+- Audiences
+- Google Marketing Platform
 apis:
+- aid: google-display-video-360:google-display-video-360-api
+  name: Google Display & Video 360 API
+  description: The full Display & Video 360 API surface — 179 operations across advertisers,
+    partners, campaigns, insertion orders, line items, ad groups, creatives, ad assets,
+    audiences, inventory sources, guaranteed orders, floodlight groups, custom bidding
+    algorithms, targeting options, users and Structured Data File tasks. Generated from Google's
+    own API Discovery Document, revision 20260813.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Advertisers
+  - Partners
+  - Campaign Management
+  - Targeting
+  - Audiences
+  - Creatives
+  - Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-api-openapi.yml
+  - type: Overlay
+    url: overlays/google-display-video-360-api-overlay.yaml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
 - aid: google-display-video-360:google-display-video-360-advertisers-api
   name: Google Display & Video 360 Advertisers API
-  description: The Advertisers API from Google Display & Video 360 — 5 operation(s) for advertisers.
+  description: The advertiser-scoped slice of the Display & Video 360 API — 103 operations under
+    /v4/advertisers covering campaigns, insertion orders, line items, ad groups, ad group ads,
+    creatives, ad assets, channels and sites, location lists, negative keyword lists, invoices,
+    reach forecasting and assigned targeting options.
   humanURL: https://developers.google.com/display-video/api/guides/getting-started/overview
   baseURL: https://displayvideo.googleapis.com
   tags:
@@ -41,10 +91,12 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/google-display-video-360-advertisers-api-openapi.yml
+  - type: Overlay
+    url: overlays/google-display-video-360-advertisers-api-overlay.yaml
   - type: Documentation
     url: https://developers.google.com/display-video/api/reference/rest
   - type: Authentication
-    url: https://developers.google.com/display-video/api/guides/authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
   - type: GettingStarted
     url: https://developers.google.com/display-video/api/guides/getting-started/overview
   - type: JSONSchema
@@ -60,12 +112,52 @@ common:
   url: agentic-access/google-display-video-360-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/google-display-video-360-vulnerability-disclosure.yml
+- type: Security
+  url: https://g.co/vrp
 - type: DomainSecurity
   url: security/google-display-video-360-domain-security.yml
 - type: Authentication
   url: authentication/google-display-video-360-authentication.yml
 - type: OAuthScopes
   url: scopes/google-display-video-360-scopes.yml
+- type: WellKnown
+  url: well-known/google-display-video-360-well-known.yml
+- type: SecurityTxt
+  url: well-known/google-display-video-360-security.txt
+- type: Packages
+  url: packages/google-display-video-360-packages.yml
+- type: SDKs
+  url: packages/google-display-video-360-packages.yml
+- type: LLMsTxt
+  url: llms/google-display-video-360-llms.txt
+- type: Conventions
+  url: conventions/google-display-video-360-conventions.yml
+- type: ErrorCatalog
+  url: errors/google-display-video-360-problem-types.yml
+- type: Conformance
+  url: conformance/google-display-video-360-conformance.yml
+- type: Lifecycle
+  url: lifecycle/google-display-video-360-lifecycle.yml
+- type: Deprecation
+  url: https://developers.google.com/display-video/api/deprecations
+- type: ChangeLog
+  url: changelog/google-display-video-360-changelog.yml
+- type: ReleaseNotes
+  url: https://developers.google.com/display-video/api/release-notes
+- type: DataModel
+  url: data-model/google-display-video-360-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCP
+  url: mcp/google-display-video-360-mcp.yml
+- type: Plans
+  url: plans/google-display-video-360-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/google-display-video-360-rate-limits.yml
+- type: FinOps
+  url: finops/google-display-video-360-finops.yml
+- type: Rules
+  url: rules/google-display-video-360-jsonschema-spectral-rules.yml
 - type: GitHubOrganization
   url: https://github.com/googleads
 - type: Portal
@@ -74,16 +166,20 @@ common:
   url: https://developers.google.com/display-video/api/guides/getting-started/overview
 - type: Documentation
   url: https://developers.google.com/display-video/api
+- type: APIReference
+  url: https://developers.google.com/display-video/api/reference/rest
 - type: Authentication
-  url: https://developers.google.com/display-video/api/guides/authentication
+  url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+- type: Blog
+  url: https://ads-developers.googleblog.com/search/label/display_video_360
+- type: Login
+  url: https://displayvideo.google.com/
 - type: Pricing
   url: https://marketingplatform.google.com/about/display-video-360/
 - type: TermsOfService
   url: https://developers.google.com/terms
 - type: PrivacyPolicy
   url: https://policies.google.com/privacy
-- type: StatusPage
-  url: https://status.cloud.google.com/
 - type: Support
   url: https://developers.google.com/display-video/api/support
 - type: JSONLD
@@ -91,3 +187,47 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: machine-readable-contract-harvested
+  detail: Google publishes a first-party API Discovery Document for Display & Video 360 at
+    displayvideo.googleapis.com/$discovery/rest?version=v4 (HTTP 200, revision 20260813, 179
+    methods, 414 schemas); it was harvested verbatim and converted to OpenAPI 3.1.0, replacing a
+    5-operation scaffold.
+  evidence:
+  - url: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+    status: 200
+  - url: https://developers.google.com/display-video/api/limits
+    status: 200
+  - url: https://developers.google.com/display-video/api/deprecations
+    status: 200
+  checked: '2026-08-13'
+x-pointer-notes:
+  StatusPage: Removed 2026-08-13. The previous pointer named https://status.cloud.google.com/,
+    the Google Cloud Platform dashboard, which does not list displayvideo.googleapis.com — DV360
+    is a Google Marketing Platform service. The only DV360-shaped candidate,
+    developers.google.com/display-video/api/support/api-issues, was fetched (HTTP 200) and is a
+    support-routing page with no incidents, dates or status indicators. Google publishes no
+    status page for this API. Recorded as absent in
+    lifecycle/google-display-video-360-lifecycle.yml rather than credited to a page that does
+    not do the job.
+  MCPServer: Deliberately NOT emitted. mcp/google-display-video-360-mcp.yml is a derived
+    candidate tool list with deployment.mode = none — Google ships no Model Context Protocol
+    server for Display & Video 360 (probed displayvideo.googleapis.com/mcp, HTTP 404; every
+    DV360 MCP server on the market is third-party). An MCPServer pointer would assert an agent
+    surface the provider does not operate. The artifact is wired as type MCP so it stays
+    discoverable without claiming a deployed server.
+  Idempotency: Deliberately NOT emitted. The Display & Video 360 API documents no idempotency
+    key, request token or dedupe header, and none appears in the Discovery Document. See the
+    idempotency block in conventions/google-display-video-360-conventions.yml.
+  Compliance: Deliberately NOT emitted. Google's Marketing Platform ISO 27001 scope names seven
+    products and Display & Video 360 is not among them; no DV360-scoped SOC or ISO certification
+    was found. See conformance/google-display-video-360-conformance.yml.
+  Authentication: The previous docs pointer, /display-video/api/guides/authentication, returned
+    404 on 2026-08-13 and was corrected to the live guide at
+    /display-video/api/guides/how-tos/authorizing.
