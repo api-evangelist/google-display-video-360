@@ -1,17 +1,69 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/openapi.yml
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://displayvideo.googleapis.com/$discovery/rest?version=v4 (auth.oauth2.scopes, revision
+  20260813) cross-checked against
+  https://developers.google.com/display-video/api/guides/how-tos/authorizing
+docs: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+description: >-
+  The complete OAuth 2.0 scope surface for the Display & Video 360 API, taken from the
+  auth.oauth2.scopes block of Google's own Discovery Document rather than inferred from operation
+  security requirements. Four scopes, all authorization-code flow, all issued by
+  accounts.google.com. There is no read-only variant: display-video is read AND write AND delete
+  in a single grant, which is the most consequential fact in this file for anyone binding an
+  agent to this API.
 schemes:
-- name: oauth2
-  source: openapi/openapi.yml
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://accounts.google.com/o/oauth2/auth
-    tokenUrl: https://oauth2.googleapis.com/token
+  - name: oauth2
+    source: openapi/google-display-video-360-api-openapi.yml
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+        tokenUrl: https://oauth2.googleapis.com/token
+        refreshUrl: https://oauth2.googleapis.com/token
+    authorization_server_metadata: well-known/google-display-video-360-oauth-authorization-server.json
+    pkce: supported (S256)
 scopes:
-- scope: https://www.googleapis.com/auth/display-video
-  description: Manage Display & Video 360 data
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/openapi.yml
+  - scope: https://www.googleapis.com/auth/display-video
+    description: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
+    flows: [authorizationCode]
+    grants: read+write+delete
+    note: >-
+      The default scope for the API and the one most integrations request. It is not
+      least-privilege: there is no read-only counterpart, so an agent that only needs to report
+      on campaigns still receives permanent-delete authority over every entity the user can see.
+      Constrain that at the DV360 user-profile layer instead — a profile with "Read only"
+      permission on the advertiser cannot write regardless of the scope on the token.
+    sources: [openapi/google-display-video-360-api-openapi.yml, discovery]
+  - scope: https://www.googleapis.com/auth/display-video-mediaplanning
+    description: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices
+    flows: [authorizationCode]
+    grants: read+write on campaign entities, read on invoices
+    note: >-
+      The narrower of the two generally-grantable scopes. Covers the
+      campaign/insertion-order/line-item planning surface and invoice reads without the delete
+      authority the full display-video scope carries. Prefer it for planning and reporting.
+    sources: [openapi/google-display-video-360-api-openapi.yml, discovery]
+  - scope: https://www.googleapis.com/auth/display-video-user-management
+    description: 'Private Service: https://www.googleapis.com/auth/display-video-user-management'
+    flows: [authorizationCode]
+    grants: read+write on DV360 user profiles and role assignments
+    private: true
+    note: >-
+      Google marks this a Private Service in its own Discovery Document — it is allowlist-gated
+      and not grantable by a standard OAuth client. It backs the /v4/users resource
+      (usersList, usersGet, usersCreate, usersPatch, usersDelete,
+      usersBulkEditAssignedUserRoles). Those operations are in the contract and will
+      authenticate, but will not authorize for a project that has not been allowlisted.
+    sources: [openapi/google-display-video-360-api-openapi.yml, discovery]
+  - scope: https://www.googleapis.com/auth/doubleclickbidmanager
+    description: View and manage your reports in DoubleClick Bid Manager
+    flows: [authorizationCode]
+    grants: read+write on Bid Manager reporting
+    note: >-
+      Reporting scope inherited from the Bid Manager API
+      (doubleclickbidmanager.googleapis.com), which is where DV360 reporting actually lives. It
+      is declared on this API's Discovery Document, but the reporting operations themselves are
+      served by that sibling API rather than by displayvideo.googleapis.com.
+    sources: [discovery]
+scope_count: 4
+read_only_scope_available: false

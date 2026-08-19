@@ -1,6 +1,6 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: derived
-source: openapi/openapi.yml
+source: openapi/google-display-video-360-advertisers-api-openapi.yml, openapi/google-display-video-360-api-openapi.yml
 summary:
   types:
   - oauth2
@@ -11,8 +11,10 @@ schemes:
   type: oauth2
   flows:
   - flow: authorizationCode
-    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
     tokenUrl: https://oauth2.googleapis.com/token
-    scopes: 1
+    scopes: 4
+  description: Google OAuth 2.0. Authorization and token endpoints read from https://accounts.google.com/.well-known/openid-configuration.
   sources:
-  - openapi/openapi.yml
+  - openapi/google-display-video-360-advertisers-api-openapi.yml
+  - openapi/google-display-video-360-api-openapi.yml

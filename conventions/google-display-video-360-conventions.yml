@@ -1,0 +1,138 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developers.google.com/display-video/api/guides/getting-started/overview,
+  https://developers.google.com/display-video/api/guides/concepts/general/errors-warnings,
+  https://developers.google.com/display-video/api/limits, and derived from
+  openapi/google-display-video-360-api-openapi.yml (179 operations)
+description: >-
+  Cross-cutting request/response semantics for the Display & Video 360 API. This is a Google
+  AIP-shaped resource API: uri-path versioning, resource-oriented paths with a small set of
+  colon-suffixed custom verbs, list pagination by opaque page token, partial update by explicit
+  field mask, and a google.rpc.Code error envelope. The conventions below are stated by Google's
+  docs and confirmed against the operation counts in the generated spec.
+authentication:
+  style: oauth2-user
+  scheme: OAuth 2.0 authorization code, Google-issued access token in the Authorization header
+  authorization_url: https://accounts.google.com/o/oauth2/v2/auth
+  token_url: https://oauth2.googleapis.com/token
+  api_keys_accepted: false
+  note: >-
+    There is no API-key path to this API. The calling Google Account must additionally hold a
+    Display & Video 360 user profile with Read only, Standard or Admin permission on the
+    partner or advertiser being addressed — an OAuth token alone is not sufficient authorization.
+  see: authentication/google-display-video-360-authentication.yml
+  scopes: scopes/google-display-video-360-scopes.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    The Display & Video 360 API documents NO idempotency key. There is no Idempotency-Key header,
+    no client-supplied request token, and no request-id echo, and none appears anywhere in the
+    Discovery Document. A retried create is a second create. The only concurrency signal the API
+    offers is 409 ABORTED on a conflicting concurrent write, which tells a client to retry but
+    does not make the retry safe. Agents performing writes must carry their own dedupe key
+    out-of-band — typically by listing on a `filter` for the displayName they are about to create
+    before creating it.
+pagination:
+  style: cursor
+  request_params:
+    page_size: pageSize
+    page_token: pageToken
+  response_fields:
+    next_cursor: nextPageToken
+  default_page_size: 100
+  operations_with_pagination: 42
+  note: >-
+    Every list method takes pageSize + pageToken and returns nextPageToken. The token is opaque —
+    pass it back verbatim. Absence of nextPageToken in the response means the final page. Maximum
+    pageSize varies by resource; read the per-method reference.
+filtering:
+  filter_param: filter
+  operations_with_filter: 35
+  syntax: >-
+    Google's list-filter syntax — field-restricted expressions combined with AND/OR, e.g.
+    entityStatus="ENTITY_STATUS_ACTIVE". Supported fields are enumerated per method in the
+    reference; unsupported fields return 400 INVALID_ARGUMENT.
+sorting:
+  order_by_param: orderBy
+  operations_with_order_by: 39
+  syntax: 'field name, optionally suffixed with " desc"'
+field_masks:
+  update:
+    param: updateMask
+    required: true
+    operations: 19
+    syntax: comma-separated list of fully qualified field names
+    note: >-
+      Every PATCH requires updateMask. Fields present in the body but absent from the mask are
+      ignored; fields named in the mask but absent from the body are cleared. This is the single
+      most common source of silent no-op writes against this API.
+  partial_response:
+    param: fields
+    scope: global
+    note: >-
+      Google's standard partial-response parameter, accepted on every method. Restricts the
+      response payload to the named fields. Declared in the Discovery Document's global
+      parameters block.
+custom_methods:
+  count: 33
+  form: 'colon-suffixed verb on the collection or resource, e.g. POST /v4/advertisers/{id}/lineItems:bulkUpdate'
+  examples:
+    - advertisersLineItemsBulkUpdate
+    - advertisersLineItemsBulkEditAssignedTargetingOptions
+    - advertisersAudit
+    - firstPartyAndPartnerAudiencesEditCustomerMatchMembers
+    - customBiddingAlgorithmsUploadScript
+  note: >-
+    Bulk methods (12 of them) are the intended path for high-volume mutation and are also how a
+    client stays inside the per-advertiser write quota, since one bulk call costs one write
+    against quota rather than N. Five methods cost 5x write quota — see rate-limits/.
+long_running_operations:
+  supported: true
+  style: google.longrunning.Operation polling
+  note: >-
+    Structured Data File generation is asynchronous. sdfdownloadtasksCreate returns an Operation;
+    the caller polls sdfdownloadtasksOperationsGet until done. Failures surface on the finished
+    Operation, not on the call that started it. There is no callback or webhook — polling is the
+    only completion signal this API offers.
+  operations:
+    - sdfdownloadtasksCreate
+    - sdfdownloadtasksOperationsGet
+    - sdfuploadtasksOperationsGet
+versioning:
+  style: uri-path
+  current: v4
+  note: Version is the first path segment. See lifecycle/google-display-video-360-lifecycle.yml.
+error_envelope:
+  format: google-rpc-status
+  media_type: application/json
+  machine_readable_field: error.status
+  shape: '{"error": {"code": integer, "message": string, "status": google.rpc.Code}}'
+  rfc9457: false
+  see: errors/google-display-video-360-problem-types.yml
+rate_limit_signaling:
+  response_headers: none
+  exhaustion_status: 429
+  exhaustion_rpc_status: RESOURCE_EXHAUSTED
+  note: >-
+    No X-RateLimit-*, no RateLimit-*, no Retry-After. The 429 is the only in-band signal; budget
+    must be tracked client-side or read from the Google Cloud console.
+  see: rate-limits/google-display-video-360-rate-limits.yml
+request_tracing:
+  request_id_header: null
+  note: >-
+    No documented request-id header on requests or responses. The `quotaUser` global parameter
+    lets a caller attribute per-user quota within a project but is not a trace identifier.
+global_parameters:
+  source: Google Discovery Document global parameters block
+  params: [alt, fields, key, access_token, oauth_token, prettyPrint, quotaUser, callback, uploadType, upload_protocol, $.xgafv]
+metadata:
+  supported: false
+  note: No general-purpose customer-defined metadata bag on DV360 resources.
+webhooks:
+  supported: false
+  note: >-
+    The API exposes no webhook, callback, push or event-subscription surface. Every state change
+    must be discovered by polling. This is why no asyncapi/ artifact exists in this repo — an
+    absent event surface, honestly recorded, not a missed harvest.

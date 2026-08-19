@@ -1,0 +1,63 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/google-display-video-360-api-openapi.yml (every operationId below verified present in
+  the spec), conventions/google-display-video-360-conventions.yml,
+  errors/google-display-video-360-problem-types.yml,
+  rate-limits/google-display-video-360-rate-limits.yml,
+  lifecycle/google-display-video-360-lifecycle.yml
+description: >-
+  Packaged Agent Skills for the Display & Video 360 API — one per marquee flow. Google publishes
+  no AGENTS.md, no skill files and no agent guidance for this API, so these are generated from the
+  contract plus the documented conventions, quotas, error semantics and deprecations. Every step
+  is grounded in an operationId that exists verbatim in the generated OpenAPI.
+skills:
+  - file: google-display-video-360-launch-a-display-campaign.md
+    name: Launch a Display & Video 360 display campaign
+    api: openapi/google-display-video-360-api-openapi.yml
+    operations:
+      - partnersList
+      - advertisersList
+      - advertisersCampaignsCreate
+      - advertisersInsertionOrdersCreate
+      - advertisersLineItemsCreate
+      - advertisersLineItemsBulkEditAssignedTargetingOptions
+      - advertisersLineItemsPatch
+  - file: google-display-video-360-audit-line-item-targeting.md
+    name: Audit line item targeting across an advertiser
+    api: openapi/google-display-video-360-api-openapi.yml
+    operations:
+      - advertisersLineItemsList
+      - advertisersLineItemsBulkListAssignedTargetingOptions
+      - advertisersLineItemsTargetingTypesAssignedTargetingOptionsList
+      - targetingTypesTargetingOptionsList
+      - targetingTypesTargetingOptionsSearch
+  - file: google-display-video-360-manage-customer-match-audience.md
+    name: Create and maintain a Customer Match audience
+    api: openapi/google-display-video-360-api-openapi.yml
+    operations:
+      - firstPartyAndPartnerAudiencesList
+      - firstPartyAndPartnerAudiencesCreate
+      - firstPartyAndPartnerAudiencesEditCustomerMatchMembers
+      - advertisersLineItemsBulkEditAssignedTargetingOptions
+  - file: google-display-video-360-export-structured-data-file.md
+    name: Export a Structured Data File
+    api: openapi/google-display-video-360-api-openapi.yml
+    operations:
+      - sdfdownloadtasksCreate
+      - sdfdownloadtasksOperationsGet
+      - mediaDownload
+cross_cutting_rules:
+  - Google OAuth 2.0 only; no API key exists.
+  - An OAuth token is not authorization — the Google Account also needs a DV360 user profile with
+    the right role on the partner or advertiser, or every call returns 403 PERMISSION_DENIED.
+  - Every PATCH requires updateMask; unmasked body fields are ignored and masked-but-absent fields
+    are cleared.
+  - No idempotency key exists anywhere in this API. Dedupe client-side by listing on a filter
+    before every create.
+  - Quotas are per-minute, dual-scoped (project and advertiser), and cannot be increased. Five
+    methods cost 5x write quota.
+  - No rate-limit response headers of any kind. The 429 is the only in-band signal.
+  - No webhooks or callbacks. Everything asynchronous is discovered by polling.
+  - Branch on error.status (a google.rpc.Code name), never on error.message.
+skill_count: 4

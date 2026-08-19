@@ -1,0 +1,1118 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/google-display-video-360-api-openapi.yml
+description: Candidate MCP tool surface for the Display & Video 360 API, derived one-to-one from the 179
+  operations in the OpenAPI this repo generated from Google's own Discovery Document. Google publishes
+  NO Model Context Protocol server for Display & Video 360 — nothing on developers.google.com/display-video,
+  nothing under @modelcontextprotocol, nothing in the client-libraries page. Every DV360 MCP server on
+  the market (Markifact, Gumloop, Porter Metrics, caspercrause/dv360-ads-mcp-server, the AG2 auto-generated
+  server) is third-party and wraps this same REST API. Nothing here is deployed by Google; this is the
+  tool list a server WOULD expose, with each tool bound to the real operation that gives it its input
+  schema.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: searched
+  note: 'mode: none because no first-party server exists. Auth is recorded as oauth because that is what
+    any server must carry: the API accepts only Google OAuth 2.0 user credentials over the display-video
+    scope family — there is no API-key path. Probed https://displayvideo.googleapis.com/mcp on 2026-08-13:
+    HTTP 404.'
+third_party_servers:
+- name: dv360-ads-mcp-server
+  url: https://github.com/caspercrause/dv360-ads-mcp-server
+  official: false
+  mode: local-stdio
+- name: Markifact Display & Video 360 MCP
+  url: https://www.markifact.com/display-video-360-mcp
+  official: false
+  mode: remote
+- name: Gumloop Google DV360 MCP
+  url: https://www.gumloop.com/mcp/gdv360
+  official: false
+  mode: remote
+coverage:
+  tools: 179
+  read_tools: 83
+  write_tools: 96
+  categories: 16
+tools:
+- name: advertisers_ad_assets_bulk_create
+  description: Creates multiple ad assets in a single request.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdAssetsBulkCreate
+  http: POST /v4/advertisers/{advertisersId}/adAssets:bulkCreate
+  consequence: write
+- name: advertisers_ad_assets_create
+  description: Creates an ad asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdAssetsCreate
+  http: POST /v4/advertisers/{advertisersId}/adAssets
+  consequence: write
+- name: advertisers_ad_assets_get
+  description: Gets an ad asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdAssetsGet
+  http: GET /v4/advertisers/{advertisersId}/adAssets/{adAssetsId}
+  consequence: read
+- name: advertisers_ad_assets_list
+  description: Lists ad assets under an advertiser ID.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdAssetsList
+  http: GET /v4/advertisers/{advertisersId}/adAssets
+  consequence: read
+- name: advertisers_ad_assets_patch
+  description: Updates an ad asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdAssetsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/adAssets/{adAssetsId}
+  consequence: write
+- name: advertisers_ad_assets_upload
+  description: Uploads and creates an ad asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdAssetsUpload
+  http: POST /v4/advertisers/{advertisersId}/adAssets:uploadAdAsset
+  consequence: write
+- name: advertisers_ad_group_ads_create
+  description: Creates an ad group ad.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupAdsCreate
+  http: POST /v4/advertisers/{advertisersId}/adGroupAds
+  consequence: write
+- name: advertisers_ad_group_ads_delete
+  description: Deletes an ad group ad.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupAdsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  consequence: write
+- name: advertisers_ad_group_ads_get
+  description: Gets an ad group ad.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupAdsGet
+  http: GET /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  consequence: read
+- name: advertisers_ad_group_ads_list
+  description: Lists ad group ads.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupAdsList
+  http: GET /v4/advertisers/{advertisersId}/adGroupAds
+  consequence: read
+- name: advertisers_ad_group_ads_patch
+  description: Updates an ad group ad.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupAdsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  consequence: write
+- name: advertisers_ad_groups_bulk_edit_assigned_targeting_options
+  description: Bulk edits targeting options for multiple ad groups.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsBulkEditAssignedTargetingOptions
+  http: POST /v4/advertisers/{advertisersId}/adGroups:bulkEditAssignedTargetingOptions
+  consequence: write
+- name: advertisers_ad_groups_bulk_list_assigned_targeting_options
+  description: Lists assigned targeting options for multiple ad groups across targeting types.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsBulkListAssignedTargetingOptions
+  http: GET /v4/advertisers/{advertisersId}/adGroups:bulkListAssignedTargetingOptions
+  consequence: read
+- name: advertisers_ad_groups_create
+  description: Creates a new ad group.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsCreate
+  http: POST /v4/advertisers/{advertisersId}/adGroups
+  consequence: write
+- name: advertisers_ad_groups_delete
+  description: Deletes a AdGroup.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  consequence: write
+- name: advertisers_ad_groups_get
+  description: Gets an ad group.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsGet
+  http: GET /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  consequence: read
+- name: advertisers_ad_groups_list
+  description: Lists ad groups.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsList
+  http: GET /v4/advertisers/{advertisersId}/adGroups
+  consequence: read
+- name: advertisers_ad_groups_patch
+  description: Updates an existing ad group.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  consequence: write
+- name: advertisers_ad_groups_targeting_types_assigned_targeting_options_create
+  description: Assigns a targeting option to an ad group.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsTargetingTypesAssignedTargetingOptionsCreate
+  http: POST /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: write
+- name: advertisers_ad_groups_targeting_types_assigned_targeting_options_delete
+  description: Deletes an assigned targeting option from an ad group.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsTargetingTypesAssignedTargetingOptionsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: write
+- name: advertisers_ad_groups_targeting_types_assigned_targeting_options_get
+  description: Gets a single targeting option assigned to an ad group.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsTargetingTypesAssignedTargetingOptionsGet
+  http: GET /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: read
+- name: advertisers_ad_groups_targeting_types_assigned_targeting_options_list
+  description: Lists the targeting options assigned to an ad group.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsTargetingTypesAssignedTargetingOptionsList
+  http: GET /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: read
+- name: advertisers_ad_groups_youtube_asset_types_youtube_asset_associations_create
+  description: Creates a new association between the identified resource and a YouTube asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsCreate
+  http: POST /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  consequence: write
+- name: advertisers_ad_groups_youtube_asset_types_youtube_asset_associations_delete
+  description: Deletes an existing association between the identified resource and a YouTube asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations/{youtubeAssetAssociationsId}
+  consequence: write
+- name: advertisers_ad_groups_youtube_asset_types_youtube_asset_associations_list
+  description: Lists the YouTube asset associations linked to the given resource.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsList
+  http: GET /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  consequence: read
+- name: advertisers_assets_upload
+  description: Uploads an asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAssetsUpload
+  http: POST /v4/advertisers/{advertisersId}/assets
+  consequence: write
+- name: advertisers_audit
+  description: Audits an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersAudit
+  http: GET /v4/advertisers/{advertisersId}:audit
+  consequence: read
+- name: advertisers_campaigns_create
+  description: Creates a new campaign.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCampaignsCreate
+  http: POST /v4/advertisers/{advertisersId}/campaigns
+  consequence: write
+- name: advertisers_campaigns_delete
+  description: Permanently deletes a campaign.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCampaignsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  consequence: write
+- name: advertisers_campaigns_get
+  description: Gets a campaign.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCampaignsGet
+  http: GET /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  consequence: read
+- name: advertisers_campaigns_list
+  description: Lists campaigns in an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCampaignsList
+  http: GET /v4/advertisers/{advertisersId}/campaigns
+  consequence: read
+- name: advertisers_campaigns_patch
+  description: Updates an existing campaign.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCampaignsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  consequence: write
+- name: advertisers_channels_create
+  description: Creates a new channel.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsCreate
+  http: POST /v4/advertisers/{advertisersId}/channels
+  consequence: write
+- name: advertisers_channels_get
+  description: Gets a channel for a partner or advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsGet
+  http: GET /v4/advertisers/{advertisersId}/channels/{channelsId}
+  consequence: read
+- name: advertisers_channels_list
+  description: Lists channels for a partner or advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsList
+  http: GET /v4/advertisers/{advertisersId}/channels
+  consequence: read
+- name: advertisers_channels_patch
+  description: Updates a channel.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/channels/{channelId}
+  consequence: write
+- name: advertisers_channels_sites_bulk_edit
+  description: Bulk edits sites under a single channel.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsSitesBulkEdit
+  http: POST /v4/advertisers/{advertiserId}/channels/{channelsId}/sites:bulkEdit
+  consequence: write
+- name: advertisers_channels_sites_create
+  description: Creates a site in a channel.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsSitesCreate
+  http: POST /v4/advertisers/{advertiserId}/channels/{channelsId}/sites
+  consequence: write
+- name: advertisers_channels_sites_delete
+  description: Deletes a site from a channel.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsSitesDelete
+  http: DELETE /v4/advertisers/{advertiserId}/channels/{channelsId}/sites/{sitesId}
+  consequence: write
+- name: advertisers_channels_sites_list
+  description: Lists sites in a channel.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsSitesList
+  http: GET /v4/advertisers/{advertisersId}/channels/{channelsId}/sites
+  consequence: read
+- name: advertisers_channels_sites_replace
+  description: Replaces all of the sites under a single channel.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersChannelsSitesReplace
+  http: POST /v4/advertisers/{advertiserId}/channels/{channelsId}/sites:replace
+  consequence: write
+- name: advertisers_create
+  description: Creates a new advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCreate
+  http: POST /v4/advertisers
+  consequence: write
+- name: advertisers_creatives_create
+  description: Creates a new creative.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCreativesCreate
+  http: POST /v4/advertisers/{advertisersId}/creatives
+  consequence: write
+- name: advertisers_creatives_delete
+  description: Deletes a creative.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCreativesDelete
+  http: DELETE /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  consequence: write
+- name: advertisers_creatives_get
+  description: Gets a creative.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCreativesGet
+  http: GET /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  consequence: read
+- name: advertisers_creatives_list
+  description: Lists creatives in an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCreativesList
+  http: GET /v4/advertisers/{advertisersId}/creatives
+  consequence: read
+- name: advertisers_creatives_patch
+  description: Updates an existing creative.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersCreativesPatch
+  http: PATCH /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  consequence: write
+- name: advertisers_delete
+  description: Deletes an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersDelete
+  http: DELETE /v4/advertisers/{advertisersId}
+  consequence: write
+- name: advertisers_edit_assigned_targeting_options
+  description: Edits targeting options under a single advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersEditAssignedTargetingOptions
+  http: POST /v4/advertisers/{advertisersId}:editAssignedTargetingOptions
+  consequence: write
+- name: advertisers_get
+  description: Gets an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersGet
+  http: GET /v4/advertisers/{advertisersId}
+  consequence: read
+- name: advertisers_insertion_orders_create
+  description: Creates a new insertion order.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersInsertionOrdersCreate
+  http: POST /v4/advertisers/{advertisersId}/insertionOrders
+  consequence: write
+- name: advertisers_insertion_orders_delete
+  description: Deletes an insertion order.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersInsertionOrdersDelete
+  http: DELETE /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  consequence: write
+- name: advertisers_insertion_orders_get
+  description: Gets an insertion order.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersInsertionOrdersGet
+  http: GET /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  consequence: read
+- name: advertisers_insertion_orders_list
+  description: Lists insertion orders in an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersInsertionOrdersList
+  http: GET /v4/advertisers/{advertisersId}/insertionOrders
+  consequence: read
+- name: advertisers_insertion_orders_patch
+  description: Updates an existing insertion order.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersInsertionOrdersPatch
+  http: PATCH /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  consequence: write
+- name: advertisers_invoices_list
+  description: Lists invoices posted for an advertiser in a given month.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersInvoicesList
+  http: GET /v4/advertisers/{advertisersId}/invoices
+  consequence: read
+- name: advertisers_invoices_lookup_invoice_currency
+  description: Retrieves the invoice currency used by an advertiser in a given month.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersInvoicesLookupInvoiceCurrency
+  http: GET /v4/advertisers/{advertisersId}/invoices:lookupInvoiceCurrency
+  consequence: read
+- name: advertisers_line_items_bulk_edit_assigned_targeting_options
+  description: Bulk edits targeting options under multiple line items.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsBulkEditAssignedTargetingOptions
+  http: POST /v4/advertisers/{advertisersId}/lineItems:bulkEditAssignedTargetingOptions
+  consequence: write
+- name: advertisers_line_items_bulk_list_assigned_targeting_options
+  description: Lists assigned targeting options for multiple line items across targeting types.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsBulkListAssignedTargetingOptions
+  http: GET /v4/advertisers/{advertisersId}/lineItems:bulkListAssignedTargetingOptions
+  consequence: read
+- name: advertisers_line_items_bulk_update
+  description: Updates multiple line items.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsBulkUpdate
+  http: POST /v4/advertisers/{advertisersId}/lineItems:bulkUpdate
+  consequence: write
+- name: advertisers_line_items_create
+  description: Creates a new line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsCreate
+  http: POST /v4/advertisers/{advertisersId}/lineItems
+  consequence: write
+- name: advertisers_line_items_delete
+  description: Deletes a line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  consequence: write
+- name: advertisers_line_items_duplicate
+  description: Duplicates a line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsDuplicate
+  http: POST /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}:duplicate
+  consequence: write
+- name: advertisers_line_items_get
+  description: Gets a line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsGet
+  http: GET /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  consequence: read
+- name: advertisers_line_items_list
+  description: Lists line items in an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsList
+  http: GET /v4/advertisers/{advertisersId}/lineItems
+  consequence: read
+- name: advertisers_line_items_patch
+  description: Updates an existing line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  consequence: write
+- name: advertisers_line_items_targeting_types_assigned_targeting_options_create
+  description: Assigns a targeting option to a line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsTargetingTypesAssignedTargetingOptionsCreate
+  http: POST /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: write
+- name: advertisers_line_items_targeting_types_assigned_targeting_options_delete
+  description: Deletes an assigned targeting option from a line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsTargetingTypesAssignedTargetingOptionsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: write
+- name: advertisers_line_items_targeting_types_assigned_targeting_options_get
+  description: Gets a single targeting option assigned to a line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsTargetingTypesAssignedTargetingOptionsGet
+  http: GET /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: read
+- name: advertisers_line_items_targeting_types_assigned_targeting_options_list
+  description: Lists the targeting options assigned to a line item.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsTargetingTypesAssignedTargetingOptionsList
+  http: GET /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: read
+- name: advertisers_line_items_youtube_asset_types_youtube_asset_associations_create
+  description: Creates a new association between the identified resource and a YouTube asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsCreate
+  http: POST /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  consequence: write
+- name: advertisers_line_items_youtube_asset_types_youtube_asset_associations_delete
+  description: Deletes an existing association between the identified resource and a YouTube asset.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations/{youtubeAssetAssociationsId}
+  consequence: write
+- name: advertisers_line_items_youtube_asset_types_youtube_asset_associations_list
+  description: Lists the YouTube asset associations linked to the given resource.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsList
+  http: GET /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  consequence: read
+- name: advertisers_list
+  description: Lists advertisers that are accessible to the current user.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersList
+  http: GET /v4/advertisers
+  consequence: read
+- name: advertisers_list_assigned_targeting_options
+  description: Lists assigned targeting options of an advertiser across targeting types.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersListAssignedTargetingOptions
+  http: GET /v4/advertisers/{advertisersId}:listAssignedTargetingOptions
+  consequence: read
+- name: advertisers_location_lists_assigned_locations_bulk_edit
+  description: Bulk edits multiple assignments between locations and a single location list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsAssignedLocationsBulkEdit
+  http: POST /v4/advertisers/{advertiserId}/locationLists/{locationListsId}/assignedLocations:bulkEdit
+  consequence: write
+- name: advertisers_location_lists_assigned_locations_create
+  description: Creates an assignment between a location and a location list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsAssignedLocationsCreate
+  http: POST /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations
+  consequence: write
+- name: advertisers_location_lists_assigned_locations_delete
+  description: Deletes the assignment between a location and a location list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsAssignedLocationsDelete
+  http: DELETE /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations/{assignedLocationsId}
+  consequence: write
+- name: advertisers_location_lists_assigned_locations_list
+  description: Lists locations assigned to a location list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsAssignedLocationsList
+  http: GET /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations
+  consequence: read
+- name: advertisers_location_lists_create
+  description: Creates a new location list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsCreate
+  http: POST /v4/advertisers/{advertisersId}/locationLists
+  consequence: write
+- name: advertisers_location_lists_get
+  description: Gets a location list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsGet
+  http: GET /v4/advertisers/{advertisersId}/locationLists/{locationListsId}
+  consequence: read
+- name: advertisers_location_lists_list
+  description: Lists location lists based on a given advertiser id.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsList
+  http: GET /v4/advertisers/{advertisersId}/locationLists
+  consequence: read
+- name: advertisers_location_lists_patch
+  description: Updates a location list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersLocationListsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/locationLists/{locationListId}
+  consequence: write
+- name: advertisers_negative_keyword_lists_create
+  description: Creates a new negative keyword list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsCreate
+  http: POST /v4/advertisers/{advertisersId}/negativeKeywordLists
+  consequence: write
+- name: advertisers_negative_keyword_lists_delete
+  description: Deletes a negative keyword list given an advertiser ID and a negative keyword list ID.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}
+  consequence: write
+- name: advertisers_negative_keyword_lists_get
+  description: Gets a negative keyword list given an advertiser ID and a negative keyword list ID.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsGet
+  http: GET /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}
+  consequence: read
+- name: advertisers_negative_keyword_lists_list
+  description: Lists negative keyword lists based on a given advertiser id.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsList
+  http: GET /v4/advertisers/{advertisersId}/negativeKeywordLists
+  consequence: read
+- name: advertisers_negative_keyword_lists_negative_keywords_bulk_edit
+  description: Bulk edits negative keywords in a single negative keyword list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsNegativeKeywordsBulkEdit
+  http: POST /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords:bulkEdit
+  consequence: write
+- name: advertisers_negative_keyword_lists_negative_keywords_create
+  description: Creates a negative keyword in a negative keyword list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsNegativeKeywordsCreate
+  http: POST /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords
+  consequence: write
+- name: advertisers_negative_keyword_lists_negative_keywords_delete
+  description: Deletes a negative keyword from a negative keyword list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsNegativeKeywordsDelete
+  http: DELETE /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords/{negativeKeywordsId}
+  consequence: write
+- name: advertisers_negative_keyword_lists_negative_keywords_list
+  description: Lists negative keywords in a negative keyword list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsNegativeKeywordsList
+  http: GET /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords
+  consequence: read
+- name: advertisers_negative_keyword_lists_negative_keywords_replace
+  description: Replaces all negative keywords in a single negative keyword list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsNegativeKeywordsReplace
+  http: POST /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords:replace
+  consequence: write
+- name: advertisers_negative_keyword_lists_patch
+  description: Updates a negative keyword list.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersNegativeKeywordListsPatch
+  http: PATCH /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListId}
+  consequence: write
+- name: advertisers_patch
+  description: Updates an existing advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersPatch
+  http: PATCH /v4/advertisers/{advertisersId}
+  consequence: write
+- name: advertisers_reach_forecast_generate_reach_forecast
+  description: Generates a reach forecast for a given advertiser and targeting configuration.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersReachForecastGenerateReachForecast
+  http: POST /v4/advertisers/{advertisersId}/reachForecast:generateReachForecast
+  consequence: write
+- name: advertisers_reach_forecast_retrieve_plannable_locations
+  description: Retrieves the list of countries where reach forecasting is supported.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersReachForecastRetrievePlannableLocations
+  http: GET /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableLocations
+  consequence: read
+- name: advertisers_reach_forecast_retrieve_plannable_products
+  description: Retrieves the list of products that can be planned for a location.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersReachForecastRetrievePlannableProducts
+  http: GET /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableProducts
+  consequence: read
+- name: advertisers_reach_forecast_retrieve_plannable_user_interests
+  description: Retrieves Google Audiences (User Interests) available for forecasting.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersReachForecastRetrievePlannableUserInterests
+  http: GET /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableUserInterests
+  consequence: read
+- name: advertisers_reach_forecast_retrieve_plannable_user_lists
+  description: Retrieves first and third party user lists available for forecasting.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersReachForecastRetrievePlannableUserLists
+  http: GET /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableUserLists
+  consequence: read
+- name: advertisers_targeting_types_assigned_targeting_options_create
+  description: Assigns a targeting option to an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersTargetingTypesAssignedTargetingOptionsCreate
+  http: POST /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: write
+- name: advertisers_targeting_types_assigned_targeting_options_delete
+  description: Deletes an assigned targeting option from an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersTargetingTypesAssignedTargetingOptionsDelete
+  http: DELETE /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: write
+- name: advertisers_targeting_types_assigned_targeting_options_get
+  description: Gets a single targeting option assigned to an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersTargetingTypesAssignedTargetingOptionsGet
+  http: GET /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: read
+- name: advertisers_targeting_types_assigned_targeting_options_list
+  description: Lists the targeting options assigned to an advertiser.
+  category: Advertisers
+  source_operation: openapi/google-display-video-360-api-openapi.yml#advertisersTargetingTypesAssignedTargetingOptionsList
+  http: GET /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: read
+- name: combined_audiences_get
+  description: Gets a combined audience.
+  category: Combined Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#combinedAudiencesGet
+  http: GET /v4/combinedAudiences/{combinedAudiencesId}
+  consequence: read
+- name: combined_audiences_list
+  description: Lists combined audiences.
+  category: Combined Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#combinedAudiencesList
+  http: GET /v4/combinedAudiences
+  consequence: read
+- name: custom_bidding_algorithms_create
+  description: Creates a new custom bidding algorithm.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsCreate
+  http: POST /v4/customBiddingAlgorithms
+  consequence: write
+- name: custom_bidding_algorithms_get
+  description: Gets a custom bidding algorithm.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsGet
+  http: GET /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}
+  consequence: read
+- name: custom_bidding_algorithms_list
+  description: Lists custom bidding algorithms that are accessible to the current user and can be used
+    in bidding stratgies.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsList
+  http: GET /v4/customBiddingAlgorithms
+  consequence: read
+- name: custom_bidding_algorithms_patch
+  description: Updates an existing custom bidding algorithm.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsPatch
+  http: PATCH /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}
+  consequence: write
+- name: custom_bidding_algorithms_rules_create
+  description: Creates a new rules resource.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsRulesCreate
+  http: POST /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules
+  consequence: write
+- name: custom_bidding_algorithms_rules_get
+  description: Retrieves a rules resource.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsRulesGet
+  http: GET /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules/{rulesId}
+  consequence: read
+- name: custom_bidding_algorithms_rules_list
+  description: Lists rules resources that belong to the given algorithm.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsRulesList
+  http: GET /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules
+  consequence: read
+- name: custom_bidding_algorithms_scripts_create
+  description: Creates a new custom bidding script.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsScriptsCreate
+  http: POST /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts
+  consequence: write
+- name: custom_bidding_algorithms_scripts_get
+  description: Gets a custom bidding script.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsScriptsGet
+  http: GET /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts/{scriptsId}
+  consequence: read
+- name: custom_bidding_algorithms_scripts_list
+  description: Lists custom bidding scripts that belong to the given algorithm.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsScriptsList
+  http: GET /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts
+  consequence: read
+- name: custom_bidding_algorithms_upload_rules
+  description: Creates a rules reference object for an AlgorithmRules file.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsUploadRules
+  http: GET /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}:uploadRules
+  consequence: read
+- name: custom_bidding_algorithms_upload_script
+  description: Creates a custom bidding script reference object for a script file.
+  category: Custom Bidding Algorithms
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customBiddingAlgorithmsUploadScript
+  http: GET /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}:uploadScript
+  consequence: read
+- name: custom_lists_get
+  description: Gets a custom list.
+  category: Custom Lists
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customListsGet
+  http: GET /v4/customLists/{customListsId}
+  consequence: read
+- name: custom_lists_list
+  description: Lists custom lists.
+  category: Custom Lists
+  source_operation: openapi/google-display-video-360-api-openapi.yml#customListsList
+  http: GET /v4/customLists
+  consequence: read
+- name: first_party_and_partner_audiences_create
+  description: Creates a FirstPartyAndPartnerAudience.
+  category: First Party and Partner Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#firstPartyAndPartnerAudiencesCreate
+  http: POST /v4/firstPartyAndPartnerAudiences
+  consequence: write
+- name: first_party_and_partner_audiences_edit_customer_match_members
+  description: Updates the member list of a Customer Match audience.
+  category: First Party and Partner Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#firstPartyAndPartnerAudiencesEditCustomerMatchMembers
+  http: POST /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}:editCustomerMatchMembers
+  consequence: write
+- name: first_party_and_partner_audiences_get
+  description: Gets a first party or partner audience.
+  category: First Party and Partner Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#firstPartyAndPartnerAudiencesGet
+  http: GET /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}
+  consequence: read
+- name: first_party_and_partner_audiences_list
+  description: Lists first party and partner audiences.
+  category: First Party and Partner Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#firstPartyAndPartnerAudiencesList
+  http: GET /v4/firstPartyAndPartnerAudiences
+  consequence: read
+- name: first_party_and_partner_audiences_patch
+  description: Updates an existing FirstPartyAndPartnerAudience.
+  category: First Party and Partner Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#firstPartyAndPartnerAudiencesPatch
+  http: PATCH /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}
+  consequence: write
+- name: floodlight_groups_floodlight_activities_get
+  description: Gets a Floodlight activity.
+  category: Floodlight Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#floodlightGroupsFloodlightActivitiesGet
+  http: GET /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities/{floodlightActivitiesId}
+  consequence: read
+- name: floodlight_groups_floodlight_activities_list
+  description: Lists Floodlight activities in a Floodlight group.
+  category: Floodlight Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#floodlightGroupsFloodlightActivitiesList
+  http: GET /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities
+  consequence: read
+- name: floodlight_groups_get
+  description: Gets a Floodlight group.
+  category: Floodlight Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#floodlightGroupsGet
+  http: GET /v4/floodlightGroups/{floodlightGroupsId}
+  consequence: read
+- name: floodlight_groups_patch
+  description: Updates an existing Floodlight group.
+  category: Floodlight Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#floodlightGroupsPatch
+  http: PATCH /v4/floodlightGroups/{floodlightGroupId}
+  consequence: write
+- name: google_audiences_get
+  description: Gets a Google audience.
+  category: Google Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#googleAudiencesGet
+  http: GET /v4/googleAudiences/{googleAudiencesId}
+  consequence: read
+- name: google_audiences_list
+  description: Lists Google audiences.
+  category: Google Audiences
+  source_operation: openapi/google-display-video-360-api-openapi.yml#googleAudiencesList
+  http: GET /v4/googleAudiences
+  consequence: read
+- name: guaranteed_orders_create
+  description: Creates a new guaranteed order.
+  category: Guaranteed Orders
+  source_operation: openapi/google-display-video-360-api-openapi.yml#guaranteedOrdersCreate
+  http: POST /v4/guaranteedOrders
+  consequence: write
+- name: guaranteed_orders_edit_guaranteed_order_read_accessors
+  description: Edits read advertisers of a guaranteed order.
+  category: Guaranteed Orders
+  source_operation: openapi/google-display-video-360-api-openapi.yml#guaranteedOrdersEditGuaranteedOrderReadAccessors
+  http: POST /v4/guaranteedOrders/{guaranteedOrdersId}:editGuaranteedOrderReadAccessors
+  consequence: write
+- name: guaranteed_orders_get
+  description: Gets a guaranteed order.
+  category: Guaranteed Orders
+  source_operation: openapi/google-display-video-360-api-openapi.yml#guaranteedOrdersGet
+  http: GET /v4/guaranteedOrders/{guaranteedOrdersId}
+  consequence: read
+- name: guaranteed_orders_list
+  description: Lists guaranteed orders that are accessible to the current user.
+  category: Guaranteed Orders
+  source_operation: openapi/google-display-video-360-api-openapi.yml#guaranteedOrdersList
+  http: GET /v4/guaranteedOrders
+  consequence: read
+- name: guaranteed_orders_patch
+  description: Updates an existing guaranteed order.
+  category: Guaranteed Orders
+  source_operation: openapi/google-display-video-360-api-openapi.yml#guaranteedOrdersPatch
+  http: PATCH /v4/guaranteedOrders/{guaranteedOrdersId}
+  consequence: write
+- name: inventory_source_groups_assigned_inventory_sources_bulk_edit
+  description: Bulk edits multiple assignments between inventory sources and a single inventory source
+    group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsAssignedInventorySourcesBulkEdit
+  http: POST /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources:bulkEdit
+  consequence: write
+- name: inventory_source_groups_assigned_inventory_sources_create
+  description: Creates an assignment between an inventory source and an inventory source group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsAssignedInventorySourcesCreate
+  http: POST /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources
+  consequence: write
+- name: inventory_source_groups_assigned_inventory_sources_delete
+  description: Deletes the assignment between an inventory source and an inventory source group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsAssignedInventorySourcesDelete
+  http: DELETE /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources/{assignedInventorySourcesId}
+  consequence: write
+- name: inventory_source_groups_assigned_inventory_sources_list
+  description: Lists inventory sources assigned to an inventory source group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsAssignedInventorySourcesList
+  http: GET /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources
+  consequence: read
+- name: inventory_source_groups_create
+  description: Creates a new inventory source group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsCreate
+  http: POST /v4/inventorySourceGroups
+  consequence: write
+- name: inventory_source_groups_delete
+  description: Deletes an inventory source group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsDelete
+  http: DELETE /v4/inventorySourceGroups/{inventorySourceGroupsId}
+  consequence: write
+- name: inventory_source_groups_get
+  description: Gets an inventory source group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsGet
+  http: GET /v4/inventorySourceGroups/{inventorySourceGroupsId}
+  consequence: read
+- name: inventory_source_groups_list
+  description: Lists inventory source groups that are accessible to the current user.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsList
+  http: GET /v4/inventorySourceGroups
+  consequence: read
+- name: inventory_source_groups_patch
+  description: Updates an inventory source group.
+  category: Inventory Source Groups
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourceGroupsPatch
+  http: PATCH /v4/inventorySourceGroups/{inventorySourceGroupId}
+  consequence: write
+- name: inventory_sources_create
+  description: Creates a new inventory source.
+  category: Inventory Sources
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourcesCreate
+  http: POST /v4/inventorySources
+  consequence: write
+- name: inventory_sources_edit_inventory_source_read_write_accessors
+  description: Edits read/write accessors of an inventory source.
+  category: Inventory Sources
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourcesEditInventorySourceReadWriteAccessors
+  http: POST /v4/inventorySources/{inventorySourcesId}:editInventorySourceReadWriteAccessors
+  consequence: write
+- name: inventory_sources_get
+  description: Gets an inventory source.
+  category: Inventory Sources
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourcesGet
+  http: GET /v4/inventorySources/{inventorySourcesId}
+  consequence: read
+- name: inventory_sources_list
+  description: Lists inventory sources that are accessible to the current user.
+  category: Inventory Sources
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourcesList
+  http: GET /v4/inventorySources
+  consequence: read
+- name: inventory_sources_patch
+  description: Updates an existing inventory source.
+  category: Inventory Sources
+  source_operation: openapi/google-display-video-360-api-openapi.yml#inventorySourcesPatch
+  http: PATCH /v4/inventorySources/{inventorySourcesId}
+  consequence: write
+- name: media_download
+  description: Downloads media.
+  category: Media
+  source_operation: openapi/google-display-video-360-api-openapi.yml#mediaDownload
+  http: GET /download/{downloadId}
+  consequence: read
+- name: media_upload
+  description: Uploads media.
+  category: Media
+  source_operation: openapi/google-display-video-360-api-openapi.yml#mediaUpload
+  http: POST /media/{mediaId}
+  consequence: write
+- name: partners_channels_create
+  description: Creates a new channel.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsCreate
+  http: POST /v4/partners/{partnersId}/channels
+  consequence: write
+- name: partners_channels_get
+  description: Gets a channel for a partner or advertiser.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsGet
+  http: GET /v4/partners/{partnersId}/channels/{channelsId}
+  consequence: read
+- name: partners_channels_list
+  description: Lists channels for a partner or advertiser.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsList
+  http: GET /v4/partners/{partnersId}/channels
+  consequence: read
+- name: partners_channels_patch
+  description: Updates a channel.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsPatch
+  http: PATCH /v4/partners/{partnersId}/channels/{channelId}
+  consequence: write
+- name: partners_channels_sites_bulk_edit
+  description: Bulk edits sites under a single channel.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsSitesBulkEdit
+  http: POST /v4/partners/{partnerId}/channels/{channelsId}/sites:bulkEdit
+  consequence: write
+- name: partners_channels_sites_create
+  description: Creates a site in a channel.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsSitesCreate
+  http: POST /v4/partners/{partnerId}/channels/{channelsId}/sites
+  consequence: write
+- name: partners_channels_sites_delete
+  description: Deletes a site from a channel.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsSitesDelete
+  http: DELETE /v4/partners/{partnerId}/channels/{channelsId}/sites/{sitesId}
+  consequence: write
+- name: partners_channels_sites_list
+  description: Lists sites in a channel.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsSitesList
+  http: GET /v4/partners/{partnersId}/channels/{channelsId}/sites
+  consequence: read
+- name: partners_channels_sites_replace
+  description: Replaces all of the sites under a single channel.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersChannelsSitesReplace
+  http: POST /v4/partners/{partnerId}/channels/{channelsId}/sites:replace
+  consequence: write
+- name: partners_edit_assigned_targeting_options
+  description: Edits targeting options under a single partner.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersEditAssignedTargetingOptions
+  http: POST /v4/partners/{partnersId}:editAssignedTargetingOptions
+  consequence: write
+- name: partners_get
+  description: Gets a partner.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersGet
+  http: GET /v4/partners/{partnersId}
+  consequence: read
+- name: partners_list
+  description: Lists partners that are accessible to the current user.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersList
+  http: GET /v4/partners
+  consequence: read
+- name: partners_targeting_types_assigned_targeting_options_create
+  description: Assigns a targeting option to a partner.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersTargetingTypesAssignedTargetingOptionsCreate
+  http: POST /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: write
+- name: partners_targeting_types_assigned_targeting_options_delete
+  description: Deletes an assigned targeting option from a partner.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersTargetingTypesAssignedTargetingOptionsDelete
+  http: DELETE /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: write
+- name: partners_targeting_types_assigned_targeting_options_get
+  description: Gets a single targeting option assigned to a partner.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersTargetingTypesAssignedTargetingOptionsGet
+  http: GET /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  consequence: read
+- name: partners_targeting_types_assigned_targeting_options_list
+  description: Lists the targeting options assigned to a partner.
+  category: Partners
+  source_operation: openapi/google-display-video-360-api-openapi.yml#partnersTargetingTypesAssignedTargetingOptionsList
+  http: GET /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  consequence: read
+- name: sdfdownloadtasks_create
+  description: Creates an SDF Download Task.
+  category: SDF Download Tasks
+  source_operation: openapi/google-display-video-360-api-openapi.yml#sdfdownloadtasksCreate
+  http: POST /v4/sdfdownloadtasks
+  consequence: write
+- name: sdfdownloadtasks_operations_get
+  description: Gets the latest state of an asynchronous SDF download task operation.
+  category: SDF Download Tasks
+  source_operation: openapi/google-display-video-360-api-openapi.yml#sdfdownloadtasksOperationsGet
+  http: GET /v4/sdfdownloadtasks/operations/{operationsId}
+  consequence: read
+- name: sdfuploadtasks_operations_get
+  description: Gets the latest state of an asynchronous SDF download task operation.
+  category: SDF Upload Tasks
+  source_operation: openapi/google-display-video-360-api-openapi.yml#sdfuploadtasksOperationsGet
+  http: GET /v4/sdfuploadtasks/operations/{operationsId}
+  consequence: read
+- name: targeting_types_targeting_options_get
+  description: Gets a single targeting option.
+  category: Targeting Types
+  source_operation: openapi/google-display-video-360-api-openapi.yml#targetingTypesTargetingOptionsGet
+  http: GET /v4/targetingTypes/{targetingTypesId}/targetingOptions/{targetingOptionsId}
+  consequence: read
+- name: targeting_types_targeting_options_list
+  description: Lists targeting options of a given type.
+  category: Targeting Types
+  source_operation: openapi/google-display-video-360-api-openapi.yml#targetingTypesTargetingOptionsList
+  http: GET /v4/targetingTypes/{targetingTypesId}/targetingOptions
+  consequence: read
+- name: targeting_types_targeting_options_search
+  description: Searches for targeting options of a given type based on the given search terms.
+  category: Targeting Types
+  source_operation: openapi/google-display-video-360-api-openapi.yml#targetingTypesTargetingOptionsSearch
+  http: POST /v4/targetingTypes/{targetingTypesId}/targetingOptions:search
+  consequence: write
+- name: users_bulk_edit_assigned_user_roles
+  description: Bulk edits user roles for a user.
+  category: Users
+  source_operation: openapi/google-display-video-360-api-openapi.yml#usersBulkEditAssignedUserRoles
+  http: POST /v4/users/{usersId}:bulkEditAssignedUserRoles
+  consequence: write
+- name: users_create
+  description: Creates a new user.
+  category: Users
+  source_operation: openapi/google-display-video-360-api-openapi.yml#usersCreate
+  http: POST /v4/users
+  consequence: write
+- name: users_delete
+  description: Deletes a user.
+  category: Users
+  source_operation: openapi/google-display-video-360-api-openapi.yml#usersDelete
+  http: DELETE /v4/users/{usersId}
+  consequence: write
+- name: users_get
+  description: Gets a user.
+  category: Users
+  source_operation: openapi/google-display-video-360-api-openapi.yml#usersGet
+  http: GET /v4/users/{usersId}
+  consequence: read
+- name: users_list
+  description: Lists users that are accessible to the current user.
+  category: Users
+  source_operation: openapi/google-display-video-360-api-openapi.yml#usersList
+  http: GET /v4/users
+  consequence: read
+- name: users_patch
+  description: Updates an existing user.
+  category: Users
+  source_operation: openapi/google-display-video-360-api-openapi.yml#usersPatch
+  http: PATCH /v4/users/{usersId}
+  consequence: write

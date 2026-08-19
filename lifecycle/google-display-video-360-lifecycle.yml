@@ -1,0 +1,89 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.google.com/display-video/api/deprecations
+description: >-
+  Version and deprecation posture for the Display & Video 360 API. Google runs a genuinely
+  three-stage lifecycle here — release, announced deprecation with a named sunset date, then
+  sunset — and it publishes both an active deprecations page and an archive of retired ones.
+  The v3 transition is the worked example: released 2023-10-31, deprecated 2025-04-02, sunset
+  2025-10-07, roughly six months of notice.
+versioning:
+  scheme: uri-path
+  current: v4
+  released: '2025-03-27'
+  beta_opened: '2025-02-13'
+  previous: v3
+  docs: https://developers.google.com/display-video/api/reference/rest
+  note: >-
+    The version is the first path segment (/v4/…). The Discovery Document is served per version
+    at https://displayvideo.googleapis.com/$discovery/rest?version=v4 — v3 and v2 discovery
+    documents were still answering 200 when probed on 2026-08-13, even though v3 is past its
+    published sunset date.
+deprecation:
+  policy_url: https://developers.google.com/display-video/api/deprecations
+  archive_url: https://developers.google.com/display-video/api/deprecations-archive
+  sunset_header: false
+  deprecation_header: false
+  stages: [release, deprecation, sunset]
+  notice_period: >-
+    Not contractually fixed. Observed on the v3 transition: 2025-04-02 announcement to
+    2025-10-07 sunset — approximately six months.
+  note: >-
+    Deprecation is announced on a docs page, not signalled in the protocol. Google emits neither
+    the RFC 8594 Sunset header nor a Deprecation header on this API, so an automated client
+    cannot learn that its version is retiring from the responses it is already receiving — it
+    has to read the page.
+  version_history:
+    - {version: v3, released: '2023-10-31', deprecated: '2025-04-02', sunset: '2025-10-07'}
+    - {version: v4, released: '2025-03-27', deprecated: null, sunset: null, status: current}
+  announced_feature_deprecations:
+    - feature: Nielsen brand lift vendor can no longer be assigned as a third-party brand-lift vendor
+      effective: '2026-07-13'
+    - feature: Demand Gen and YouTube responsive ads inherit advertiser-level default business name and logo when unset
+      effective: '2026-07-13'
+    - feature: Insertion-order and campaign-level targeting methods begin returning 404; SDF targeting columns become non-writable
+      effective: '2026-02-23'
+    - feature: EU political ad declaration required on line items via API or SDF
+      effective: '2025-09-08'
+    - feature: YouTube & partners line-item content category settings become read-only, moving to advertiser level
+      effective: '2025-06-12'
+    - feature: Line-item budgets can no longer be updated under insertion orders using automated bid strategies
+      effective: '2025-06-12'
+    - feature: SDF uploads using the TrueView "Action" line-item subtype fail
+      effective: '2025-04-22'
+    - feature: Infinite (10,000-day) first-party audience membership duration no longer permitted
+      effective: '2025-04-07'
+    - feature: SDF v6 sunset
+      effective: '2025-04-30'
+status_page:
+  url: null
+  name: null
+  note: >-
+    Google publishes NO status or incident dashboard for the Display & Video 360 API. The
+    obvious candidate — https://developers.google.com/display-video/api/support/api-issues,
+    titled "Display & Video 360 API issues" — was fetched on 2026-08-13 (HTTP 200) and is a
+    support-routing page, not a status page: it classifies KINDS of problem (general questions,
+    API errors, unexpected behavior) and hands the reader a support form. It carries no
+    incident list, no dates and no status indicators. The generic
+    https://status.cloud.google.com/ board that apis.yml points at is the Google Cloud Platform
+    dashboard; displayvideo.googleapis.com is a Google Marketing Platform service and does not
+    appear on it. Recorded as absent rather than credited to a page that does not do the job.
+  candidates_checked:
+    - {url: 'https://developers.google.com/display-video/api/support/api-issues', status: 200, verdict: support-routing page, not a status page}
+    - {url: 'https://status.cloud.google.com/', status: 200, verdict: Google Cloud Platform dashboard; does not list this API}
+support:
+  url: https://developers.google.com/display-video/api/support
+  form: https://developers.google.com/display-video/api/support/api-issues
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No SLA is published for the Display & Video 360 API. DV360 itself is sold under Google
+    Marketing Platform enterprise agreements; any availability commitment lives in that contract,
+    not in the developer documentation.
+changelog: https://developers.google.com/display-video/api/release-notes
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in the generated OpenAPI carries deprecated: true — Google's Discovery Document
+  marks no v4 method as deprecated. Deprecations for this API are announced at the feature and
+  version level on the deprecations page rather than per method in the contract.

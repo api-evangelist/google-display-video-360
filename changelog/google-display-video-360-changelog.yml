@@ -1,0 +1,49 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.google.com/display-video/api/release-notes
+url: https://developers.google.com/display-video/api/release-notes
+description: >-
+  Recent window of the Display & Video 360 API release notes. Google publishes a dated,
+  version-tagged changelog on the developer site and mirrors the notable items on the Google Ads
+  Developer Blog. Entries are grouped by release date and each names the API versions it applies
+  to, which makes it possible to tell an additive change from a version-scoped one.
+scheme:
+  versioning: uri-path
+  current_version: v4
+  cadence: roughly every 4–8 weeks
+  format: dated entries, each tagged with the API version(s) affected
+mirrors:
+  - name: Google Ads Developer Blog — Display & Video 360 label
+    url: https://ads-developers.googleblog.com/search/label/display_video_360
+entries:
+  - date: '2026-07-23'
+    version: v4
+    breaking: false
+    highlights:
+      - Added syntheticContentAttestationStatus to the Creative and AdAsset resources for AI-content labeling
+      - Added a patch method to the advertisers.adAssets service
+      - Added defaultBusinessName and defaultLogoAssetId fields to the Advertiser resource
+      - Opened beta support for reach forecasts and reach metadata retrieval, partner allowlist only
+  - date: '2026-06-10'
+    version: v4
+    breaking: false
+    highlights:
+      - New exchange added
+      - New TARGETING_TYPE_AUDIO_CONTENT_TYPE targeting values
+      - SDF version 10 support enabled
+      - Demand Gen rollout to all partners began, completing 2026-06-24
+  - date: '2026-04-14'
+    version: v4
+    breaking: false
+    highlights:
+      - New exchange and third-party vendor support
+      - Asset identification fields added to ImageAsset and YoutubeVideoDetails
+      - Demand Gen beta features launched, allowlist only
+window:
+  from: '2026-04-14'
+  to: '2026-07-23'
+  note: >-
+    Recent window only — the live release-notes page is the source of truth for full history.
+    Deprecation-class changes are tracked separately in
+    lifecycle/google-display-video-360-lifecycle.yml, sourced from the deprecations page.
+entry_count: 3

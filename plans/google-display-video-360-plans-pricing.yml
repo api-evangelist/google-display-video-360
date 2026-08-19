@@ -4,147 +4,48 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Google Display & Video 360
 providerId: google-display-video-360
 created: '2026-05-04'
-modified: '2026-05-04'
+generated: '2026-08-13'
+modified: '2026-08-13'
+method: searched
+source: https://marketingplatform.google.com/about/display-video-360/
+supersedes: >-
+  The 2026-05-04 bulk-sweep scaffold that previously occupied this file. It invented a Free /
+  Pro / Enterprise ladder with a 1,000-request monthly quota and a 10 rpm free tier. None of that
+  exists. Display & Video 360 has no self-serve tiers and no per-request API pricing.
+description: >-
+  Display & Video 360 publishes NO plans and NO price list. It is sold as an enterprise Google
+  Marketing Platform product through Google sales or a Google Marketing Platform reseller, priced
+  against media spend under a negotiated contract. The API is not separately metered or sold: API
+  access is included with a DV360 seat and is governed by hard per-minute quotas rather than by a
+  paid tier. There is no free tier, no trial, no usage-based API price, and no published rate card
+  — the product page's only commercial call to action is "Contact us".
+plan_count: 0
+plans: []
+pricing_model:
+  type: enterprise-contract
+  self_serve: false
+  free_tier: false
+  trial: false
+  published_price_list: false
+  billed_on: negotiated media spend / platform fee under a Google Marketing Platform agreement
+  api_metered_separately: false
+  note: >-
+    Because the API is not sold by the call, the constraint that actually binds an integrator is
+    quota, not price. See rate-limits/google-display-video-360-rate-limits.yml — 1500 total and
+    700 write requests per minute per project, 300 total and 150 write per advertiser, with
+    Google stating that increases cannot be requested.
+access_prerequisites:
+  - A Display & Video 360 account obtained through Google sales or a Google Marketing Platform reseller
+  - A Google Cloud project with the Display & Video 360 API enabled
+  - A Google Account holding a DV360 user profile with Read only, Standard or Admin permission
+    on the partner or advertiser being addressed
+evidence:
+  - {url: 'https://marketingplatform.google.com/about/display-video-360/', status: 200, finding: 'product page; contact-sales only, no pricing or tiers published'}
+  - {url: 'https://developers.google.com/display-video/api/guides/getting-started/overview', status: 200, finding: 'getting-started names account + Cloud project prerequisites, no purchase or plan step'}
+  - {url: 'https://developers.google.com/display-video/api/limits', status: 200, finding: 'quotas are fixed and not purchasable; increases cannot be requested'}
 tags:
   - Campaign Management
   - Display Ads
   - DV360
   - Programmatic Advertising
-  - Targeting
-  - Video Ads
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
-plans:
-  - id: google-display-video-360-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Google Display & Video 360 API surface. Intended for evaluation,
-      prototyping, and low-volume integrations. Real limits and pricing must be reconciled with the provider's
-      published plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://displayvideo.googleapis.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://displayvideo.googleapis.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Google Display & Video 360 API
-  - id: google-display-video-360-pro
-    name: Professional
-    type: paid
-    description: Production tier for Google Display & Video 360. Provides higher quotas, priority support,
-      and access to the broader API portfolio. Pricing placeholder; align with the provider's pricing
-      page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://displayvideo.googleapis.com
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://displayvideo.googleapis.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://displayvideo.googleapis.com
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Google Display & Video 360 API
-  - id: google-display-video-360-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Google Display & Video 360. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://displayvideo.googleapis.com
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://displayvideo.googleapis.com
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Google Display & Video 360 API
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - Enterprise

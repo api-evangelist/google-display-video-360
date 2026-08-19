@@ -1,74 +1,4373 @@
-generated: '2026-07-15'
+generated: '2026-08-13'
 method: generated
-source: openapi/openapi.yml
+source: openapi/google-display-video-360-advertisers-api-openapi.yml, openapi/google-display-video-360-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 5
+  operations: 282
   by_action_class:
-    connected: 5
+    connected: 126
+    acting: 156
   by_consequence:
-    read: 5
+    read: 126
+    write: 147
+    physical: 9
   human_in_the_loop_required: 0
 operations:
+- path: /v4/advertisers/{advertisersId}
+  method: get
+  operationId: advertisersGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}
+  method: delete
+  operationId: advertisersDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}
+  method: patch
+  operationId: advertisersPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}:audit
+  method: get
+  operationId: advertisersAudit
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers
+  method: post
+  operationId: advertisersCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v4/advertisers
   method: get
-  operationId: listAdvertisers
+  operationId: advertisersList
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
     token:
       max-ttl: 3600
     audit: none
+- path: /v4/advertisers/{advertisersId}:editAssignedTargetingOptions
+  method: post
+  operationId: advertisersEditAssignedTargetingOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
     - https://www.googleapis.com/auth/display-video
-- path: /v4/advertisers/{advertiserId}/campaigns
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}:listAssignedTargetingOptions
   method: get
-  operationId: listCampaigns
+  operationId: advertisersListAssignedTargetingOptions
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
     token:
       max-ttl: 3600
     audit: none
+- path: /v4/advertisers/{advertisersId}/assets
+  method: post
+  operationId: advertisersAssetsUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
     - https://www.googleapis.com/auth/display-video
-- path: /v4/advertisers/{advertiserId}/insertionOrders
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups
+  method: post
+  operationId: advertisersAdGroupsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups
   method: get
-  operationId: listInsertionOrders
+  operationId: advertisersAdGroupsList
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
     token:
       max-ttl: 3600
     audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups:bulkEditAssignedTargetingOptions
+  method: post
+  operationId: advertisersAdGroupsBulkEditAssignedTargetingOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
     - https://www.googleapis.com/auth/display-video
-- path: /v4/advertisers/{advertiserId}/lineItems
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
   method: get
-  operationId: listLineItems
+  operationId: advertisersAdGroupsGet
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
     token:
       max-ttl: 3600
     audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  method: delete
+  operationId: advertisersAdGroupsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
     - https://www.googleapis.com/auth/display-video
-- path: /v4/advertisers/{advertiserId}/creatives
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  method: patch
+  operationId: advertisersAdGroupsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups:bulkListAssignedTargetingOptions
   method: get
-  operationId: listCreatives
+  operationId: advertisersAdGroupsBulkListAssignedTargetingOptions
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
     token:
       max-ttl: 3600
     audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: post
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
     - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: get
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: get
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: delete
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: get
+  operationId: advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: post
+  operationId: advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations/{youtubeAssetAssociationsId}
+  method: delete
+  operationId: advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems
+  method: post
+  operationId: advertisersLineItemsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems
+  method: get
+  operationId: advertisersLineItemsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems:bulkListAssignedTargetingOptions
+  method: get
+  operationId: advertisersLineItemsBulkListAssignedTargetingOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  method: patch
+  operationId: advertisersLineItemsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  method: get
+  operationId: advertisersLineItemsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  method: delete
+  operationId: advertisersLineItemsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}:duplicate
+  method: post
+  operationId: advertisersLineItemsDuplicate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems:bulkUpdate
+  method: post
+  operationId: advertisersLineItemsBulkUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems:bulkEditAssignedTargetingOptions
+  method: post
+  operationId: advertisersLineItemsBulkEditAssignedTargetingOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: post
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: get
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: get
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: delete
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: post
+  operationId: advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: get
+  operationId: advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations/{youtubeAssetAssociationsId}
+  method: delete
+  operationId: advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/channels/{channelId}
+  method: patch
+  operationId: advertisersChannelsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/channels/{channelsId}
+  method: get
+  operationId: advertisersChannelsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/channels
+  method: get
+  operationId: advertisersChannelsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/channels
+  method: post
+  operationId: advertisersChannelsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/channels/{channelsId}/sites
+  method: get
+  operationId: advertisersChannelsSitesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites
+  method: post
+  operationId: advertisersChannelsSitesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites:replace
+  method: post
+  operationId: advertisersChannelsSitesReplace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites/{sitesId}
+  method: delete
+  operationId: advertisersChannelsSitesDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites:bulkEdit
+  method: post
+  operationId: advertisersChannelsSitesBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/creatives
+  method: post
+  operationId: advertisersCreativesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/creatives
+  method: get
+  operationId: advertisersCreativesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  method: get
+  operationId: advertisersCreativesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  method: delete
+  operationId: advertisersCreativesDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  method: patch
+  operationId: advertisersCreativesPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroupAds
+  method: post
+  operationId: advertisersAdGroupAdsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroupAds
+  method: get
+  operationId: advertisersAdGroupAdsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  method: get
+  operationId: advertisersAdGroupAdsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  method: delete
+  operationId: advertisersAdGroupAdsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  method: patch
+  operationId: advertisersAdGroupAdsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  method: patch
+  operationId: advertisersInsertionOrdersPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  method: get
+  operationId: advertisersInsertionOrdersGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  method: delete
+  operationId: advertisersInsertionOrdersDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/insertionOrders
+  method: get
+  operationId: advertisersInsertionOrdersList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/insertionOrders
+  method: post
+  operationId: advertisersInsertionOrdersCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableUserLists
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableUserLists
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/reachForecast:generateReachForecast
+  method: post
+  operationId: advertisersReachForecastGenerateReachForecast
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableLocations
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableLocations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableProducts
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableProducts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableUserInterests
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableUserInterests
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/campaigns
+  method: post
+  operationId: advertisersCampaignsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/campaigns
+  method: get
+  operationId: advertisersCampaignsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  method: get
+  operationId: advertisersCampaignsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  method: delete
+  operationId: advertisersCampaignsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  method: patch
+  operationId: advertisersCampaignsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/locationLists/{locationListsId}
+  method: get
+  operationId: advertisersLocationListsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/locationLists
+  method: get
+  operationId: advertisersLocationListsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/locationLists
+  method: post
+  operationId: advertisersLocationListsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/locationLists/{locationListId}
+  method: patch
+  operationId: advertisersLocationListsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations
+  method: post
+  operationId: advertisersLocationListsAssignedLocationsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations
+  method: get
+  operationId: advertisersLocationListsAssignedLocationsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations/{assignedLocationsId}
+  method: delete
+  operationId: advertisersLocationListsAssignedLocationsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListsId}/assignedLocations:bulkEdit
+  method: post
+  operationId: advertisersLocationListsAssignedLocationsBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: get
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: delete
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: get
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: post
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets
+  method: post
+  operationId: advertisersAdAssetsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets
+  method: get
+  operationId: advertisersAdAssetsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adAssets/{adAssetsId}
+  method: get
+  operationId: advertisersAdAssetsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adAssets/{adAssetsId}
+  method: patch
+  operationId: advertisersAdAssetsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets:uploadAdAsset
+  method: post
+  operationId: advertisersAdAssetsUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets:bulkCreate
+  method: post
+  operationId: advertisersAdAssetsBulkCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/invoices
+  method: get
+  operationId: advertisersInvoicesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/invoices:lookupInvoiceCurrency
+  method: get
+  operationId: advertisersInvoicesLookupInvoiceCurrency
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists
+  method: get
+  operationId: advertisersNegativeKeywordListsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists
+  method: post
+  operationId: advertisersNegativeKeywordListsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListId}
+  method: patch
+  operationId: advertisersNegativeKeywordListsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}
+  method: get
+  operationId: advertisersNegativeKeywordListsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}
+  method: delete
+  operationId: advertisersNegativeKeywordListsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords
+  method: post
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords:replace
+  method: post
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsReplace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords/{negativeKeywordsId}
+  method: delete
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords:bulkEdit
+  method: post
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords
+  method: get
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/users
+  method: get
+  operationId: usersList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video-user-management
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/users
+  method: post
+  operationId: usersCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video-user-management
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/users/{usersId}:bulkEditAssignedUserRoles
+  method: post
+  operationId: usersBulkEditAssignedUserRoles
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video-user-management
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/users/{usersId}
+  method: patch
+  operationId: usersPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video-user-management
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/users/{usersId}
+  method: get
+  operationId: usersGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video-user-management
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/users/{usersId}
+  method: delete
+  operationId: usersDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video-user-management
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/guaranteedOrders
+  method: post
+  operationId: guaranteedOrdersCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/guaranteedOrders
+  method: get
+  operationId: guaranteedOrdersList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/guaranteedOrders/{guaranteedOrdersId}:editGuaranteedOrderReadAccessors
+  method: post
+  operationId: guaranteedOrdersEditGuaranteedOrderReadAccessors
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/guaranteedOrders/{guaranteedOrdersId}
+  method: get
+  operationId: guaranteedOrdersGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/guaranteedOrders/{guaranteedOrdersId}
+  method: patch
+  operationId: guaranteedOrdersPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /media/{mediaId}
+  method: post
+  operationId: mediaUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/doubleclickbidmanager
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /download/{downloadId}
+  method: get
+  operationId: mediaDownload
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/doubleclickbidmanager
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customLists/{customListsId}
+  method: get
+  operationId: customListsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customLists
+  method: get
+  operationId: customListsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}:editCustomerMatchMembers
+  method: post
+  operationId: firstPartyAndPartnerAudiencesEditCustomerMatchMembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/firstPartyAndPartnerAudiences
+  method: get
+  operationId: firstPartyAndPartnerAudiencesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/firstPartyAndPartnerAudiences
+  method: post
+  operationId: firstPartyAndPartnerAudiencesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}
+  method: patch
+  operationId: firstPartyAndPartnerAudiencesPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}
+  method: get
+  operationId: firstPartyAndPartnerAudiencesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/floodlightGroups/{floodlightGroupId}
+  method: patch
+  operationId: floodlightGroupsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/floodlightGroups/{floodlightGroupsId}
+  method: get
+  operationId: floodlightGroupsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities/{floodlightActivitiesId}
+  method: get
+  operationId: floodlightGroupsFloodlightActivitiesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities
+  method: get
+  operationId: floodlightGroupsFloodlightActivitiesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/targetingTypes/{targetingTypesId}/targetingOptions:search
+  method: post
+  operationId: targetingTypesTargetingOptionsSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/targetingTypes/{targetingTypesId}/targetingOptions/{targetingOptionsId}
+  method: get
+  operationId: targetingTypesTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/targetingTypes/{targetingTypesId}/targetingOptions
+  method: get
+  operationId: targetingTypesTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/sdfdownloadtasks
+  method: post
+  operationId: sdfdownloadtasksCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/sdfdownloadtasks/operations/{operationsId}
+  method: get
+  operationId: sdfdownloadtasksOperationsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/doubleclickbidmanager
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/inventorySourceGroups/{inventorySourceGroupId}
+  method: patch
+  operationId: inventorySourceGroupsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySourceGroups
+  method: get
+  operationId: inventorySourceGroupsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/inventorySourceGroups
+  method: post
+  operationId: inventorySourceGroupsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySourceGroups/{inventorySourceGroupsId}
+  method: get
+  operationId: inventorySourceGroupsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/inventorySourceGroups/{inventorySourceGroupsId}
+  method: delete
+  operationId: inventorySourceGroupsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources
+  method: post
+  operationId: inventorySourceGroupsAssignedInventorySourcesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources
+  method: get
+  operationId: inventorySourceGroupsAssignedInventorySourcesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources/{assignedInventorySourcesId}
+  method: delete
+  operationId: inventorySourceGroupsAssignedInventorySourcesDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources:bulkEdit
+  method: post
+  operationId: inventorySourceGroupsAssignedInventorySourcesBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}
+  method: get
+  operationId: advertisersGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}
+  method: delete
+  operationId: advertisersDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}
+  method: patch
+  operationId: advertisersPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}:audit
+  method: get
+  operationId: advertisersAudit
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers
+  method: post
+  operationId: advertisersCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers
+  method: get
+  operationId: advertisersList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}:editAssignedTargetingOptions
+  method: post
+  operationId: advertisersEditAssignedTargetingOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}:listAssignedTargetingOptions
+  method: get
+  operationId: advertisersListAssignedTargetingOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/assets
+  method: post
+  operationId: advertisersAssetsUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups
+  method: post
+  operationId: advertisersAdGroupsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups
+  method: get
+  operationId: advertisersAdGroupsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups:bulkEditAssignedTargetingOptions
+  method: post
+  operationId: advertisersAdGroupsBulkEditAssignedTargetingOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  method: get
+  operationId: advertisersAdGroupsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  method: delete
+  operationId: advertisersAdGroupsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}
+  method: patch
+  operationId: advertisersAdGroupsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups:bulkListAssignedTargetingOptions
+  method: get
+  operationId: advertisersAdGroupsBulkListAssignedTargetingOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: post
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: get
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: get
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: delete
+  operationId: advertisersAdGroupsTargetingTypesAssignedTargetingOptionsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: get
+  operationId: advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: post
+  operationId: advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroups/{adGroupsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations/{youtubeAssetAssociationsId}
+  method: delete
+  operationId: advertisersAdGroupsYoutubeAssetTypesYoutubeAssetAssociationsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems
+  method: post
+  operationId: advertisersLineItemsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems
+  method: get
+  operationId: advertisersLineItemsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems:bulkListAssignedTargetingOptions
+  method: get
+  operationId: advertisersLineItemsBulkListAssignedTargetingOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  method: patch
+  operationId: advertisersLineItemsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  method: get
+  operationId: advertisersLineItemsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}
+  method: delete
+  operationId: advertisersLineItemsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}:duplicate
+  method: post
+  operationId: advertisersLineItemsDuplicate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems:bulkUpdate
+  method: post
+  operationId: advertisersLineItemsBulkUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems:bulkEditAssignedTargetingOptions
+  method: post
+  operationId: advertisersLineItemsBulkEditAssignedTargetingOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: post
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: get
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: get
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: delete
+  operationId: advertisersLineItemsTargetingTypesAssignedTargetingOptionsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: post
+  operationId: advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations
+  method: get
+  operationId: advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/lineItems/{lineItemsId}/youtubeAssetTypes/{youtubeAssetTypesId}/youtubeAssetAssociations/{youtubeAssetAssociationsId}
+  method: delete
+  operationId: advertisersLineItemsYoutubeAssetTypesYoutubeAssetAssociationsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/channels/{channelId}
+  method: patch
+  operationId: advertisersChannelsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/channels/{channelsId}
+  method: get
+  operationId: advertisersChannelsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/channels
+  method: get
+  operationId: advertisersChannelsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/channels
+  method: post
+  operationId: advertisersChannelsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/channels/{channelsId}/sites
+  method: get
+  operationId: advertisersChannelsSitesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites
+  method: post
+  operationId: advertisersChannelsSitesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites:replace
+  method: post
+  operationId: advertisersChannelsSitesReplace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites/{sitesId}
+  method: delete
+  operationId: advertisersChannelsSitesDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/channels/{channelsId}/sites:bulkEdit
+  method: post
+  operationId: advertisersChannelsSitesBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/creatives
+  method: post
+  operationId: advertisersCreativesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/creatives
+  method: get
+  operationId: advertisersCreativesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  method: get
+  operationId: advertisersCreativesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  method: delete
+  operationId: advertisersCreativesDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/creatives/{creativesId}
+  method: patch
+  operationId: advertisersCreativesPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroupAds
+  method: post
+  operationId: advertisersAdGroupAdsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroupAds
+  method: get
+  operationId: advertisersAdGroupAdsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  method: get
+  operationId: advertisersAdGroupAdsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  method: delete
+  operationId: advertisersAdGroupAdsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adGroupAds/{adGroupAdsId}
+  method: patch
+  operationId: advertisersAdGroupAdsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  method: patch
+  operationId: advertisersInsertionOrdersPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  method: get
+  operationId: advertisersInsertionOrdersGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/insertionOrders/{insertionOrdersId}
+  method: delete
+  operationId: advertisersInsertionOrdersDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/insertionOrders
+  method: get
+  operationId: advertisersInsertionOrdersList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/insertionOrders
+  method: post
+  operationId: advertisersInsertionOrdersCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableUserLists
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableUserLists
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/reachForecast:generateReachForecast
+  method: post
+  operationId: advertisersReachForecastGenerateReachForecast
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableLocations
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableLocations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableProducts
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableProducts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/reachForecast:retrievePlannableUserInterests
+  method: get
+  operationId: advertisersReachForecastRetrievePlannableUserInterests
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/campaigns
+  method: post
+  operationId: advertisersCampaignsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/campaigns
+  method: get
+  operationId: advertisersCampaignsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  method: get
+  operationId: advertisersCampaignsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  method: delete
+  operationId: advertisersCampaignsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/campaigns/{campaignsId}
+  method: patch
+  operationId: advertisersCampaignsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/locationLists/{locationListsId}
+  method: get
+  operationId: advertisersLocationListsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/locationLists
+  method: get
+  operationId: advertisersLocationListsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/locationLists
+  method: post
+  operationId: advertisersLocationListsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/locationLists/{locationListId}
+  method: patch
+  operationId: advertisersLocationListsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations
+  method: post
+  operationId: advertisersLocationListsAssignedLocationsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations
+  method: get
+  operationId: advertisersLocationListsAssignedLocationsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations/{assignedLocationsId}
+  method: delete
+  operationId: advertisersLocationListsAssignedLocationsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/locationLists/{locationListsId}/assignedLocations:bulkEdit
+  method: post
+  operationId: advertisersLocationListsAssignedLocationsBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: get
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: delete
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: get
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: post
+  operationId: advertisersTargetingTypesAssignedTargetingOptionsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets
+  method: post
+  operationId: advertisersAdAssetsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets
+  method: get
+  operationId: advertisersAdAssetsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adAssets/{adAssetsId}
+  method: get
+  operationId: advertisersAdAssetsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/adAssets/{adAssetsId}
+  method: patch
+  operationId: advertisersAdAssetsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets:uploadAdAsset
+  method: post
+  operationId: advertisersAdAssetsUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/adAssets:bulkCreate
+  method: post
+  operationId: advertisersAdAssetsBulkCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/invoices
+  method: get
+  operationId: advertisersInvoicesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/invoices:lookupInvoiceCurrency
+  method: get
+  operationId: advertisersInvoicesLookupInvoiceCurrency
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/display-video-mediaplanning
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists
+  method: get
+  operationId: advertisersNegativeKeywordListsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists
+  method: post
+  operationId: advertisersNegativeKeywordListsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListId}
+  method: patch
+  operationId: advertisersNegativeKeywordListsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}
+  method: get
+  operationId: advertisersNegativeKeywordListsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}
+  method: delete
+  operationId: advertisersNegativeKeywordListsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords
+  method: post
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords:replace
+  method: post
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsReplace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords/{negativeKeywordsId}
+  method: delete
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords:bulkEdit
+  method: post
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/advertisers/{advertisersId}/negativeKeywordLists/{negativeKeywordListsId}/negativeKeywords
+  method: get
+  operationId: advertisersNegativeKeywordListsNegativeKeywordsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/googleAudiences/{googleAudiencesId}
+  method: get
+  operationId: googleAudiencesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/googleAudiences
+  method: get
+  operationId: googleAudiencesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners/{partnersId}
+  method: get
+  operationId: partnersGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners
+  method: get
+  operationId: partnersList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners/{partnersId}:editAssignedTargetingOptions
+  method: post
+  operationId: partnersEditAssignedTargetingOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnersId}/channels
+  method: post
+  operationId: partnersChannelsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnersId}/channels
+  method: get
+  operationId: partnersChannelsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners/{partnersId}/channels/{channelId}
+  method: patch
+  operationId: partnersChannelsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnersId}/channels/{channelsId}
+  method: get
+  operationId: partnersChannelsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners/{partnerId}/channels/{channelsId}/sites
+  method: post
+  operationId: partnersChannelsSitesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnerId}/channels/{channelsId}/sites:replace
+  method: post
+  operationId: partnersChannelsSitesReplace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnerId}/channels/{channelsId}/sites/{sitesId}
+  method: delete
+  operationId: partnersChannelsSitesDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnerId}/channels/{channelsId}/sites:bulkEdit
+  method: post
+  operationId: partnersChannelsSitesBulkEdit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnersId}/channels/{channelsId}/sites
+  method: get
+  operationId: partnersChannelsSitesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: post
+  operationId: partnersTargetingTypesAssignedTargetingOptionsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions
+  method: get
+  operationId: partnersTargetingTypesAssignedTargetingOptionsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: get
+  operationId: partnersTargetingTypesAssignedTargetingOptionsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/partners/{partnersId}/targetingTypes/{targetingTypesId}/assignedTargetingOptions/{assignedTargetingOptionsId}
+  method: delete
+  operationId: partnersTargetingTypesAssignedTargetingOptionsDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySources/{inventorySourcesId}:editInventorySourceReadWriteAccessors
+  method: post
+  operationId: inventorySourcesEditInventorySourceReadWriteAccessors
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySources
+  method: get
+  operationId: inventorySourcesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/inventorySources
+  method: post
+  operationId: inventorySourcesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySources/{inventorySourcesId}
+  method: patch
+  operationId: inventorySourcesPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/inventorySources/{inventorySourcesId}
+  method: get
+  operationId: inventorySourcesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/sdfuploadtasks/operations/{operationsId}
+  method: get
+  operationId: sdfuploadtasksOperationsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    - https://www.googleapis.com/auth/doubleclickbidmanager
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/combinedAudiences/{combinedAudiencesId}
+  method: get
+  operationId: combinedAudiencesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/combinedAudiences
+  method: get
+  operationId: combinedAudiencesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}:uploadRules
+  method: get
+  operationId: customBiddingAlgorithmsUploadRules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms
+  method: post
+  operationId: customBiddingAlgorithmsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/customBiddingAlgorithms
+  method: get
+  operationId: customBiddingAlgorithmsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}:uploadScript
+  method: get
+  operationId: customBiddingAlgorithmsUploadScript
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}
+  method: get
+  operationId: customBiddingAlgorithmsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}
+  method: patch
+  operationId: customBiddingAlgorithmsPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules
+  method: post
+  operationId: customBiddingAlgorithmsRulesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules
+  method: get
+  operationId: customBiddingAlgorithmsRulesList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules/{rulesId}
+  method: get
+  operationId: customBiddingAlgorithmsRulesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts
+  method: post
+  operationId: customBiddingAlgorithmsScriptsCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts
+  method: get
+  operationId: customBiddingAlgorithmsScriptsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts/{scriptsId}
+  method: get
+  operationId: customBiddingAlgorithmsScriptsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/display-video
+    token:
+      max-ttl: 3600
+    audit: none

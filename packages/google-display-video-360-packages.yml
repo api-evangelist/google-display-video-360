@@ -1,0 +1,105 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.google.com/display-video/api/guides/getting-started/libraries
+description: >-
+  First-party Google client libraries that carry the Display & Video 360 API surface.
+  Google does not ship a DV360-specific SDK for most languages; it ships one general-purpose
+  Google API client per language, and the DV360 v4 service is generated into it from the same
+  Discovery Document this repo harvests. Where a DV360-specific generated artifact does exist
+  (Java, .NET, Ruby) it is listed separately, because those carry their own version and release
+  date and are the truest decay signal for this API.
+  Versions and published dates read from each registry's metadata endpoint on 2026-08-13.
+notes:
+  - The Display & Video 360 API documents no first-party CLI.
+  - Go, Node.js and Ruby are described by Google's own client-libraries page as early-stage /
+    alpha for this API, even though the underlying packages are actively released.
+packages:
+  - language: javascript
+    registry: npm
+    name: googleapis
+    url: https://www.npmjs.com/package/googleapis
+    install: npm install googleapis
+    official: true
+    version: 174.0.1
+    published: '2026-08-05'
+    scope: general-purpose Google API client; DV360 v4 generated in as `google.displayvideo('v4')`
+    source_code: https://github.com/googleapis/google-api-nodejs-client
+  - language: python
+    registry: pypi
+    name: google-api-python-client
+    url: https://pypi.org/project/google-api-python-client/
+    install: pip install google-api-python-client
+    official: true
+    version: 2.198.0
+    published: '2026-06-25'
+    scope: general-purpose Google API client; DV360 v4 via `build('displayvideo','v4')`
+    source_code: https://github.com/googleapis/google-api-python-client
+  - language: java
+    registry: maven
+    name: com.google.apis:google-api-services-displayvideo
+    url: https://central.sonatype.com/artifact/com.google.apis/google-api-services-displayvideo
+    install: 'implementation "com.google.apis:google-api-services-displayvideo:v4-rev20260606-2.0.0"'
+    official: true
+    version: v4-rev20260606-2.0.0
+    published: '2026-06-10'
+    scope: DV360-specific generated Java client; version string embeds the Discovery revision it was generated from
+    note: >-
+      Generated from Discovery revision 20260606. The live Discovery Document harvested for this
+      repo is revision 20260813, so the published Java artifact trails the live contract by
+      roughly ten weeks — expected for Google's generated clients, which are re-cut on a
+      periodic rather than per-revision cadence.
+  - language: dotnet
+    registry: nuget
+    name: Google.Apis.DisplayVideo.v4
+    url: https://www.nuget.org/packages/Google.Apis.DisplayVideo.v4
+    install: dotnet add package Google.Apis.DisplayVideo.v4
+    official: true
+    version: 1.75.0.4234
+    published: '2026-08-11'
+    scope: DV360-specific generated .NET client
+  - language: ruby
+    registry: rubygems
+    name: google-apis-displayvideo_v4
+    url: https://rubygems.org/gems/google-apis-displayvideo_v4
+    install: gem install google-apis-displayvideo_v4
+    official: true
+    version: 0.26.0
+    published: '2026-08-09'
+    scope: DV360-specific generated Ruby client
+    source_code: https://github.com/googleapis/google-api-ruby-client
+  - language: go
+    registry: gomodules
+    name: google.golang.org/api
+    url: https://pkg.go.dev/google.golang.org/api/displayvideo/v4
+    install: go get google.golang.org/api/displayvideo/v4
+    official: true
+    version: v0.293.0
+    published: '2026-08-11'
+    scope: general-purpose Google API client module; DV360 v4 lives at the displayvideo/v4 import path
+    source_code: https://github.com/googleapis/google-api-go-client
+  - language: php
+    registry: packagist
+    name: google/apiclient
+    url: https://packagist.org/packages/google/apiclient
+    install: composer require google/apiclient
+    official: true
+    version: v2.19.4
+    published: '2026-06-29'
+    scope: general-purpose Google API client; DV360 service classes ship in google/apiclient-services
+    source_code: https://github.com/googleapis/google-api-php-client
+  - language: objective-c
+    registry: source
+    name: google-api-objectivec-client-for-rest
+    url: https://github.com/google/google-api-objectivec-client-for-rest
+    install: 'CocoaPods: pod ''GoogleAPIClientForREST/DisplayVideo'''
+    official: true
+    version: null
+    published: null
+    note: >-
+      Distributed from source / CocoaPods rather than a registry this pipeline queries
+      unauthenticated; version not recorded rather than guessed.
+examples:
+  - name: googleads/googleads-displayvideo-examples
+    url: https://github.com/googleads/googleads-displayvideo-examples
+    languages: [java, php, python]
+    official: true

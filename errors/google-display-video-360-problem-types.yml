@@ -1,0 +1,98 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.google.com/display-video/api/guides/concepts/general/errors-warnings
+docs: https://developers.google.com/display-video/api/guides/concepts/general/errors-warnings
+format: google-rpc-status
+description: >-
+  Error catalog for the Display & Video 360 API. The API does NOT use RFC 9457
+  application/problem+json. It uses Google's own error envelope — a top-level `error` object
+  carrying an HTTP code, a human-readable message, and a google.rpc.Code enum name. The enum is
+  the machine-readable part and is what an agent should branch on; the message is prose and its
+  wording is not contractual.
+envelope:
+  media_type: application/json
+  shape: |
+    {
+      "error": {
+        "code": integer,        // HTTP status code
+        "message": string,      // human-readable detail; not contractual
+        "status": enum          // google.rpc.Code name — branch on this
+      }
+    }
+  machine_readable_field: error.status
+  note: >-
+    The OpenAPI in this repo is generated from Google's Discovery Document, which declares only
+    success responses. Google documents these error codes in prose on the errors-and-warnings
+    page rather than in the machine-readable contract, so the codes below are captured here and
+    projected onto the spec through overlays/ rather than being written into the generated spec.
+problems:
+  - status: 400
+    rpc_status: INVALID_ARGUMENT
+    title: Invalid request
+    detail: There is an issue with the request — a malformed field, an invalid enum value, or a field combination the API rejects.
+    remediation: Read the `message` field and correct the request. Do not retry unchanged; this is deterministic.
+    retryable: false
+  - status: 401
+    rpc_status: UNAUTHENTICATED
+    title: Missing or invalid credentials
+    detail: The request carried no valid OAuth 2.0 credential.
+    remediation: Verify the access token is present, unexpired, and issued for one of the display-video scopes.
+    retryable: false
+  - status: 403
+    rpc_status: PERMISSION_DENIED
+    title: Insufficient permission
+    detail: The authenticated Display & Video 360 user does not hold the required role on the partner or advertiser being addressed.
+    remediation: Confirm the Google Account has a DV360 user profile with Read only, Standard or Admin permission on that partner/advertiser.
+    retryable: false
+  - status: 404
+    rpc_status: NOT_FOUND
+    title: Resource not found
+    detail: The addressed resource does not exist, or the ID belongs to a different resource type or a parent the caller cannot see.
+    remediation: Verify the resource ID and that it matches the intended type and parent.
+    retryable: false
+  - status: 409
+    rpc_status: ABORTED
+    title: Concurrent modification
+    detail: Another write touched the same entity concurrently and this request was aborted.
+    remediation: Wait briefly and retry the request.
+    retryable: true
+  - status: 429
+    rpc_status: RESOURCE_EXHAUSTED
+    title: Quota exhausted
+    detail: A per-minute quota was exceeded — project total, project write, advertiser total or advertiser write. Failed requests still consume quota.
+    remediation: Slow the request rate and reshape the workflow. Quota increases cannot be requested for this API. See rate-limits/google-display-video-360-rate-limits.yml.
+    retryable: true
+  - status: 500
+    rpc_status: INTERNAL
+    title: Internal server error
+    detail: Server-side failure.
+    remediation: Wait and retry with backoff; contact support if it persists.
+    retryable: true
+  - status: 504
+    rpc_status: DEADLINE_EXCEEDED
+    title: Request timed out
+    detail: The request exceeded the server deadline.
+    remediation: Wait and retry with backoff; contact support if it persists.
+    retryable: true
+warnings:
+  description: >-
+    Distinct from errors: line items carry non-blocking `warningMessages` that signal the entity
+    may not serve, without failing the write that created it. They can appear mid-flight as
+    deprecations and account changes land, so an agent that only checks write responses will miss
+    them entirely.
+  detection: Poll advertisersLineItemsList and inspect warningMessages on active line items.
+  common_causes:
+    - Flight misconfiguration — invalid dates, or a parent insertion order whose flight has ended
+    - No valid creative assigned to the line item
+    - Incomplete or invalid targeting configuration
+  docs: https://developers.google.com/display-video/api/guides/concepts/general/errors-warnings
+long_running_operations:
+  note: >-
+    SDF generation runs as a long-running operation. Failures are not returned by the request that
+    starts the task; they surface in the finished Operation object retrieved from
+    sdfdownloadtasksOperationsGet.
+  operations:
+    - sdfdownloadtasksCreate
+    - sdfdownloadtasksOperationsGet
+    - sdfuploadtasksOperationsGet
+problem_count: 8

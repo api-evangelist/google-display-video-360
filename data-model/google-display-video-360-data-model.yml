@@ -1,0 +1,407 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/google-display-video-360-api-openapi.yml
+description: 'Entity-relationship graph for the Display & Video 360 API, derived mechanically from the
+  generated OpenAPI: an entity is a schema that carries both a Google resource `name` and its own `<entity>Id`
+  field; a relationship is either an id-reference field (belongs_to) or a structural $ref (has_one / has_many).
+  The graph is dominated by one spine — Partner owns Advertiser, Advertiser owns Campaign, Campaign owns
+  InsertionOrder, InsertionOrder owns LineItem, and LineItem is what actually buys media — with targeting,
+  creatives, audiences and inventory hanging off it. Every id in this API is an opaque numeric string,
+  not a prefixed token, so IDs are not self-describing and must be read in the context of the path that
+  produced them.'
+id_convention:
+  style: opaque numeric string
+  typed_prefixes: false
+  resource_name: Every entity also carries a Google resource `name` of the form advertisers/{advertiserId}/lineItems/{lineItemId}
+    which IS self-describing.
+hierarchy:
+- Partner > Advertiser > Campaign > InsertionOrder > LineItem > AdGroup > AdGroupAd
+- Advertiser > Creative | AdAsset | Channel > Site | LocationList > AssignedLocation | NegativeKeywordList
+  > NegativeKeyword | Invoice
+- Any of Advertiser | Campaign | InsertionOrder | LineItem | AdGroup > AssignedTargetingOption
+entity_count: 31
+relationship_count: 24
+entities:
+- name: AdAsset
+  description: A single ad asset.
+  id_field: adAssetId
+  resource_name_field: name
+  fields: 6
+  read_operations:
+  - advertisersAdAssetsGet
+  write_operations:
+  - advertisersAdAssetsCreate
+  - advertisersAdAssetsPatch
+- name: AdGroup
+  description: A single ad group associated with a line item.
+  id_field: adGroupId
+  resource_name_field: name
+  fields: 11
+  read_operations:
+  - advertisersAdGroupsGet
+  write_operations:
+  - advertisersAdGroupsCreate
+  - advertisersAdGroupsPatch
+- name: AdGroupAd
+  description: A single ad associated with an ad group.
+  id_field: adGroupAdId
+  resource_name_field: name
+  fields: 21
+  read_operations:
+  - advertisersAdGroupAdsGet
+  write_operations:
+  - advertisersAdGroupAdsCreate
+  - advertisersAdGroupAdsPatch
+- name: Advertiser
+  description: A single advertiser in Display & Video 360 (DV360).
+  id_field: advertiserId
+  resource_name_field: name
+  fields: 17
+  read_operations:
+  - advertisersGet
+  write_operations:
+  - advertisersCreate
+  - advertisersPatch
+- name: AssignedInventorySource
+  description: An assignment between a targetable inventory source and an inventory source group.
+  id_field: assignedInventorySourceId
+  resource_name_field: name
+  fields: 3
+  write_operations:
+  - inventorySourceGroupsAssignedInventorySourcesCreate
+- name: AssignedLocation
+  description: An assignment between a location list and a relevant targeting option.
+  id_field: assignedLocationId
+  resource_name_field: name
+  fields: 3
+  write_operations:
+  - advertisersLocationListsAssignedLocationsCreate
+- name: AssignedTargetingOption
+  description: A single assigned targeting option, which defines the state of a targeting option for an
+    entity with targeting settings.
+  id_field: assignedTargetingOptionId
+  resource_name_field: name
+  fields: 55
+  read_operations:
+  - advertisersAdGroupsTargetingTypesAssignedTargetingOptionsGet
+  - advertisersLineItemsTargetingTypesAssignedTargetingOptionsGet
+  - advertisersTargetingTypesAssignedTargetingOptionsGet
+  - partnersTargetingTypesAssignedTargetingOptionsGet
+  write_operations:
+  - advertisersAdGroupsTargetingTypesAssignedTargetingOptionsCreate
+  - advertisersLineItemsTargetingTypesAssignedTargetingOptionsCreate
+  - advertisersTargetingTypesAssignedTargetingOptionsCreate
+  - partnersTargetingTypesAssignedTargetingOptionsCreate
+- name: Campaign
+  description: A single campaign.
+  id_field: campaignId
+  resource_name_field: name
+  fields: 10
+  read_operations:
+  - advertisersCampaignsGet
+  write_operations:
+  - advertisersCampaignsCreate
+  - advertisersCampaignsPatch
+- name: Channel
+  description: A single channel. Channels are custom groups of related websites and apps.
+  id_field: channelId
+  resource_name_field: name
+  fields: 7
+  read_operations:
+  - advertisersChannelsGet
+  - partnersChannelsGet
+  write_operations:
+  - advertisersChannelsCreate
+  - advertisersChannelsPatch
+  - partnersChannelsCreate
+  - partnersChannelsPatch
+- name: CombinedAudience
+  description: Describes a combined audience resource.
+  id_field: combinedAudienceId
+  resource_name_field: name
+  fields: 3
+  read_operations:
+  - combinedAudiencesGet
+- name: Creative
+  description: A single Creative.
+  id_field: creativeId
+  resource_name_field: name
+  fields: 48
+  read_operations:
+  - advertisersCreativesGet
+  write_operations:
+  - advertisersCreativesCreate
+  - advertisersCreativesPatch
+- name: CustomBiddingAlgorithm
+  description: A single custom bidding algorithm.
+  id_field: customBiddingAlgorithmId
+  resource_name_field: name
+  fields: 10
+  read_operations:
+  - customBiddingAlgorithmsGet
+  write_operations:
+  - customBiddingAlgorithmsCreate
+  - customBiddingAlgorithmsPatch
+- name: CustomBiddingAlgorithmRules
+  description: A single custom bidding algorithm rules.
+  id_field: customBiddingAlgorithmRulesId
+  resource_name_field: name
+  fields: 8
+  read_operations:
+  - customBiddingAlgorithmsRulesGet
+  write_operations:
+  - customBiddingAlgorithmsRulesCreate
+- name: CustomBiddingScript
+  description: A single custom bidding script.
+  id_field: customBiddingScriptId
+  resource_name_field: name
+  fields: 8
+  read_operations:
+  - customBiddingAlgorithmsScriptsGet
+  write_operations:
+  - customBiddingAlgorithmsScriptsCreate
+- name: CustomList
+  description: Describes a custom list entity, such as a custom affinity or custom intent audience list.
+  id_field: customListId
+  resource_name_field: name
+  fields: 3
+  read_operations:
+  - customListsGet
+- name: FirstPartyAndPartnerAudience
+  description: Describes a first or partner audience list used for targeting. First party audiences are
+    created via usage of client data. Partner audiences are provided by Third Party data providers and
+    can only be licensed to customers.
+  id_field: firstPartyAndPartnerAudienceId
+  resource_name_field: name
+  fields: 18
+  read_operations:
+  - firstPartyAndPartnerAudiencesGet
+  write_operations:
+  - firstPartyAndPartnerAudiencesCreate
+  - firstPartyAndPartnerAudiencesPatch
+- name: FloodlightActivity
+  description: A single Floodlight activity.
+  id_field: floodlightActivityId
+  resource_name_field: name
+  fields: 8
+  read_operations:
+  - floodlightGroupsFloodlightActivitiesGet
+- name: FloodlightGroup
+  description: A single Floodlight group.
+  id_field: floodlightGroupId
+  resource_name_field: name
+  fields: 7
+  read_operations:
+  - floodlightGroupsGet
+  write_operations:
+  - floodlightGroupsPatch
+- name: GoogleAudience
+  description: Describes a Google audience resource. Includes Google audience lists.
+  id_field: googleAudienceId
+  resource_name_field: name
+  fields: 4
+  read_operations:
+  - googleAudiencesGet
+- name: GuaranteedOrder
+  description: A guaranteed order. Guaranteed orders are parent entity of guaranteed inventory sources.
+    When creating a guaranteed inventory source, a guaranteed order ID must be assigned to the inventory
+    source.
+  id_field: guaranteedOrderId
+  resource_name_field: name
+  fields: 14
+  read_operations:
+  - guaranteedOrdersGet
+  write_operations:
+  - guaranteedOrdersCreate
+  - guaranteedOrdersPatch
+- name: InsertionOrder
+  description: A single insertion order.
+  id_field: insertionOrderId
+  resource_name_field: name
+  fields: 17
+  read_operations:
+  - advertisersInsertionOrdersGet
+  write_operations:
+  - advertisersInsertionOrdersCreate
+  - advertisersInsertionOrdersPatch
+- name: InventorySource
+  description: An inventory source.
+  id_field: inventorySourceId
+  resource_name_field: name
+  fields: 19
+  read_operations:
+  - inventorySourcesGet
+  write_operations:
+  - inventorySourcesCreate
+  - inventorySourcesPatch
+- name: InventorySourceGroup
+  description: A collection of targetable inventory sources.
+  id_field: inventorySourceGroupId
+  resource_name_field: name
+  fields: 3
+  read_operations:
+  - inventorySourceGroupsGet
+  write_operations:
+  - inventorySourceGroupsCreate
+  - inventorySourceGroupsPatch
+- name: Invoice
+  description: A single invoice.
+  id_field: invoiceId
+  resource_name_field: name
+  fields: 20
+- name: LineItem
+  description: A single line item.
+  id_field: lineItemId
+  resource_name_field: name
+  fields: 28
+  read_operations:
+  - advertisersLineItemsGet
+  write_operations:
+  - advertisersLineItemsCreate
+  - advertisersLineItemsPatch
+- name: LocationList
+  description: A list of locations used for targeting.
+  id_field: locationListId
+  resource_name_field: name
+  fields: 5
+  read_operations:
+  - advertisersLocationListsGet
+  write_operations:
+  - advertisersLocationListsCreate
+  - advertisersLocationListsPatch
+- name: NegativeKeywordList
+  description: A list of negative keywords used for targeting.
+  id_field: negativeKeywordListId
+  resource_name_field: name
+  fields: 5
+  read_operations:
+  - advertisersNegativeKeywordListsGet
+  write_operations:
+  - advertisersNegativeKeywordListsCreate
+  - advertisersNegativeKeywordListsPatch
+- name: Partner
+  description: A single partner in Display & Video 360 (DV360).
+  id_field: partnerId
+  resource_name_field: name
+  fields: 10
+  read_operations:
+  - partnersGet
+- name: PlannableLocation
+  description: A plannable location used for forecasting.
+  id_field: plannableLocationId
+  resource_name_field: name
+  fields: 6
+- name: TargetingOption
+  description: Represents a single targeting option, which is a targetable concept in DV360.
+  id_field: targetingOptionId
+  resource_name_field: name
+  fields: 37
+  read_operations:
+  - targetingTypesTargetingOptionsGet
+- name: User
+  description: A single user in Display & Video 360.
+  id_field: userId
+  resource_name_field: name
+  fields: 6
+  read_operations:
+  - usersGet
+  write_operations:
+  - usersCreate
+  - usersPatch
+relationships:
+- from: AdGroup
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: AdGroup
+  type: belongs_to
+  to: LineItem
+  via: lineItemId
+- from: AdGroupAd
+  type: belongs_to
+  to: AdGroup
+  via: adGroupId
+- from: AdGroupAd
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: Advertiser
+  type: belongs_to
+  to: Partner
+  via: partnerId
+- from: AssignedInventorySource
+  type: belongs_to
+  to: InventorySource
+  via: inventorySourceId
+- from: AssignedLocation
+  type: belongs_to
+  to: TargetingOption
+  via: targetingOptionId
+- from: Campaign
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: Channel
+  type: belongs_to
+  to: Partner
+  via: partnerId
+- from: Channel
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: Creative
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: CustomBiddingAlgorithm
+  type: belongs_to
+  to: Partner
+  via: partnerId
+- from: CustomBiddingAlgorithm
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: CustomBiddingAlgorithmRules
+  type: belongs_to
+  to: CustomBiddingAlgorithm
+  via: customBiddingAlgorithmId
+- from: CustomBiddingScript
+  type: belongs_to
+  to: CustomBiddingAlgorithm
+  via: customBiddingAlgorithmId
+- from: FloodlightActivity
+  type: belongs_to
+  to: FloodlightGroup
+  via: floodlightGroupId
+- from: InsertionOrder
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: InsertionOrder
+  type: belongs_to
+  to: Campaign
+  via: campaignId
+- from: InventorySource
+  type: belongs_to
+  to: GuaranteedOrder
+  via: guaranteedOrderId
+- from: LineItem
+  type: belongs_to
+  to: Campaign
+  via: campaignId
+- from: LineItem
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: LineItem
+  type: belongs_to
+  to: InsertionOrder
+  via: insertionOrderId
+- from: LocationList
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId
+- from: NegativeKeywordList
+  type: belongs_to
+  to: Advertiser
+  via: advertiserId

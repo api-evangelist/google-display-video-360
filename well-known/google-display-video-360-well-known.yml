@@ -1,0 +1,87 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of every /.well-known/ path below on 2026-08-13
+description: >-
+  Well-known discovery probe across every host this provider names — the API host
+  (displayvideo.googleapis.com), the docs host (developers.google.com), the product host
+  (marketingplatform.google.com), the corporate root (google.com), and the OAuth
+  authorization server the API's own securitySchemes point at (accounts.google.com).
+  The API host itself serves no /.well-known/ surface: every path 404s. The two real hits
+  live on Google-wide hosts — the corporate security.txt and the Google identity discovery
+  documents that govern authorization for this API.
+hosts:
+  - host: displayvideo.googleapis.com
+    role: api
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+  - host: developers.google.com
+    role: docs
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+  - host: marketingplatform.google.com
+    role: product
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+  - host: google.com
+    role: corporate-root
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        file: google-display-video-360-security.txt
+        note: RFC 9116 security.txt, expires 2030-04-01. Covers Google properties including this API.
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+  - host: accounts.google.com
+    role: authorization-server
+    note: >-
+      Not a DV360 host, but the authorizationUrl declared by this API's OpenAPI oauth2
+      securityScheme. Probed because it is the identity surface an agent must complete
+      before it can call displayvideo.googleapis.com at all.
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        file: google-display-video-360-openid-configuration.json
+        note: OIDC discovery. issuer https://accounts.google.com; authorization_endpoint https://accounts.google.com/o/oauth2/v2/auth; token_endpoint https://oauth2.googleapis.com/token; PKCE S256 supported.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        file: google-display-video-360-oauth-authorization-server.json
+        note: RFC 8414 authorization server metadata for the same issuer.
+  - host: oauth2.googleapis.com
+    role: token-endpoint
+    documents:
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+summary:
+  paths_probed: 44
+  hits: 3
+  api_host_hits: 0
+  security_txt: true
+  oidc_discovery: true
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false

@@ -1,0 +1,120 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Google Display & Video 360 Advertisers API
+  version: 1.0.0
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Enhancements derived from Google's published documentation that are absent from the
+  machine-readable contract: the error catalog at
+  https://developers.google.com/display-video/api/guides/concepts/general/errors-warnings,
+  the quota page at https://developers.google.com/display-video/api/limits, and the
+  deprecation policy at https://developers.google.com/display-video/api/deprecations.
+x-rationale: >-
+  Google's Discovery Document declares success responses only — no operation in the generated
+  OpenAPI carries a single 4xx or 5xx. Google DOES document those errors, in prose, on a separate
+  page. This overlay projects that documented error contract onto every operation without
+  mutating the generated spec, so a consumer applying the overlay gets a spec that describes
+  failure as well as success. It adds nothing Google has not published.
+extends: openapi/google-display-video-360-advertisers-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/google-display-video-360/
+      x-contract-origin: google-api-discovery-document
+      x-discovery-document: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+      x-error-format: google-rpc-status
+      x-idempotency: none
+      x-rate-limit-headers: none
+      x-event-surface: none
+      x-deprecation-policy: https://developers.google.com/display-video/api/deprecations
+      x-changelog: https://developers.google.com/display-video/api/release-notes
+      x-quotas: https://developers.google.com/display-video/api/limits
+  - target: $.components.schemas
+    update:
+      GoogleRpcErrorEnvelope:
+        type: object
+        description: >-
+          Standard Display & Video 360 API error envelope. Documented at
+          https://developers.google.com/display-video/api/guides/concepts/general/errors-warnings
+          but absent from the Discovery Document.
+        properties:
+          error:
+            type: object
+            properties:
+              code:
+                type: integer
+                description: HTTP status code.
+              message:
+                type: string
+                description: Human-readable detail. Not contractual — do not branch on its wording.
+              status:
+                type: string
+                description: google.rpc.Code enum name. This is the machine-readable field to branch on.
+                enum:
+                  - INVALID_ARGUMENT
+                  - UNAUTHENTICATED
+                  - PERMISSION_DENIED
+                  - NOT_FOUND
+                  - ABORTED
+                  - RESOURCE_EXHAUSTED
+                  - INTERNAL
+                  - DEADLINE_EXCEEDED
+  - target: $.paths.*.*.responses
+    description: >-
+      Add the documented error responses to every operation. Every code below is published by
+      Google on the errors-and-warnings page as applying to this API generally.
+    update:
+      '400':
+        description: INVALID_ARGUMENT — the request is malformed or a field value is rejected. Not retryable unchanged.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'
+      '401':
+        description: UNAUTHENTICATED — no valid OAuth 2.0 credential was supplied.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'
+      '403':
+        description: >-
+          PERMISSION_DENIED — the authenticated Google Account lacks a Display & Video 360 user
+          profile with sufficient permission on the addressed partner or advertiser.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'
+      '404':
+        description: NOT_FOUND — the resource does not exist, or the id belongs to another type or an unreachable parent.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'
+      '409':
+        description: ABORTED — a concurrent modification conflicted with this request. Retry after a short wait.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'
+      '429':
+        description: >-
+          RESOURCE_EXHAUSTED — a per-minute quota was exceeded (1500 total / 700 write per
+          project; 300 total / 150 write per advertiser). No rate-limit headers are returned and
+          quota increases cannot be requested. Failed requests still consume quota.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'
+      '500':
+        description: INTERNAL — server-side failure. Retry with backoff.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'
+      '504':
+        description: DEADLINE_EXCEEDED — the request exceeded the server deadline. Retry with backoff.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleRpcErrorEnvelope'

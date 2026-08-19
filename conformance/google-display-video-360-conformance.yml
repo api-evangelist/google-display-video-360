@@ -1,0 +1,103 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/google-display-video-360-api-openapi.yml,
+  openapi/_original/google-display-video-360-discovery-v4.json,
+  well-known/google-display-video-360-openid-configuration.json,
+  https://developers.google.com/display-video/api/guides/concepts/general/errors-warnings
+description: >-
+  Cross-cutting standards posture for the Display & Video 360 API, derived from the contract and
+  from the OAuth authorization server metadata this API's securitySchemes point at. The headline
+  finding is that this is a fully OAuth 2.0 / OIDC-fronted API with no key-based path, and that
+  its error and discovery formats are Google-proprietary rather than IETF — google.rpc.Status
+  instead of RFC 9457, and a Google Discovery Document instead of OpenAPI.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      OpenAPI securitySchemes declares a single oauth2 scheme with an authorizationCode flow;
+      the Discovery Document's auth.oauth2.scopes block enumerates four scopes. No other
+      credential type is accepted.
+  - id: oidc
+    conforms: true
+    evidence: >-
+      The declared authorization server, https://accounts.google.com, serves a valid OIDC
+      discovery document at /.well-known/openid-configuration (probed 200 on 2026-08-13).
+      issuer https://accounts.google.com, RS256 id_token signing, openid/email/profile scopes.
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: true
+    evidence: accounts.google.com/.well-known/oauth-authorization-server returns 200 with full RFC 8414 metadata.
+  - id: rfc7636-pkce
+    conforms: true
+    evidence: 'code_challenge_methods_supported: [plain, S256] in the authorization server metadata.'
+  - id: rfc9116-security-txt
+    conforms: true
+    evidence: https://google.com/.well-known/security.txt returns 200 with Contact, Policy, Encryption, Acknowledgments and Expires fields.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      Google publishes no OpenAPI for this API. The machine-readable contract is a Google API
+      Discovery Document (discovery#restDescription) at
+      https://displayvideo.googleapis.com/$discovery/rest?version=v4. The OpenAPI 3.1.0 documents
+      in openapi/ were generated mechanically from that document by API Evangelist, not by Google.
+  - id: google-api-discovery
+    conforms: true
+    evidence: >-
+      First-party discovery#restDescription served at the API host, revision 20260813,
+      179 methods and 414 schemas.
+  - id: aip-resource-oriented-design
+    conforms: true
+    evidence: >-
+      Resource-oriented paths, standard List/Get/Create/Patch/Delete methods, colon-suffixed
+      custom verbs, required updateMask on every PATCH, opaque pageToken pagination,
+      google.longrunning.Operation for SDF tasks.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use Google's own envelope, {"error":{"code","message","status"}}, with status carrying
+      a google.rpc.Code enum name. Content type is application/json, not application/problem+json.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      Deprecations and sunsets are announced on a documentation page. No Sunset or Deprecation
+      response header is emitted, so a running client cannot learn from its own traffic that its
+      API version is retiring.
+  - id: rfc9331-ratelimit-headers
+    conforms: false
+    evidence: >-
+      No RateLimit-* or X-RateLimit-* headers and no Retry-After are documented or returned. The
+      429 / RESOURCE_EXHAUSTED response is the only in-band exhaustion signal.
+  - id: idempotency-key
+    conforms: false
+    evidence: No idempotency key, request token or dedupe header exists anywhere in the contract or docs.
+  - id: asyncapi
+    conforms: false
+    evidence: No event, streaming, webhook or push surface exists — nothing to describe.
+  - id: json-api
+    conforms: false
+  - id: odata
+    conforms: false
+  - id: scim
+    conforms: false
+  - id: fhir-r4
+    conforms: false
+  - id: psd2
+    conforms: false
+  - id: fapi
+    conforms: false
+compliance_program:
+  published: false
+  note: >-
+    Checked and NOT found for this product. Google's Marketing Platform ISO 27001 page
+    (https://support.google.com/marketingplatform/answer/9013962) names Google Marketing
+    Platform, Google Analytics, Google Tag Manager, Google Optimize, Google Attribution, Google
+    Data Studio and Google Audience Center — Display & Video 360 is not in that list. Google's
+    SOC reporting scope is published for Google Cloud Platform, Google Workspace and Google Ads,
+    again not DV360. Google's business data-responsibility hub
+    (https://business.safety.google/compliance/) is the corporate compliance surface but names
+    no DV360-scoped certification. No `Compliance` pointer is emitted from this file, because
+    asserting one would credit this product with a certification scope its own vendor does not
+    claim for it.
+  checked:
+    - {url: 'https://support.google.com/marketingplatform/answer/9013962', finding: 'ISO 27001 scope list does not include Display & Video 360'}
+    - {url: 'https://business.safety.google/compliance/', finding: 'corporate data-protection compliance hub; no DV360-scoped certification named'}
