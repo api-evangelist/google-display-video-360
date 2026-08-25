@@ -1,0 +1,14 @@
+{
+  "repo": "google-display-video-360",
+  "feeds": [
+    {
+      "source": "https://developers.google.com/display-video/api/guides/how-tos/authorizing",
+      "feed_url": "https://developers.google.com/display-video/api/guides/how-tos/authorizing",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-22T20:20:02Z"
+}
