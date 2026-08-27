@@ -61,42 +61,13 @@ tags_raw:
 - Audiences
 - Google Marketing Platform
 apis:
-- aid: google-display-video-360:google-display-video-360-api
-  name: Google Display & Video 360 API
-  description: The full Display & Video 360 API surface — 179 operations across advertisers,
-    partners, campaigns, insertion orders, line items, ad groups, creatives, ad assets,
-    audiences, inventory sources, guaranteed orders, floodlight groups, custom bidding
-    algorithms, targeting options, users and Structured Data File tasks. Generated from Google's
-    own API Discovery Document, revision 20260813.
-  humanURL: https://developers.google.com/display-video/api/reference/rest
-  baseURL: https://displayvideo.googleapis.com
-  tags:
-  - Advertisers
-  - Partners
-  - Campaign Management
-  - Targeting
-  - Audiences
-  - Creatives
-  - Inventory
-  properties:
-  - type: OpenAPI
-    url: openapi/google-display-video-360-api-openapi.yml
-  - type: Overlay
-    url: overlays/google-display-video-360-api-overlay.yaml
-  - type: APIReference
-    url: https://developers.google.com/display-video/api/reference/rest
-  - type: Documentation
-    url: https://developers.google.com/display-video/api
-  - type: Authentication
-    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
-  - type: GettingStarted
-    url: https://developers.google.com/display-video/api/guides/getting-started/overview
 - aid: google-display-video-360:google-display-video-360-advertisers-api
   name: Google Display & Video 360 Advertisers API
-  description: The advertiser-scoped slice of the Display & Video 360 API — 103 operations under
-    /v4/advertisers covering campaigns, insertion orders, line items, ad groups, ad group ads,
-    creatives, ad assets, channels and sites, location lists, negative keyword lists, invoices,
-    reach forecasting and assigned targeting options.
+  description: >-
+    The advertiser-scoped slice of the Display & Video 360 API — 103 operations under /v4/advertisers
+    covering campaigns, insertion orders, line items, ad groups, ad group ads, creatives, ad assets, channels
+    and sites, location lists, negative keyword lists, invoices, reach forecasting and assigned targeting
+    options.
   humanURL: https://developers.google.com/display-video/api/guides/getting-started/overview
   baseURL: https://displayvideo.googleapis.com
   tags:
@@ -118,7 +89,293 @@ apis:
     url: json-ld/json-ld.yml
   - type: GraphQL
     url: graphql/google-display-video-360-graphql.md
+- aid: google-display-video-360:google-display-video-360-combined-audiences-api
+  name: Google Display & Video 360 Combined Audiences API
+  description: >-
+    The Combined Audiences API from Google Display & Video 360 — 2 operation(s) for combined audiences.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Combined Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-combined-audiences-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-custom-bidding-algorithms-api
+  name: Google Display & Video 360 Custom Bidding Algorithms API
+  description: >-
+    The Custom Bidding Algorithms API from Google Display & Video 360 — 8 operation(s) for custom bidding
+    algorithms.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Custom Bidding Algorithms
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-custom-bidding-algorithms-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-custom-lists-api
+  name: Google Display & Video 360 Custom Lists API
+  description: The Custom Lists API from Google Display & Video 360 — 2 operation(s) for custom lists.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Custom Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-custom-lists-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-first-party-and-partner-audiences-api
+  name: Google Display & Video 360 First Party and Partner Audiences API
+  description: >-
+    The First Party and Partner Audiences API from Google Display & Video 360 — 3 operation(s) for first
+    party and partner audiences.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - First Party and Partner Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-first-party-and-partner-audiences-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-floodlight-groups-api
+  name: Google Display & Video 360 Floodlight Groups API
+  description: >-
+    The Floodlight Groups API from Google Display & Video 360 — 4 operation(s) for floodlight groups.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Floodlight Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-floodlight-groups-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-google-audiences-api
+  name: Google Display & Video 360 Google Audiences API
+  description: >-
+    The Google Audiences API from Google Display & Video 360 — 2 operation(s) for google audiences.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Google Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-google-audiences-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-guaranteed-orders-api
+  name: Google Display & Video 360 Guaranteed Orders API
+  description: >-
+    The Guaranteed Orders API from Google Display & Video 360 — 3 operation(s) for guaranteed orders.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Guaranteed Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-guaranteed-orders-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-inventory-source-groups-api
+  name: Google Display & Video 360 Inventory Source Groups API
+  description: >-
+    The Inventory Source Groups API from Google Display & Video 360 — 6 operation(s) for inventory source
+    groups.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Inventory Source Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-inventory-source-groups-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-inventory-sources-api
+  name: Google Display & Video 360 Inventory Sources API
+  description: >-
+    The Inventory Sources API from Google Display & Video 360 — 3 operation(s) for inventory sources.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Inventory Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-inventory-sources-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-media-api
+  name: Google Display & Video 360 Media API
+  description: The Media API from Google Display & Video 360 — 2 operation(s) for media.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-media-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-partners-api
+  name: Google Display & Video 360 Partners API
+  description: The Partners API from Google Display & Video 360 — 13 operation(s) for partners.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Partners
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-partners-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-sdf-download-tasks-api
+  name: Google Display & Video 360 SDF Download Tasks API
+  description: >-
+    The SDF Download Tasks API from Google Display & Video 360 — 2 operation(s) for sdf download tasks.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - SDF Download Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-sdf-download-tasks-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-sdf-upload-tasks-api
+  name: Google Display & Video 360 SDF Upload Tasks API
+  description: >-
+    The SDF Upload Tasks API from Google Display & Video 360 — 1 operation(s) for sdf upload tasks.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - SDF Upload Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-sdf-upload-tasks-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-targeting-types-api
+  name: Google Display & Video 360 Targeting Types API
+  description: >-
+    The Targeting Types API from Google Display & Video 360 — 3 operation(s) for targeting types.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Targeting Types
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-targeting-types-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
+- aid: google-display-video-360:google-display-video-360-users-api
+  name: Google Display & Video 360 Users API
+  description: The Users API from Google Display & Video 360 — 3 operation(s) for users.
+  humanURL: https://developers.google.com/display-video/api/reference/rest
+  baseURL: https://displayvideo.googleapis.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/google-display-video-360-users-api-openapi.yml
+  - type: APIReference
+    url: https://developers.google.com/display-video/api/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/display-video/api
+  - type: Authentication
+    url: https://developers.google.com/display-video/api/guides/how-tos/authorizing
+  - type: GettingStarted
+    url: https://developers.google.com/display-video/api/guides/getting-started/overview
 common:
+- type: Overlay
+  url: overlays/google-display-video-360-api-overlay.yaml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/google-display--video-360/overview
 - type: AgenticAccess
