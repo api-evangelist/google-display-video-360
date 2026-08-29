@@ -11,6 +11,18 @@ description: Display & Video 360 is Google's enterprise demand-side platform for
   API key, and an access token is not sufficient on its own — the calling Google Account must
   also hold a Display & Video 360 user profile with permission on the partner or advertiser
   being addressed.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: sales
