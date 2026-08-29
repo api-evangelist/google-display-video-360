@@ -1,0 +1,378 @@
+openapi: 3.2.0
+info:
+  title: Google Display & Video 360 Floodlight Groups API
+  description: Display & Video 360 API allows users to automate complex Display & Video 360 workflows, such as creating insertion orders and setting targeting options for individual line items. Derived mechanically from the first-party Google API Discovery Document at https://displayvideo.googleapis.com/$discovery/rest?version=v4 (revision 20260813).
+  version: v4
+  contact:
+    name: Google
+    url: https://developers.google.com/display-video/
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  termsOfService: https://developers.google.com/terms
+  x-google-discovery-revision: '20260813'
+  x-google-discovery-document: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+servers:
+- url: https://displayvideo.googleapis.com
+  description: Display & Video 360 API server
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/display-video
+tags:
+- name: Floodlight Groups
+paths:
+  /v4/floodlightGroups/{floodlightGroupId}:
+    patch:
+      operationId: floodlightGroupsPatch
+      summary: Updates an existing Floodlight group.
+      description: Updates an existing Floodlight group. Returns the updated Floodlight group if successful.
+      tags:
+      - Floodlight Groups
+      parameters:
+      - name: floodlightGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+        description: Output only. The unique ID of the Floodlight group. Assigned by the system.
+        required: true
+      - name: updateMask
+        in: query
+        schema:
+          type: string
+          format: google-fieldmask
+        description: Required. The mask to control which fields to update.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: Required. The partner context by which the Floodlight group is being accessed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FloodlightGroup'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FloodlightGroup'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.floodlightGroups.patch
+  /v4/floodlightGroups/{floodlightGroupsId}:
+    get:
+      operationId: floodlightGroupsGet
+      summary: Gets a Floodlight group.
+      description: Gets a Floodlight group.
+      tags:
+      - Floodlight Groups
+      parameters:
+      - name: floodlightGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the Floodlight group to fetch.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: Required. The partner context by which the Floodlight group is being accessed.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FloodlightGroup'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.floodlightGroups.get
+  /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities/{floodlightActivitiesId}:
+    get:
+      operationId: floodlightGroupsFloodlightActivitiesGet
+      summary: Gets a Floodlight activity.
+      description: Gets a Floodlight activity.
+      tags:
+      - Floodlight Groups
+      parameters:
+      - name: floodlightGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the parent Floodlight group to which the requested Floodlight activity belongs.
+        required: true
+      - name: floodlightActivityId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the Floodlight activity to fetch.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: Required. The ID of the partner through which the Floodlight activity is being accessed.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FloodlightActivity'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.floodlightGroups.floodlightActivities.get
+  /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities:
+    get:
+      operationId: floodlightGroupsFloodlightActivitiesList
+      summary: Lists Floodlight activities in a Floodlight group.
+      description: Lists Floodlight activities in a Floodlight group.
+      tags:
+      - Floodlight Groups
+      parameters:
+      - name: floodlightGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the parent Floodlight group to which the requested Floodlight activities belong.
+        required: true
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: Optional. A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListFloodlightActivities` method. If not specified, the first page of results will be returned.
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Optional. Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Optional. Field by which to sort the list. Acceptable values are: * `displayName` (default) * `floodlightActivityId` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: Required. The ID of the partner through which the Floodlight activities are being accessed.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFloodlightActivitiesResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.floodlightGroups.floodlightActivities.list
+components:
+  schemas:
+    LookbackWindow:
+      type: object
+      description: Specifies how many days into the past to look when determining whether to record a conversion.
+      properties:
+        clickDays:
+          type: integer
+          format: int32
+          description: Lookback window, in days, from the last time a given user clicked on one of your ads.
+        impressionDays:
+          type: integer
+          format: int32
+          description: Lookback window, in days, from the last time a given user viewed one of your ads.
+    ListFloodlightActivitiesResponse:
+      type: object
+      properties:
+        floodlightActivities:
+          type: array
+          description: The list of Floodlight activities. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/FloodlightActivity'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFloodlightActivities` method to retrieve the next page of results.
+    FloodlightActivity:
+      type: object
+      description: A single Floodlight activity.
+      properties:
+        name:
+          type: string
+          description: Output only. The resource name of the Floodlight activity.
+          readOnly: true
+        advertiserIds:
+          type: array
+          description: Output only. IDs of the advertisers that have access to the parent Floodlight group. Only advertisers under the provided partner ID will be listed in this field.
+          readOnly: true
+          items:
+            type: string
+            format: int64
+        servingStatus:
+          type: string
+          description: 'Optional. Whether the Floodlight activity is served. Allowed values — `FLOODLIGHT_ACTIVITY_SERVING_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `FLOODLIGHT_ACTIVITY_SERVING_STATUS_ENABLED`: Enabled.; `FLOODLIGHT_ACTIVITY_SERVING_STATUS_DISABLED`: Disabled.'
+          enum:
+          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_UNSPECIFIED
+          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_ENABLED
+          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_DISABLED
+        floodlightActivityId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the Floodlight activity. Assigned by the system.
+          readOnly: true
+        displayName:
+          type: string
+          description: Required. The display name of the Floodlight activity.
+        sslRequired:
+          type: boolean
+          description: Output only. Whether tags are required to be compliant.
+          readOnly: true
+        floodlightGroupId:
+          type: string
+          format: int64
+          description: Required. Immutable. The ID of the parent Floodlight group.
+        remarketingConfigs:
+          type: array
+          description: Output only. A list of configuration objects designating whether remarketing for this Floodlight Activity is enabled and available for a specifc advertiser. If enabled, this Floodlight Activity generates a remarketing user list that is able to be used in targeting under the advertiser.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/RemarketingConfig'
+    RemarketingConfig:
+      type: object
+      description: Settings that control the whether remarketing is enabled for the given identified advertiser.
+      properties:
+        advertiserId:
+          type: string
+          format: int64
+          description: Output only. The ID of the advertiser.
+          readOnly: true
+        remarketingEnabled:
+          type: boolean
+          description: Output only. Whether the Floodlight activity remarketing user list is available to the identified advertiser.
+          readOnly: true
+    ActiveViewVideoViewabilityMetricConfig:
+      type: object
+      description: Configuration for custom Active View video viewability metrics.
+      properties:
+        minimumVolume:
+          type: string
+          description: 'Required. The minimum percentage of the video ad''s volume required in order for an impression to be recorded. Allowed values — `VIDEO_VOLUME_PERCENT_UNSPECIFIED`: Value is not specified or is unknown in this version.; `VIDEO_VOLUME_PERCENT_0`: 0% volume.; `VIDEO_VOLUME_PERCENT_10`: 10% volume.'
+          enum:
+          - VIDEO_VOLUME_PERCENT_UNSPECIFIED
+          - VIDEO_VOLUME_PERCENT_0
+          - VIDEO_VOLUME_PERCENT_10
+        minimumQuartile:
+          type: string
+          description: 'The minimum visible video duration required, based on the video quartiles, in order for an impression to be recorded. You must specify minimum_duration, minimum_quartile or both. If both are specified, an impression meets the metric criteria if either requirement is met (whichever happens first). Allowed values — `VIDEO_DURATION_QUARTILE_UNSPECIFIED`: Value is not specified or is unknown in this version.; `VIDEO_DURATION_QUARTILE_NONE`: No quartile value.; `VIDEO_DURATION_QUARTILE_FIRST`: First quartile.; `VIDEO_DURATION_QUARTILE_SECOND`: Second quartile (midpoint).; `VIDEO_DURATION_QUARTILE_THIRD`: Third quartile.; `VIDEO_DURATION_QUARTILE_FOURTH`: Fourth quartile (completion).'
+          enum:
+          - VIDEO_DURATION_QUARTILE_UNSPECIFIED
+          - VIDEO_DURATION_QUARTILE_NONE
+          - VIDEO_DURATION_QUARTILE_FIRST
+          - VIDEO_DURATION_QUARTILE_SECOND
+          - VIDEO_DURATION_QUARTILE_THIRD
+          - VIDEO_DURATION_QUARTILE_FOURTH
+        minimumDuration:
+          type: string
+          description: 'The minimum visible video duration required (in seconds) in order for an impression to be recorded. You must specify minimum_duration, minimum_quartile or both. If both are specified, an impression meets the metric criteria if either requirement is met (whichever happens first). Allowed values — `VIDEO_DURATION_UNSPECIFIED`: Value is not specified or is unknown in this version.; `VIDEO_DURATION_SECONDS_NONE`: No duration value.; `VIDEO_DURATION_SECONDS_0`: 0 seconds.; `VIDEO_DURATION_SECONDS_1`: 1 second.; `VIDEO_DURATION_SECONDS_2`: 2 seconds.; `VIDEO_DURATION_SECONDS_3`: 3 seconds.; `VIDEO_DURATION_SECONDS_4`: 4 seconds.; `VIDEO_DURATION_SECONDS_5`: 5 seconds.; `VIDEO_DURATION_SECONDS_6`: 6 seconds.; `VIDEO_DURATION_SECONDS_7`: 7 seconds.; `VIDEO_DURATION_SECONDS_8`: 8 seconds.; `VIDEO_DURATION_SECONDS_9`: 9 seconds.; `VIDEO_DURATION_SECONDS_10`: 10 seconds.; `VIDEO_DURATION_SECONDS_11`: 11 seconds.; `VIDEO_DURATION_SECONDS_12`: 12 seconds.; `VIDEO_DURATION_SECONDS_13`: 13 seconds.; `VIDEO_DURATION_SECONDS_14`: 14 seconds.; `VIDEO_DURATION_SECONDS_15`: 15 seconds.; `VIDEO_DURATION_SECONDS_30`: 30 seconds.; `VIDEO_DURATION_SECONDS_45`: 45 seconds.; `VIDEO_DURATION_SECONDS_60`: 60 seconds.'
+          enum:
+          - VIDEO_DURATION_UNSPECIFIED
+          - VIDEO_DURATION_SECONDS_NONE
+          - VIDEO_DURATION_SECONDS_0
+          - VIDEO_DURATION_SECONDS_1
+          - VIDEO_DURATION_SECONDS_2
+          - VIDEO_DURATION_SECONDS_3
+          - VIDEO_DURATION_SECONDS_4
+          - VIDEO_DURATION_SECONDS_5
+          - VIDEO_DURATION_SECONDS_6
+          - VIDEO_DURATION_SECONDS_7
+          - VIDEO_DURATION_SECONDS_8
+          - VIDEO_DURATION_SECONDS_9
+          - VIDEO_DURATION_SECONDS_10
+          - VIDEO_DURATION_SECONDS_11
+          - VIDEO_DURATION_SECONDS_12
+          - VIDEO_DURATION_SECONDS_13
+          - VIDEO_DURATION_SECONDS_14
+          - VIDEO_DURATION_SECONDS_15
+          - VIDEO_DURATION_SECONDS_30
+          - VIDEO_DURATION_SECONDS_45
+          - VIDEO_DURATION_SECONDS_60
+        displayName:
+          type: string
+          description: Required. The display name of the custom metric.
+        minimumViewability:
+          type: string
+          description: 'Required. The minimum percentage of the video ad''s pixels visible on the screen in order for an impression to be recorded. Allowed values — `VIEWABILITY_PERCENT_UNSPECIFIED`: Value is not specified or is unknown in this version.; `VIEWABILITY_PERCENT_0`: 0% viewable.; `VIEWABILITY_PERCENT_25`: 25% viewable.; `VIEWABILITY_PERCENT_50`: 50% viewable.; `VIEWABILITY_PERCENT_75`: 75% viewable.; `VIEWABILITY_PERCENT_100`: 100% viewable.'
+          enum:
+          - VIEWABILITY_PERCENT_UNSPECIFIED
+          - VIEWABILITY_PERCENT_0
+          - VIEWABILITY_PERCENT_25
+          - VIEWABILITY_PERCENT_50
+          - VIEWABILITY_PERCENT_75
+          - VIEWABILITY_PERCENT_100
+    FloodlightGroup:
+      type: object
+      description: A single Floodlight group.
+      properties:
+        floodlightGroupId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the Floodlight group. Assigned by the system.
+          readOnly: true
+        lookbackWindow:
+          $ref: '#/components/schemas/LookbackWindow'
+        webTagType:
+          type: string
+          description: 'Required. The web tag type enabled for the Floodlight group. Allowed values — `WEB_TAG_TYPE_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `WEB_TAG_TYPE_NONE`: No tag type.; `WEB_TAG_TYPE_IMAGE`: Image tag.; `WEB_TAG_TYPE_DYNAMIC`: Dynamic tag.'
+          enum:
+          - WEB_TAG_TYPE_UNSPECIFIED
+          - WEB_TAG_TYPE_NONE
+          - WEB_TAG_TYPE_IMAGE
+          - WEB_TAG_TYPE_DYNAMIC
+        customVariables:
+          type: object
+          description: 'User-defined custom variables owned by the Floodlight group. Use custom Floodlight variables to create reporting data that is tailored to your unique business needs. Custom Floodlight variables use the keys `U1=`, `U2=`, and so on, and can take any values that you choose to pass to them. You can use them to track virtually any type of data that you collect about your customers, such as the genre of movie that a customer purchases, the country to which the item is shipped, and so on. Custom Floodlight variables may not be used to pass any data that could be used or recognized as personally identifiable information (PII). Example: `custom_variables { fields { "U1": value { number_value: 123.4 }, "U2": value { string_value: "MyVariable2" }, "U3": value { string_value: "MyVariable3" } } }` Acceptable values for keys are "U1" through "U100", inclusive. String values must be less than 64 characters long, and cannot contain the following characters: `"<>`.'
+          additionalProperties:
+            description: Properties of the object.
+        displayName:
+          type: string
+          description: Required. The display name of the Floodlight group.
+        name:
+          type: string
+          description: Output only. The resource name of the Floodlight group.
+          readOnly: true
+        activeViewConfig:
+          $ref: '#/components/schemas/ActiveViewVideoViewabilityMetricConfig'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Google OAuth 2.0. Authorization and token endpoints read from https://accounts.google.com/.well-known/openid-configuration.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          refreshUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+            https://www.googleapis.com/auth/display-video-user-management: 'Private Service: https://www.googleapis.com/auth/display-video-user-management'
+            https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
+            https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices

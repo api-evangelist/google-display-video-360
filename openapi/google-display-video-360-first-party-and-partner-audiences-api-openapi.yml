@@ -1,0 +1,440 @@
+openapi: 3.2.0
+info:
+  title: Google Display & Video 360 First Party and Partner Audiences API
+  description: Display & Video 360 API allows users to automate complex Display & Video 360 workflows, such as creating insertion orders and setting targeting options for individual line items. Derived mechanically from the first-party Google API Discovery Document at https://displayvideo.googleapis.com/$discovery/rest?version=v4 (revision 20260813).
+  version: v4
+  contact:
+    name: Google
+    url: https://developers.google.com/display-video/
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  termsOfService: https://developers.google.com/terms
+  x-google-discovery-revision: '20260813'
+  x-google-discovery-document: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+servers:
+- url: https://displayvideo.googleapis.com
+  description: Display & Video 360 API server
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/display-video
+tags:
+- name: First Party and Partner Audiences
+paths:
+  /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}:editCustomerMatchMembers:
+    post:
+      operationId: firstPartyAndPartnerAudiencesEditCustomerMatchMembers
+      summary: Updates the member list of a Customer Match audience.
+      description: 'Updates the member list of a Customer Match audience. Only supported for the following audience_type: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`'
+      tags:
+      - First Party and Partner Audiences
+      parameters:
+      - name: firstPartyAndPartnerAudienceId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the Customer Match FirstPartyAndPartnerAudience whose members will be edited.
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditCustomerMatchMembersRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditCustomerMatchMembersResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.firstPartyAndPartnerAudiences.editCustomerMatchMembers
+  /v4/firstPartyAndPartnerAudiences:
+    get:
+      operationId: firstPartyAndPartnerAudiencesList
+      summary: Lists first party and partner audiences.
+      description: Lists first party and partner audiences. The order is defined by the order_by parameter.
+      tags:
+      - First Party and Partner Audiences
+      parameters:
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that has access to the fetched first party and partner audiences.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that has access to the fetched first party and partner audiences.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Optional. Field by which to sort the list. Acceptable values are: * `FirstPartyAndPartnerAudienceId` (default) * `displayName` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Optional. Requested page size. Must be between `1` and `5000`. If unspecified, this value defaults to `5000`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: Optional. A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListFirstPartyAndPartnerAudiences` method. If not specified, the first page of results will be returned.
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: 'Optional. Allows filtering by first party and partner audience fields. Supported syntax: * Filter expressions for first party and partner audiences can only contain at most one restriction. * A restriction has the form of `{field} {operator} {value}`. * All fields must use the `HAS (:)` operator. Supported fields: * `displayName` Examples: * All first party and partner audiences for which the display name contains "Google": `displayName:"Google"`. The length of this field should be no more than 500 characters. Reference our [filter `LIST` requests](/display-video/api/guides/how-tos/filters) guide for more information.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFirstPartyAndPartnerAudiencesResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.firstPartyAndPartnerAudiences.list
+    post:
+      operationId: firstPartyAndPartnerAudiencesCreate
+      summary: Creates a FirstPartyAndPartnerAudience.
+      description: 'Creates a FirstPartyAndPartnerAudience. Only supported for the following audience_type: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`'
+      tags:
+      - First Party and Partner Audiences
+      parameters:
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: Required. The ID of the advertiser under whom the FirstPartyAndPartnerAudience will be created.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.firstPartyAndPartnerAudiences.create
+  /v4/firstPartyAndPartnerAudiences/{firstPartyAndPartnerAudiencesId}:
+    patch:
+      operationId: firstPartyAndPartnerAudiencesPatch
+      summary: Updates an existing FirstPartyAndPartnerAudience.
+      description: 'Updates an existing FirstPartyAndPartnerAudience. Only supported for the following audience_type: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`'
+      tags:
+      - First Party and Partner Audiences
+      parameters:
+      - name: firstPartyAndPartnerAudienceId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Identifier. The unique ID of the first party and partner audience. Assigned by the system.
+        required: true
+      - name: updateMask
+        in: query
+        schema:
+          type: string
+          format: google-fieldmask
+        description: 'Required. The mask to control which fields to update. Updates are only supported for the following fields: * `displayName` * `description` * `membershipDurationDays`'
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: Required. The ID of the owner advertiser of the updated FirstPartyAndPartnerAudience.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.firstPartyAndPartnerAudiences.patch
+    get:
+      operationId: firstPartyAndPartnerAudiencesGet
+      summary: Gets a first party or partner audience.
+      description: Gets a first party or partner audience.
+      tags:
+      - First Party and Partner Audiences
+      parameters:
+      - name: firstPartyAndPartnerAudienceId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the first party and partner audience to fetch.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that has access to the fetched first party and partner audience.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that has access to the fetched first party and partner audience.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.firstPartyAndPartnerAudiences.get
+components:
+  schemas:
+    FirstPartyAndPartnerAudience:
+      type: object
+      description: Describes a first or partner audience list used for targeting. First party audiences are created via usage of client data. Partner audiences are provided by Third Party data providers and can only be licensed to customers.
+      properties:
+        displayAudienceSize:
+          type: string
+          format: int64
+          description: Output only. The estimated audience size for the Display network. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only returned in GET request.
+          readOnly: true
+        displayMobileAppAudienceSize:
+          type: string
+          format: int64
+          description: Output only. The estimated mobile app audience size in Display network. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only applicable to first party audiences. Only returned in GET request.
+          readOnly: true
+        displayDesktopAudienceSize:
+          type: string
+          format: int64
+          description: Output only. The estimated desktop audience size in Display network. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only applicable to first party audiences. Only returned in GET request.
+          readOnly: true
+        audienceSource:
+          type: string
+          description: 'Output only. The source of the audience. Allowed values — `AUDIENCE_SOURCE_UNSPECIFIED`: Default value when audience source is not specified or is unknown.; `DISPLAY_VIDEO_360`: Originated from Display & Video 360.; `CAMPAIGN_MANAGER`: Originated from Campaign Manager 360.; `AD_MANAGER`: Originated from Google Ad Manager.; `SEARCH_ADS_360`: Originated from Search Ads 360.; `YOUTUBE`: Originated from Youtube.; `ADS_DATA_HUB`: Originated from Ads Data Hub.'
+          enum:
+          - AUDIENCE_SOURCE_UNSPECIFIED
+          - DISPLAY_VIDEO_360
+          - CAMPAIGN_MANAGER
+          - AD_MANAGER
+          - SEARCH_ADS_360
+          - YOUTUBE
+          - ADS_DATA_HUB
+          readOnly: true
+        appId:
+          type: string
+          description: Optional. The app_id matches with the type of the mobile_device_ids being uploaded. Only applicable to audience_type `CUSTOMER_MATCH_DEVICE_ID`
+        firstPartyAndPartnerAudienceId:
+          type: string
+          format: int64
+          description: Identifier. The unique ID of the first party and partner audience. Assigned by the system.
+        displayName:
+          type: string
+          description: Optional. The display name of the first party and partner audience.
+        membershipDurationDays:
+          type: string
+          format: int64
+          description: 'Optional. The duration in days that an entry remains in the audience after the qualifying event. The set value must be greater than 0 and less than or equal to 540. Only applicable to first party audiences. This field is required if one of the following audience_type is used: * `CUSTOMER_MATCH_CONTACT_INFO` * `CUSTOMER_MATCH_DEVICE_ID`'
+        audienceType:
+          type: string
+          description: 'Immutable. The type of the audience. Allowed values — `AUDIENCE_TYPE_UNSPECIFIED`: Default value when type is not specified or is unknown.; `CUSTOMER_MATCH_CONTACT_INFO`: Audience was generated through matching customers to known contact information.; `CUSTOMER_MATCH_DEVICE_ID`: Audience was generated through matching customers to known Mobile device IDs.; `CUSTOMER_MATCH_USER_ID`: Audience was generated through matching customers to known User IDs.; `ACTIVITY_BASED`: Deprecated: Audience was created based on campaign activity.; `FREQUENCY_CAP`: Deprecated: Audience was created based on excluding the number of impressions they were served.; `TAG_BASED`: Audience was created based on custom variables attached to pixel.; `YOUTUBE_USERS`: Audience was created based on past interactions with videos, YouTube ads, or YouTube channel.; `THIRD_PARTY`: Audience has been licensed for use from a third party.; `COMMERCE`: Audience provided by commerce partners for a fee.; `LINEAR`: Audience for Linear TV content.; `AGENCY`: Audience provided by an agency.'
+          enum:
+          - AUDIENCE_TYPE_UNSPECIFIED
+          - CUSTOMER_MATCH_CONTACT_INFO
+          - CUSTOMER_MATCH_DEVICE_ID
+          - CUSTOMER_MATCH_USER_ID
+          - ACTIVITY_BASED
+          - FREQUENCY_CAP
+          - TAG_BASED
+          - YOUTUBE_USERS
+          - THIRD_PARTY
+          - COMMERCE
+          - LINEAR
+          - AGENCY
+        gmailAudienceSize:
+          type: string
+          format: int64
+          description: Output only. The estimated audience size for Gmail network. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only applicable to first party audiences. Only returned in GET request.
+          readOnly: true
+        displayMobileWebAudienceSize:
+          type: string
+          format: int64
+          description: Output only. The estimated mobile web audience size in Display network. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only applicable to first party audiences. Only returned in GET request.
+          readOnly: true
+        name:
+          type: string
+          description: Output only. The resource name of the first party and partner audience.
+          readOnly: true
+        firstPartyAndPartnerAudienceType:
+          type: string
+          description: 'Output only. Whether the audience is a first party and partner audience. Allowed values — `FIRST_PARTY_AND_PARTNER_AUDIENCE_TYPE_UNSPECIFIED`: Default value when type is not specified or is unknown.; `TYPE_FIRST_PARTY`: Audience that is created via usage of client data.; `TYPE_PARTNER`: Audience that is provided by Third Party data providers.'
+          enum:
+          - FIRST_PARTY_AND_PARTNER_AUDIENCE_TYPE_UNSPECIFIED
+          - TYPE_FIRST_PARTY
+          - TYPE_PARTNER
+          readOnly: true
+        contactInfoList:
+          $ref: '#/components/schemas/ContactInfoList'
+        activeDisplayAudienceSize:
+          type: string
+          format: int64
+          description: Output only. The estimated audience size for the Display network in the past month. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only returned in GET request.
+          readOnly: true
+        description:
+          type: string
+          description: Optional. The user-provided description of the audience. Only applicable to first party audiences.
+        youtubeAudienceSize:
+          type: string
+          format: int64
+          description: Output only. The estimated audience size for YouTube network. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only applicable to first party audiences. Only returned in GET request.
+          readOnly: true
+        mobileDeviceIdList:
+          $ref: '#/components/schemas/MobileDeviceIdList'
+    ContactInfoList:
+      type: object
+      description: Wrapper message for a list of contact information defining Customer Match audience members.
+      properties:
+        contactInfos:
+          type: array
+          description: Optional. A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
+          items:
+            $ref: '#/components/schemas/ContactInfo'
+        consent:
+          $ref: '#/components/schemas/Consent'
+    ListFirstPartyAndPartnerAudiencesResponse:
+      type: object
+      properties:
+        firstPartyAndPartnerAudiences:
+          type: array
+          description: The list of first party and partner audiences. Audience size properties will not be included. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFirstPartyAndPartnerAudiences` method to retrieve the next page of results.
+    EditCustomerMatchMembersRequest:
+      type: object
+      description: Request message for FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
+      properties:
+        removedContactInfoList:
+          $ref: '#/components/schemas/ContactInfoList'
+        addedMobileDeviceIdList:
+          $ref: '#/components/schemas/MobileDeviceIdList'
+        addedContactInfoList:
+          $ref: '#/components/schemas/ContactInfoList'
+        advertiserId:
+          type: string
+          format: int64
+          description: Required. The ID of the owner advertiser of the updated Customer Match FirstAndThirdPartyAudience.
+        removedMobileDeviceIdList:
+          $ref: '#/components/schemas/MobileDeviceIdList'
+    EditCustomerMatchMembersResponse:
+      type: object
+      description: The response of FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
+      properties:
+        firstPartyAndPartnerAudienceId:
+          type: string
+          format: int64
+          description: Required. The ID of the updated Customer Match FirstPartyAndPartnerAudience.
+    Consent:
+      type: object
+      description: User consent status.
+      properties:
+        adPersonalization:
+          type: string
+          description: 'Represents consent for ad personalization. Allowed values — `CONSENT_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CONSENT_STATUS_GRANTED`: Consent is granted.; `CONSENT_STATUS_DENIED`: Consent is denied.'
+          enum:
+          - CONSENT_STATUS_UNSPECIFIED
+          - CONSENT_STATUS_GRANTED
+          - CONSENT_STATUS_DENIED
+        adUserData:
+          type: string
+          description: 'Represents consent for ad user data. Allowed values — `CONSENT_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CONSENT_STATUS_GRANTED`: Consent is granted.; `CONSENT_STATUS_DENIED`: Consent is denied.'
+          enum:
+          - CONSENT_STATUS_UNSPECIFIED
+          - CONSENT_STATUS_GRANTED
+          - CONSENT_STATUS_DENIED
+    ContactInfo:
+      type: object
+      description: Contact information defining a Customer Match audience member.
+      properties:
+        hashedFirstName:
+          type: string
+          description: 'Optional. SHA256 hashed first name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_last_name * zip_codes'
+        hashedEmails:
+          type: array
+          description: Optional. A list of SHA256 hashed email of the member. Before hashing, remove all whitespace and make sure the string is all lowercase.
+          items:
+            type: string
+        hashedPhoneNumbers:
+          type: array
+          description: Optional. A list of SHA256 hashed phone numbers of the member. Before hashing, all phone numbers must be formatted using the [E.164 format](https://en.wikipedia.org/wiki/E.164) and include the country calling code.
+          items:
+            type: string
+        countryCode:
+          type: string
+          description: 'Optional. Country code of the member. Must also be set with the following fields: * hashed_first_name * hashed_last_name * zip_codes'
+        hashedLastName:
+          type: string
+          description: 'Optional. SHA256 hashed last name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_first_name * zip_codes'
+        zipCodes:
+          type: array
+          description: 'Optional. A list of zip codes of the member. Must also be set with the following fields: * country_code * hashed_first_name * hashed_last_name'
+          items:
+            type: string
+    MobileDeviceIdList:
+      type: object
+      description: Wrapper message for a list of mobile device IDs defining Customer Match audience members.
+      properties:
+        mobileDeviceIds:
+          type: array
+          description: Optional. A list of mobile device IDs defining Customer Match audience members. The size of mobile_device_ids mustn't be greater than 500,000.
+          items:
+            type: string
+        consent:
+          $ref: '#/components/schemas/Consent'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Google OAuth 2.0. Authorization and token endpoints read from https://accounts.google.com/.well-known/openid-configuration.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          refreshUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+            https://www.googleapis.com/auth/display-video-user-management: 'Private Service: https://www.googleapis.com/auth/display-video-user-management'
+            https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
+            https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices

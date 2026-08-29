@@ -1,0 +1,813 @@
+openapi: 3.2.0
+info:
+  title: Google Display & Video 360 Custom Bidding Algorithms API
+  description: Display & Video 360 API allows users to automate complex Display & Video 360 workflows, such as creating insertion orders and setting targeting options for individual line items. Derived mechanically from the first-party Google API Discovery Document at https://displayvideo.googleapis.com/$discovery/rest?version=v4 (revision 20260813).
+  version: v4
+  contact:
+    name: Google
+    url: https://developers.google.com/display-video/
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  termsOfService: https://developers.google.com/terms
+  x-google-discovery-revision: '20260813'
+  x-google-discovery-document: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+servers:
+- url: https://displayvideo.googleapis.com
+  description: Display & Video 360 API server
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/display-video
+tags:
+- name: Custom Bidding Algorithms
+paths:
+  /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}:uploadRules:
+    get:
+      operationId: customBiddingAlgorithmsUploadRules
+      summary: Creates a rules reference object for an AlgorithmRules file.
+      description: Creates a rules reference object for an AlgorithmRules file. The resulting reference object provides a resource path where the AlgorithmRules file should be uploaded. This reference object should be included when creating a new CustomBiddingAlgorithmRules resource.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm that owns the rules resource.
+        required: true
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingAlgorithmRulesRef'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.uploadRules
+  /v4/customBiddingAlgorithms:
+    post:
+      operationId: customBiddingAlgorithmsCreate
+      summary: Creates a new custom bidding algorithm.
+      description: Creates a new custom bidding algorithm. Returns the newly created custom bidding algorithm if successful.
+      tags:
+      - Custom Bidding Algorithms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomBiddingAlgorithm'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingAlgorithm'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.create
+    get:
+      operationId: customBiddingAlgorithmsList
+      summary: Lists custom bidding algorithms that are accessible to the current user and can be used in bidding stratgies.
+      description: Lists custom bidding algorithms that are accessible to the current user and can be used in bidding stratgies. The order is defined by the order_by parameter.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListCustomBiddingAlgorithms` method. If not specified, the first page of results will be returned.
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: 'Allows filtering by custom bidding algorithm fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND`. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The `customBiddingAlgorithmType` field must use the `EQUALS (=)` operator. * The `displayName` field must use the `HAS (:)` operator. Supported fields: * `customBiddingAlgorithmType` * `displayName` Examples: * All custom bidding algorithms for which the display name contains "politics": `displayName:"politics"`. * All custom bidding algorithms for which the type is "SCRIPT_BASED": `customBiddingAlgorithmType=SCRIPT_BASED` The length of this field should be no more than 500 characters. Reference our [filter `LIST` requests](/display-video/api/guides/how-tos/filters) guide for more information.'
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the DV360 partner that has access to the custom bidding algorithm.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the DV360 advertiser that has access to the custom bidding algorithm.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomBiddingAlgorithmsResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.list
+  /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}:uploadScript:
+    get:
+      operationId: customBiddingAlgorithmsUploadScript
+      summary: Creates a custom bidding script reference object for a script file.
+      description: Creates a custom bidding script reference object for a script file. The resulting reference object provides a resource path to which the script file should be uploaded. This reference object should be included in when creating a new custom bidding script object.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm owns the script.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingScriptRef'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.uploadScript
+  /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}:
+    get:
+      operationId: customBiddingAlgorithmsGet
+      summary: Gets a custom bidding algorithm.
+      description: Gets a custom bidding algorithm.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm to fetch.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the DV360 partner that has access to the custom bidding algorithm.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the DV360 partner that has access to the custom bidding algorithm.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingAlgorithm'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.get
+    patch:
+      operationId: customBiddingAlgorithmsPatch
+      summary: Updates an existing custom bidding algorithm.
+      description: Updates an existing custom bidding algorithm. Returns the updated custom bidding algorithm if successful. Requests updating a custom bidding algorithm assigned to a line item will return an error.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Output only. The unique ID of the custom bidding algorithm. Assigned by the system.
+        required: true
+      - name: updateMask
+        in: query
+        schema:
+          type: string
+          format: google-fieldmask
+        description: Required. The mask to control which fields to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomBiddingAlgorithm'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingAlgorithm'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.patch
+  /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules:
+    post:
+      operationId: customBiddingAlgorithmsRulesCreate
+      summary: Creates a new rules resource.
+      description: Creates a new rules resource. Returns the newly created rules resource if successful. Requests creating a custom bidding rules resource under an algorithm assigned to a line item will return an error.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm that owns the rules resource.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this rules resource.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomBiddingAlgorithmRules'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingAlgorithmRules'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.rules.create
+    get:
+      operationId: customBiddingAlgorithmsRulesList
+      summary: Lists rules resources that belong to the given algorithm.
+      description: Lists rules resources that belong to the given algorithm. The order is defined by the order_by parameter.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm that owns the rules resource.
+        required: true
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListCustomBiddingAlgorithmRules` method. If not specified, the first page of results will be returned.
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Field by which to sort the list. Acceptable values are: * `createTime desc` (default) The default sorting order is descending. To specify ascending order for a field, the suffix "desc" should be removed. Example: `createTime`.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomBiddingAlgorithmRulesResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.rules.list
+  /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/rules/{rulesId}:
+    get:
+      operationId: customBiddingAlgorithmsRulesGet
+      summary: Retrieves a rules resource.
+      description: Retrieves a rules resource.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm that owns the rules resource.
+        required: true
+      - name: customBiddingAlgorithmRulesId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the rules resource to fetch.
+        required: true
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingAlgorithmRules'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.rules.get
+  /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts:
+    post:
+      operationId: customBiddingAlgorithmsScriptsCreate
+      summary: Creates a new custom bidding script.
+      description: Creates a new custom bidding script. Returns the newly created script if successful. Requests creating a custom bidding script under an algorithm assigned to a line item will return an error.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm that owns the script.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomBiddingScript'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingScript'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.scripts.create
+    get:
+      operationId: customBiddingAlgorithmsScriptsList
+      summary: Lists custom bidding scripts that belong to the given algorithm.
+      description: Lists custom bidding scripts that belong to the given algorithm. The order is defined by the order_by parameter.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm owns the script.
+        required: true
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListCustomBiddingScripts` method. If not specified, the first page of results will be returned.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Field by which to sort the list. Acceptable values are: * `createTime desc` (default) The default sorting order is descending. To specify ascending order for a field, the suffix "desc" should be removed. Example: `createTime`.'
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomBiddingScriptsResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.scripts.list
+  /v4/customBiddingAlgorithms/{customBiddingAlgorithmsId}/scripts/{scriptsId}:
+    get:
+      operationId: customBiddingAlgorithmsScriptsGet
+      summary: Gets a custom bidding script.
+      description: Gets a custom bidding script.
+      tags:
+      - Custom Bidding Algorithms
+      parameters:
+      - name: customBiddingAlgorithmId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding algorithm owns the script.
+        required: true
+      - name: customBiddingScriptId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the custom bidding script to fetch.
+        required: true
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent custom bidding algorithm.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBiddingScript'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.customBiddingAlgorithms.scripts.get
+components:
+  schemas:
+    ScriptError:
+      type: object
+      description: An error message for a custom bidding script.
+      properties:
+        column:
+          type: string
+          format: int64
+          description: The column number in the script where the error was thrown.
+        line:
+          type: string
+          format: int64
+          description: The line number in the script where the error was thrown.
+        errorMessage:
+          type: string
+          description: The detailed error message.
+        errorCode:
+          type: string
+          description: 'The type of error. Allowed values — `ERROR_CODE_UNSPECIFIED`: The script error is not specified or is unknown in this version.; `SYNTAX_ERROR`: The script has a syntax error.; `DEPRECATED_SYNTAX`: The script uses deprecated syntax.; `INTERNAL_ERROR`: Internal errors were thrown while processing the script.'
+          enum:
+          - ERROR_CODE_UNSPECIFIED
+          - SYNTAX_ERROR
+          - DEPRECATED_SYNTAX
+          - INTERNAL_ERROR
+    CustomBiddingModelDetails:
+      type: object
+      description: The details of a custom bidding algorithm model for a single shared advertiser.
+      properties:
+        advertiserId:
+          type: string
+          format: int64
+          description: The unique ID of the relevant advertiser.
+        readinessState:
+          type: string
+          description: 'The readiness state of custom bidding model. Allowed values — `READINESS_STATE_UNSPECIFIED`: State is not specified or is unknown in this version.; `READINESS_STATE_ACTIVE`: The model is trained and ready for serving.; `READINESS_STATE_INSUFFICIENT_DATA`: There is not enough data to train the serving model.; `READINESS_STATE_TRAINING`: The model is training and not ready for serving.; `READINESS_STATE_NO_VALID_SCRIPT`: A valid custom bidding script has not been provided with which to train the model. This state will only be applied to algorithms whose `custom_bidding_algorithm_type` is `SCRIPT_BASED`.; `READINESS_STATE_EVALUATION_FAILURE`: A valid script was provided but failed evaluation. This is applicable for scripts that could not be evaluated in the alloted time.'
+          enum:
+          - READINESS_STATE_UNSPECIFIED
+          - READINESS_STATE_ACTIVE
+          - READINESS_STATE_INSUFFICIENT_DATA
+          - READINESS_STATE_TRAINING
+          - READINESS_STATE_NO_VALID_SCRIPT
+          - READINESS_STATE_EVALUATION_FAILURE
+        suspensionState:
+          type: string
+          description: 'Output only. The suspension state of custom bidding model. Allowed values — `SUSPENSION_STATE_UNSPECIFIED`: State is not specified or is unknown in this version.; `SUSPENSION_STATE_ENABLED`: Model is enabled, either recently used, currently used or scheduled to be used. The algorithm is actively scoring impressions for this advertiser.; `SUSPENSION_STATE_DORMANT`: Model has not been used recently. Although the model still acts as `ENABLED`, it will eventually be suspended if not used.; `SUSPENSION_STATE_SUSPENDED`: Model is suspended from scoring impressions and cannot serve. If the algorithm is assigned to a line item under this advertiser or otherwise updated, it will switch back to the `ENABLED` state and require time to prepare the serving model again.'
+          enum:
+          - SUSPENSION_STATE_UNSPECIFIED
+          - SUSPENSION_STATE_ENABLED
+          - SUSPENSION_STATE_DORMANT
+          - SUSPENSION_STATE_SUSPENDED
+          readOnly: true
+    CustomBiddingAlgorithmRules:
+      type: object
+      description: A single custom bidding algorithm rules.
+      properties:
+        active:
+          type: boolean
+          description: Output only. Whether the rules resource is currently being used for scoring by the parent algorithm.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/CustomBiddingAlgorithmRulesError'
+        name:
+          type: string
+          description: Output only. The resource name of the rules resource.
+          readOnly: true
+        customBiddingAlgorithmId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the custom bidding algorithm that the rules resource belongs to.
+          readOnly: true
+        createTime:
+          type: string
+          format: google-datetime
+          description: Output only. The time when the rules resource was created.
+          readOnly: true
+        state:
+          type: string
+          description: 'Output only. The state of the rules resource. Allowed values — `STATE_UNSPECIFIED`: The rules state are unspecified or unknown in this version.; `ACCEPTED`: The rules have been accepted for scoring impressions.; `REJECTED`: The rules have been rejected by backend pipelines. They may have errors.'
+          enum:
+          - STATE_UNSPECIFIED
+          - ACCEPTED
+          - REJECTED
+          readOnly: true
+        customBiddingAlgorithmRulesId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the rules resource.
+          readOnly: true
+        rules:
+          $ref: '#/components/schemas/CustomBiddingAlgorithmRulesRef'
+    ListCustomBiddingAlgorithmRulesResponse:
+      type: object
+      properties:
+        customBiddingRules:
+          type: array
+          description: The list of CustomBiddingAlgorithmRules resources. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/CustomBiddingAlgorithmRules'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmRulesRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
+    CustomBiddingAlgorithmRulesError:
+      type: object
+      description: An error message for a CustomBiddingAlgorithmRules resource.
+      properties:
+        errorCode:
+          type: string
+          description: 'The type of error. Allowed values — `ERROR_CODE_UNSPECIFIED`: The error is not specified or is unknown in this version.; `SYNTAX_ERROR`: The rules have a syntax error.; `CONSTRAINT_VIOLATION_ERROR`: The rules have a constraint violation error.; `INTERNAL_ERROR`: Internal errors were thrown while processing the rules.'
+          enum:
+          - ERROR_CODE_UNSPECIFIED
+          - SYNTAX_ERROR
+          - CONSTRAINT_VIOLATION_ERROR
+          - INTERNAL_ERROR
+    CustomBiddingAlgorithm:
+      type: object
+      description: A single custom bidding algorithm.
+      properties:
+        customBiddingAlgorithmType:
+          type: string
+          description: 'Required. Immutable. The type of custom bidding algorithm. Allowed values — `CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED`: Algorithm type is not specified or is unknown in this version.; `SCRIPT_BASED`: Algorithm generated through customer-uploaded custom bidding script files.; `RULE_BASED`: Algorithm based in defined rules. These rules are defined in the API using the AlgorithmRules object. This algorithm type is only available to allowlisted customers. Other customers attempting to use this type will receive an error.'
+          enum:
+          - CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED
+          - SCRIPT_BASED
+          - RULE_BASED
+        name:
+          type: string
+          description: Output only. The resource name of the custom bidding algorithm.
+          readOnly: true
+        customBiddingAlgorithmId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the custom bidding algorithm. Assigned by the system.
+          readOnly: true
+        displayName:
+          type: string
+          description: Required. The display name of the custom bidding algorithm. Must be UTF-8 encoded with a maximum size of 240 bytes.
+        partnerId:
+          type: string
+          format: int64
+          description: Immutable. The unique ID of the partner that owns the custom bidding algorithm.
+        thirdPartyOptimizationPartner:
+          type: string
+          description: 'Optional. Immutable. Designates the third party optimization partner that manages this algorithm. Allowed values — `UNKNOWN`: Type value is not specified or is unknown in this version.; `SCIBIDS`: Third party data science service provider that DV3 partners/advertisers can partner with.; `ADELAIDE`: Third party attention measurement service provider that DV3 partners/advertisers can partner with.'
+          enum:
+          - UNKNOWN
+          - SCIBIDS
+          - ADELAIDE
+        advertiserId:
+          type: string
+          format: int64
+          description: Immutable. The unique ID of the advertiser that owns the custom bidding algorithm.
+        sharedAdvertiserIds:
+          type: array
+          description: The IDs of the advertisers who have access to this algorithm. If advertiser_id is set, this field will only consist of that value. This field will not be set if the algorithm [`owner`](/display-video/api/reference/rest/v1/customBiddingAlgorithms#CustomBiddingAlgorithm.FIELDS.oneof_owner) is a partner and is being retrieved using an advertiser [`accessor`](/display-video/api/reference/rest/v1/customBiddingAlgorithms/list#body.QUERY_PARAMETERS.oneof_accessor).
+          items:
+            type: string
+            format: int64
+        modelDetails:
+          type: array
+          description: Output only. The details of custom bidding models for each advertiser who has access. This field may only include the details of the queried advertiser if the algorithm [`owner`](/display-video/api/reference/rest/v1/customBiddingAlgorithms#CustomBiddingAlgorithm.FIELDS.oneof_owner) is a partner and is being retrieved using an advertiser [`accessor`](/display-video/api/reference/rest/v1/customBiddingAlgorithms/list#body.QUERY_PARAMETERS.oneof_accessor).
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/CustomBiddingModelDetails'
+        entityStatus:
+          type: string
+          description: 'Controls whether or not the custom bidding algorithm can be used as a bidding strategy. Accepted values are: * `ENTITY_STATUS_ACTIVE` * `ENTITY_STATUS_ARCHIVED` Allowed values — `ENTITY_STATUS_UNSPECIFIED`: Default value when status is not specified or is unknown in this version.; `ENTITY_STATUS_ACTIVE`: The entity is enabled to bid and spend budget.; `ENTITY_STATUS_ARCHIVED`: The entity is archived. Bidding and budget spending are disabled. An entity can be deleted after archived. Deleted entities cannot be retrieved.; `ENTITY_STATUS_DRAFT`: The entity is under draft. Bidding and budget spending are disabled.; `ENTITY_STATUS_PAUSED`: Bidding and budget spending are paused for the entity.; `ENTITY_STATUS_SCHEDULED_FOR_DELETION`: The entity is scheduled for deletion.'
+          enum:
+          - ENTITY_STATUS_UNSPECIFIED
+          - ENTITY_STATUS_ACTIVE
+          - ENTITY_STATUS_ARCHIVED
+          - ENTITY_STATUS_DRAFT
+          - ENTITY_STATUS_PAUSED
+          - ENTITY_STATUS_SCHEDULED_FOR_DELETION
+    CustomBiddingScriptRef:
+      type: object
+      description: The reference to the uploaded custom bidding script file.
+      properties:
+        resourceName:
+          type: string
+          description: A resource name to be used in media.download to Download the script files. Or media.upload to Upload the script files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/scriptRef/{ref_id}`.
+    ListCustomBiddingScriptsResponse:
+      type: object
+      properties:
+        customBiddingScripts:
+          type: array
+          description: The list of custom bidding scripts. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/CustomBiddingScript'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingScriptsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
+    CustomBiddingScript:
+      type: object
+      description: A single custom bidding script.
+      properties:
+        active:
+          type: boolean
+          description: Output only. Whether the script is currently being used for scoring by the parent algorithm.
+          readOnly: true
+        errors:
+          type: array
+          description: Output only. Error details of a rejected custom bidding script. This field will only be populated when state is REJECTED.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/ScriptError'
+        script:
+          $ref: '#/components/schemas/CustomBiddingScriptRef'
+        customBiddingScriptId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the custom bidding script.
+          readOnly: true
+        createTime:
+          type: string
+          format: google-datetime
+          description: Output only. The time when the script was created.
+          readOnly: true
+        state:
+          type: string
+          description: 'Output only. The state of the custom bidding script. Allowed values — `STATE_UNSPECIFIED`: The script state is not specified or is unknown in this version.; `ACCEPTED`: The script has been accepted for scoring impressions.; `REJECTED`: The script has been rejected by backend pipelines. It may have errors.; `PENDING`: The script is being processed for backend pipelines.'
+          enum:
+          - STATE_UNSPECIFIED
+          - ACCEPTED
+          - REJECTED
+          - PENDING
+          readOnly: true
+        name:
+          type: string
+          description: Output only. The resource name of the custom bidding script.
+          readOnly: true
+        customBiddingAlgorithmId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the custom bidding algorithm the script belongs to.
+          readOnly: true
+    CustomBiddingAlgorithmRulesRef:
+      type: object
+      description: The reference to the uploaded AlgorithmRules file. Retrieve the location to upload new AlgorithmRules file to using customBiddingAlgorithms.uploadRules.
+      properties:
+        resourceName:
+          type: string
+          description: A resource name to be used in media.download to download the rules files. Or media.upload to upload the rules files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/rulesRef/{ref_id}`.
+    ListCustomBiddingAlgorithmsResponse:
+      type: object
+      properties:
+        customBiddingAlgorithms:
+          type: array
+          description: The list of custom bidding algorithms. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/CustomBiddingAlgorithm'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Google OAuth 2.0. Authorization and token endpoints read from https://accounts.google.com/.well-known/openid-configuration.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          refreshUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+            https://www.googleapis.com/auth/display-video-user-management: 'Private Service: https://www.googleapis.com/auth/display-video-user-management'
+            https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
+            https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices

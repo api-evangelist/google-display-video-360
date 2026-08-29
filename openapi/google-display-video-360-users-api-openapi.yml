@@ -1,0 +1,323 @@
+openapi: 3.2.0
+info:
+  title: Google Display & Video 360 Users API
+  description: Display & Video 360 API allows users to automate complex Display & Video 360 workflows, such as creating insertion orders and setting targeting options for individual line items. Derived mechanically from the first-party Google API Discovery Document at https://displayvideo.googleapis.com/$discovery/rest?version=v4 (revision 20260813).
+  version: v4
+  contact:
+    name: Google
+    url: https://developers.google.com/display-video/
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  termsOfService: https://developers.google.com/terms
+  x-google-discovery-revision: '20260813'
+  x-google-discovery-document: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+servers:
+- url: https://displayvideo.googleapis.com
+  description: Display & Video 360 API server
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/display-video
+tags:
+- name: Users
+paths:
+  /v4/users:
+    get:
+      operationId: usersList
+      summary: Lists users that are accessible to the current user.
+      description: Lists users that are accessible to the current user. If two users have user roles on the same partner or advertiser, they can access each other. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      tags:
+      - Users
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. For example, `displayName desc`.'
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListUsers` method. If not specified, the first page of results will be returned.
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: 'Allows filtering by user fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by the logical operator `AND`. * A restriction has the form of `{field} {operator} {value}`. * The `displayName` and `email` fields must use the `HAS (:)` operator. * The `lastLoginTime` field must use either the `LESS THAN OR EQUAL TO (<=)` or `GREATER THAN OR EQUAL TO (>=)` operator. * All other fields must use the `EQUALS (=)` operator. Supported fields: * `assignedUserRole.advertiserId` * `assignedUserRole.entityType`: This is synthetic field of `AssignedUserRole` used for filtering. Identifies the type of entity to which the user role is assigned. Valid values are `Partner` and `Advertiser`. * `assignedUserRole.parentPartnerId`: This is a synthetic field of `AssignedUserRole` used for filtering. Identifies the parent partner of the entity to which the user role is assigned. * `assignedUserRole.partnerId` * `assignedUserRole.userRole` * `displayName` * `email` * `lastLoginTime` (input in ISO 8601 format, or `YYYY-MM-DDTHH:MM:SSZ`) Examples: * The user with `displayName` containing "foo": `displayName:"foo"` * The user with `email` containing "bar": `email:"bar"` * All users with standard user roles: `assignedUserRole.userRole="STANDARD"` * All users with user roles for partner 123: `assignedUserRole.partnerId="123"` * All users with user roles for advertiser 123: `assignedUserRole.advertiserId="123"` * All users with partner level user roles: `entityType="PARTNER"` * All users with user roles for partner 123 and advertisers under partner 123: `parentPartnerId="123"` * All users that last logged in on or after 2023-01-01T00:00:00Z (format of ISO 8601): `lastLoginTime>="2023-01-01T00:00:00Z"` The length of this field should be no more than 500 characters. Reference our [filter `LIST` requests](/display-video/api/guides/how-tos/filters) guide for more information.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUsersResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video-user-management
+      x-google-method-id: displayvideo.users.list
+    post:
+      operationId: usersCreate
+      summary: Creates a new user.
+      description: Creates a new user. Returns the newly created user if successful. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video-user-management
+      x-google-method-id: displayvideo.users.create
+  /v4/users/{usersId}:bulkEditAssignedUserRoles:
+    post:
+      operationId: usersBulkEditAssignedUserRoles
+      summary: Bulk edits user roles for a user.
+      description: Bulk edits user roles for a user. The operation will delete the assigned user roles provided in BulkEditAssignedUserRolesRequest.deletedAssignedUserRoles and then assign the user roles provided in BulkEditAssignedUserRolesRequest.createdAssignedUserRoles. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      tags:
+      - Users
+      parameters:
+      - name: userId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the user to which the assigned user roles belong.
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkEditAssignedUserRolesRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkEditAssignedUserRolesResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video-user-management
+      x-google-method-id: displayvideo.users.bulkEditAssignedUserRoles
+  /v4/users/{usersId}:
+    patch:
+      operationId: usersPatch
+      summary: Updates an existing user.
+      description: Updates an existing user. Returns the updated user if successful. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      tags:
+      - Users
+      parameters:
+      - name: userId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Output only. The unique ID of the user. Assigned by the system.
+        required: true
+      - name: updateMask
+        in: query
+        schema:
+          type: string
+          format: google-fieldmask
+        description: Required. The mask to control which fields to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video-user-management
+      x-google-method-id: displayvideo.users.patch
+    get:
+      operationId: usersGet
+      summary: Gets a user.
+      description: Gets a user. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      tags:
+      - Users
+      parameters:
+      - name: userId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the user to fetch.
+        required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video-user-management
+      x-google-method-id: displayvideo.users.get
+    delete:
+      operationId: usersDelete
+      summary: Deletes a user.
+      description: Deletes a user. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      tags:
+      - Users
+      parameters:
+      - name: userId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the user to delete.
+        required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video-user-management
+      x-google-method-id: displayvideo.users.delete
+components:
+  schemas:
+    ListUsersResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          description: The list of users. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/User'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListUsers` method to retrieve the next page of results. This token will be absent if there are no more results to return.
+    User:
+      type: object
+      description: A single user in Display & Video 360.
+      properties:
+        userId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the user. Assigned by the system.
+          readOnly: true
+        email:
+          type: string
+          description: Required. Immutable. The email address used to identify the user.
+        name:
+          type: string
+          description: Output only. The resource name of the user.
+          readOnly: true
+        assignedUserRoles:
+          type: array
+          description: The assigned user roles. Required in CreateUser. Output only in UpdateUser. Can only be updated through BulkEditAssignedUserRoles.
+          items:
+            $ref: '#/components/schemas/AssignedUserRole'
+        lastLoginTime:
+          type: string
+          format: google-datetime
+          description: Output only. The timestamp when the user last logged in DV360 UI.
+          readOnly: true
+        displayName:
+          type: string
+          description: Required. The display name of the user. Must be UTF-8 encoded with a maximum size of 240 bytes.
+    BulkEditAssignedUserRolesResponse:
+      type: object
+      properties:
+        createdAssignedUserRoles:
+          type: array
+          description: The list of assigned user roles that have been successfully created. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/AssignedUserRole'
+    BulkEditAssignedUserRolesRequest:
+      type: object
+      description: Request message for BulkEditAssignedUserRoles.
+      properties:
+        deletedAssignedUserRoles:
+          type: array
+          description: The assigned user roles to delete in batch, specified as a list of assigned_user_role_ids. The format of assigned_user_role_id is `entityType-entityid`, for example `partner-123`.
+          items:
+            type: string
+        createdAssignedUserRoles:
+          type: array
+          description: The assigned user roles to create in batch, specified as a list of AssignedUserRoles.
+          items:
+            $ref: '#/components/schemas/AssignedUserRole'
+    Empty:
+      type: object
+      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
+    AssignedUserRole:
+      type: object
+      description: A single assigned user role, which defines a user's authorized interaction with a specified partner or advertiser.
+      properties:
+        assignedUserRoleId:
+          type: string
+          description: Output only. The ID of the assigned user role.
+          readOnly: true
+        userRole:
+          type: string
+          description: 'Required. The user role to assign to a user for the entity. Allowed values — `USER_ROLE_UNSPECIFIED`: Default value when the user role is not specified or is unknown in this version.; `ADMIN`: The user can manage campaigns, creatives, insertion orders, line items, and reports for the entity. They can view and edit billing information, create or modify users, and enable or disable exchanges. This role can only be assigned for a partner entity.; `ADMIN_PARTNER_CLIENT`: The user can manage campaigns, creatives, insertion orders, line items, and reports for the entity. They can create and modify other `ADMIN_PARTNER_CLIENT` users and view billing information. They cannot view revenue models, markups, or any other reseller-sensitive fields. This role can only be assigned for a partner entity.; `STANDARD`: The user can manage campaigns, creatives, insertion orders, line items, and reports for the entity. They cannot create and modify users or view billing information.; `STANDARD_PLANNER`: The user can view all campaigns, creatives, insertion orders, line items, and reports for the entity, including all cost data. They can create and modify planning-related features, including plans and inventory.; `STANDARD_PLANNER_LIMITED`: The user can view all campaigns, creatives, insertion orders, line items, and reports for the entity. They can create or modify planning-related features, including plans and inventory. They have no access to cost data and cannot start, accept, or negotiate deals.; `STANDARD_PARTNER_CLIENT`: The user can manage campaigns, creatives, insertion orders, line items, and reports for the entity. They cannot create or modify other users or view billing information. They cannot view revenue models, markups, or any other reseller-sensitive fields. This role can only be assigned for an advertiser entity.; `READ_ONLY`: The user can only build reports and view data for the entity.; `REPORTING_ONLY`: The user can only create and manage reports.; `LIMITED_REPORTING_ONLY`: The user can only create and manage the following client-safe reports: General, Audience Performance, Cross-Partner, Keyword, Order ID, Category, and Third-Party Data Provider.; `CREATIVE`: The user can view media plan information they need to collaborate, but can''t view cost-related data or Marketplace.; `CREATIVE_ADMIN`: The user can view media plan information they need to collaborate, but can''t view cost-related data or Marketplace. In addition, they can add other creative admins or creative users to the entity.'
+          enum:
+          - USER_ROLE_UNSPECIFIED
+          - ADMIN
+          - ADMIN_PARTNER_CLIENT
+          - STANDARD
+          - STANDARD_PLANNER
+          - STANDARD_PLANNER_LIMITED
+          - STANDARD_PARTNER_CLIENT
+          - READ_ONLY
+          - REPORTING_ONLY
+          - LIMITED_REPORTING_ONLY
+          - CREATIVE
+          - CREATIVE_ADMIN
+        partnerId:
+          type: string
+          format: int64
+          description: The ID of the partner that the assigned user role applies to.
+        advertiserId:
+          type: string
+          format: int64
+          description: The ID of the advertiser that the assigend user role applies to.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Google OAuth 2.0. Authorization and token endpoints read from https://accounts.google.com/.well-known/openid-configuration.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          refreshUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+            https://www.googleapis.com/auth/display-video-user-management: 'Private Service: https://www.googleapis.com/auth/display-video-user-management'
+            https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
+            https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices

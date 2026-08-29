@@ -1,0 +1,272 @@
+openapi: 3.2.0
+info:
+  title: Google Display & Video 360 SDF Download Tasks API
+  description: Display & Video 360 API allows users to automate complex Display & Video 360 workflows, such as creating insertion orders and setting targeting options for individual line items. Derived mechanically from the first-party Google API Discovery Document at https://displayvideo.googleapis.com/$discovery/rest?version=v4 (revision 20260813).
+  version: v4
+  contact:
+    name: Google
+    url: https://developers.google.com/display-video/
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  termsOfService: https://developers.google.com/terms
+  x-google-discovery-revision: '20260813'
+  x-google-discovery-document: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+servers:
+- url: https://displayvideo.googleapis.com
+  description: Display & Video 360 API server
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/display-video
+tags:
+- name: SDF Download Tasks
+paths:
+  /v4/sdfdownloadtasks:
+    post:
+      operationId: sdfdownloadtasksCreate
+      summary: Creates an SDF Download Task.
+      description: Creates an SDF Download Task. Returns an Operation. An SDF Download Task is a long-running, asynchronous operation. The metadata type of this operation is SdfDownloadTaskMetadata. If the request is successful, the response type of the operation is SdfDownloadTask. The response will not include the download files, which must be retrieved with media.download. The state of operation can be retrieved with `sdfdownloadtasks.operations.get`. Any errors can be found in the error.message. Note that error.details is expected to be empty.
+      tags:
+      - SDF Download Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSdfDownloadTaskRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operation'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.sdfdownloadtasks.create
+  /v4/sdfdownloadtasks/operations/{operationsId}:
+    get:
+      operationId: sdfdownloadtasksOperationsGet
+      summary: Gets the latest state of an asynchronous SDF download task operation.
+      description: Gets the latest state of an asynchronous SDF download task operation. Clients should poll this method at intervals of 30 seconds.
+      tags:
+      - SDF Download Tasks
+      parameters:
+      - name: name
+        in: path
+        schema:
+          type: string
+          pattern: ^sdfdownloadtasks/operations/[^/]+$
+        description: The name of the operation resource.
+        required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operation'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+        - https://www.googleapis.com/auth/doubleclickbidmanager
+      x-google-method-id: displayvideo.sdfdownloadtasks.operations.get
+components:
+  schemas:
+    Status:
+      type: object
+      description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+      properties:
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of google.rpc.Code.
+        details:
+          type: array
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            type: object
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+    InventorySourceFilter:
+      type: object
+      description: A filtering option for filtering on Inventory Source entities.
+      properties:
+        inventorySourceIds:
+          type: array
+          description: Inventory Sources to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Leave empty to download all Inventory Sources for the selected Advertiser or Partner.
+          items:
+            type: string
+            format: int64
+    Operation:
+      type: object
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        name:
+          type: string
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+        done:
+          type: boolean
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+        error:
+          $ref: '#/components/schemas/Status'
+        response:
+          type: object
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+        metadata:
+          type: object
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+    CreateSdfDownloadTaskRequest:
+      type: object
+      description: Request message for [SdfDownloadTaskService.CreateSdfDownloadTask].
+      properties:
+        advertiserId:
+          type: string
+          format: int64
+          description: The ID of the advertiser to download SDF for.
+        partnerId:
+          type: string
+          format: int64
+          description: The ID of the partner to download SDF for.
+        inventorySourceFilter:
+          $ref: '#/components/schemas/InventorySourceFilter'
+        parentEntityFilter:
+          $ref: '#/components/schemas/ParentEntityFilter'
+        idFilter:
+          $ref: '#/components/schemas/IdFilter'
+        version:
+          type: string
+          description: 'Required. The SDF version of the downloaded file. If set to `SDF_VERSION_UNSPECIFIED`, this will default to the version specified by the advertiser or partner identified by `root_id`. An advertiser inherits its SDF version from its partner unless configured otherwise. Allowed values — `SDF_VERSION_UNSPECIFIED`: SDF version value is not specified or is unknown in this version.; `SDF_VERSION_3_1`: SDF version 3.1; `SDF_VERSION_4`: SDF version 4; `SDF_VERSION_4_1`: SDF version 4.1; `SDF_VERSION_4_2`: SDF version 4.2; `SDF_VERSION_5`: SDF version 5.; `SDF_VERSION_5_1`: SDF version 5.1; `SDF_VERSION_5_2`: SDF version 5.2; `SDF_VERSION_5_3`: SDF version 5.3; `SDF_VERSION_5_4`: SDF version 5.4; `SDF_VERSION_5_5`: SDF version 5.5; `SDF_VERSION_6`: SDF version 6; `SDF_VERSION_7`: SDF version 7. Read the [v7 migration guide](/display-video/api/structured-data-file/v7-migration-guide) before migrating to this version.; `SDF_VERSION_7_1`: SDF version 7.1. Read the [v7 migration guide](/display-video/api/structured-data-file/v7-migration-guide) before migrating to this version.; `SDF_VERSION_8`: SDF version 8. Read the [v8 migration guide](/display-video/api/structured-data-file/v8-migration-guide) before migrating to this version.; `SDF_VERSION_8_1`: SDF version 8.1.; `SDF_VERSION_9`: SDF version 9. Read the [v9 migration guide](/display-video/api/structured-data-file/v9-migration-guide) before migrating to this version.; `SDF_VERSION_9_1`: SDF version 9.1.; `SDF_VERSION_9_2`: SDF version 9.2.; `SDF_VERSION_10`: SDF version 10.; `SDF_VERSION_10_1`: SDF version 10.1.'
+          enum:
+          - SDF_VERSION_UNSPECIFIED
+          - SDF_VERSION_3_1
+          - SDF_VERSION_4
+          - SDF_VERSION_4_1
+          - SDF_VERSION_4_2
+          - SDF_VERSION_5
+          - SDF_VERSION_5_1
+          - SDF_VERSION_5_2
+          - SDF_VERSION_5_3
+          - SDF_VERSION_5_4
+          - SDF_VERSION_5_5
+          - SDF_VERSION_6
+          - SDF_VERSION_7
+          - SDF_VERSION_7_1
+          - SDF_VERSION_8
+          - SDF_VERSION_8_1
+          - SDF_VERSION_9
+          - SDF_VERSION_9_1
+          - SDF_VERSION_9_2
+          - SDF_VERSION_10
+          - SDF_VERSION_10_1
+    ParentEntityFilter:
+      type: object
+      description: A filtering option that filters on selected file types belonging to a chosen set of filter entities.
+      properties:
+        fileType:
+          type: array
+          description: Required. File types that will be returned.
+          items:
+            type: string
+            enum:
+            - FILE_TYPE_UNSPECIFIED
+            - FILE_TYPE_CAMPAIGN
+            - FILE_TYPE_MEDIA_PRODUCT
+            - FILE_TYPE_INSERTION_ORDER
+            - FILE_TYPE_LINE_ITEM
+            - FILE_TYPE_AD_GROUP
+            - FILE_TYPE_AD
+            - FILE_TYPE_LINE_ITEM_QA
+            - FILE_TYPE_AD_GROUP_QA
+            description: 'Allowed values — `FILE_TYPE_UNSPECIFIED`: Default value when type is unspecified or is unknown in this version.; `FILE_TYPE_CAMPAIGN`: Campaign.; `FILE_TYPE_MEDIA_PRODUCT`: Media Product.; `FILE_TYPE_INSERTION_ORDER`: Insertion Order.; `FILE_TYPE_LINE_ITEM`: Line Item.; `FILE_TYPE_AD_GROUP`: YouTube Ad Group.; `FILE_TYPE_AD`: YouTube Ad.; `FILE_TYPE_LINE_ITEM_QA`: Line Item - QA format.; `FILE_TYPE_AD_GROUP_QA`: YouTube Ad Group - QA format.'
+        filterIds:
+          type: array
+          description: The IDs of the specified filter type. This is used to filter entities to fetch. If filter type is not `FILTER_TYPE_NONE`, at least one ID must be specified.
+          items:
+            type: string
+            format: int64
+        filterType:
+          type: string
+          description: 'Required. Filter type used to filter fetched entities. Allowed values — `FILTER_TYPE_UNSPECIFIED`: Default value when type is unspecified or is unknown in this version.; `FILTER_TYPE_NONE`: If selected, no filter will be applied to the download. Can only be used if an Advertiser is specified in CreateSdfDownloadTaskRequest.; `FILTER_TYPE_ADVERTISER_ID`: Advertiser ID. If selected, all filter IDs must be Advertiser IDs that belong to the Partner specified in CreateSdfDownloadTaskRequest.; `FILTER_TYPE_CAMPAIGN_ID`: Campaign ID. If selected, all filter IDs must be Campaign IDs that belong to the Advertiser or Partner specified in CreateSdfDownloadTaskRequest.; `FILTER_TYPE_MEDIA_PRODUCT_ID`: Media Product ID. If selected, all filter IDs must be Media Product IDs that belong to the Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Can only be used for downloading `FILE_TYPE_MEDIA_PRODUCT`.; `FILTER_TYPE_INSERTION_ORDER_ID`: Insertion Order ID. If selected, all filter IDs must be Insertion Order IDs that belong to the Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Can only be used for downloading `FILE_TYPE_INSERTION_ORDER`, `FILE_TYPE_LINE_ITEM`, `FILE_TYPE_LINE_ITEM_QA`, `FILE_TYPE_AD_GROUP`, `FILE_TYPE_AD_GROUP_QA`, and `FILE_TYPE_AD`.; `FILTER_TYPE_LINE_ITEM_ID`: Line Item ID. If selected, all filter IDs must be Line Item IDs that belong to the Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Can only be used for downloading `FILE_TYPE_LINE_ITEM`, `FILE_TYPE_LINE_ITEM_QA`,`FILE_TYPE_AD_GROUP`, `FILE_TYPE_AD_GROUP_QA`, and `FILE_TYPE_AD`.'
+          enum:
+          - FILTER_TYPE_UNSPECIFIED
+          - FILTER_TYPE_NONE
+          - FILTER_TYPE_ADVERTISER_ID
+          - FILTER_TYPE_CAMPAIGN_ID
+          - FILTER_TYPE_MEDIA_PRODUCT_ID
+          - FILTER_TYPE_INSERTION_ORDER_ID
+          - FILTER_TYPE_LINE_ITEM_ID
+    IdFilter:
+      type: object
+      description: A filtering option that filters entities by their entity IDs.
+      properties:
+        mediaProductIds:
+          type: array
+          description: Media Products to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        lineItemIds:
+          type: array
+          description: Line Items to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        adGroupIds:
+          type: array
+          description: YouTube Ad Groups to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        lineItemQaIds:
+          type: array
+          description: Optional. Line Items, by ID, to download in QA format. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        campaignIds:
+          type: array
+          description: Campaigns to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        adGroupAdIds:
+          type: array
+          description: YouTube Ads to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        adGroupQaIds:
+          type: array
+          description: Optional. YouTube Ad Groups, by ID, to download in QA format. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        insertionOrderIds:
+          type: array
+          description: Insertion Orders to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Google OAuth 2.0. Authorization and token endpoints read from https://accounts.google.com/.well-known/openid-configuration.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          refreshUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+            https://www.googleapis.com/auth/display-video-user-management: 'Private Service: https://www.googleapis.com/auth/display-video-user-management'
+            https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
+            https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices

@@ -1,0 +1,529 @@
+openapi: 3.2.0
+info:
+  title: Google Display & Video 360 Inventory Source Groups API
+  description: Display & Video 360 API allows users to automate complex Display & Video 360 workflows, such as creating insertion orders and setting targeting options for individual line items. Derived mechanically from the first-party Google API Discovery Document at https://displayvideo.googleapis.com/$discovery/rest?version=v4 (revision 20260813).
+  version: v4
+  contact:
+    name: Google
+    url: https://developers.google.com/display-video/
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  termsOfService: https://developers.google.com/terms
+  x-google-discovery-revision: '20260813'
+  x-google-discovery-document: https://displayvideo.googleapis.com/$discovery/rest?version=v4
+servers:
+- url: https://displayvideo.googleapis.com
+  description: Display & Video 360 API server
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/display-video
+tags:
+- name: Inventory Source Groups
+paths:
+  /v4/inventorySourceGroups/{inventorySourceGroupId}:
+    patch:
+      operationId: inventorySourceGroupsPatch
+      summary: Updates an inventory source group.
+      description: Updates an inventory source group. Returns the updated inventory source group if successful.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: inventorySourceGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+        description: Output only. The unique ID of the inventory source group. Assigned by the system.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the inventory source group. Only this partner has write access to this group.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the inventory source group. The parent partner does not have access to this group.
+      - name: updateMask
+        in: query
+        schema:
+          type: string
+          format: google-fieldmask
+        description: Required. The mask to control which fields to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventorySourceGroup'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventorySourceGroup'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.patch
+  /v4/inventorySourceGroups:
+    get:
+      operationId: inventorySourceGroupsList
+      summary: Lists inventory source groups that are accessible to the current user.
+      description: Lists inventory source groups that are accessible to the current user. The order is defined by the order_by parameter.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListInventorySources` method. If not specified, the first page of results will be returned.
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: 'Allows filtering by inventory source group fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by the logical operator `OR`. * A restriction has the form of `{field} {operator} {value}`. * All fields must use the `EQUALS (=)` operator. Supported fields: * `inventorySourceGroupId` The length of this field should be no more than 500 characters. Reference our [filter `LIST` requests](/display-video/api/guides/how-tos/filters) guide for more information.'
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that has access to the inventory source group. A partner cannot access advertiser-owned inventory source groups.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that has access to the inventory source group. If an inventory source group is partner-owned, only advertisers to which the group is explicitly shared can access the group.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) * `inventorySourceGroupId` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. For example, `displayName desc`.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInventorySourceGroupsResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.list
+    post:
+      operationId: inventorySourceGroupsCreate
+      summary: Creates a new inventory source group.
+      description: Creates a new inventory source group. Returns the newly created inventory source group if successful.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the inventory source group. The parent partner will not have access to this group.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the inventory source group. Only this partner will have write access to this group. Only advertisers to which this group is explicitly shared will have read access to this group.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventorySourceGroup'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventorySourceGroup'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.create
+  /v4/inventorySourceGroups/{inventorySourceGroupsId}:
+    get:
+      operationId: inventorySourceGroupsGet
+      summary: Gets an inventory source group.
+      description: Gets an inventory source group.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: inventorySourceGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the inventory source group to fetch.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that has access to the inventory source group. A partner cannot access an advertiser-owned inventory source group.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that has access to the inventory source group. If an inventory source group is partner-owned, only advertisers to which the group is explicitly shared can access the group.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventorySourceGroup'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.get
+    delete:
+      operationId: inventorySourceGroupsDelete
+      summary: Deletes an inventory source group.
+      description: Deletes an inventory source group.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: inventorySourceGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the inventory source group to delete.
+        required: true
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the inventory source group. The parent partner does not have access to this group.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the inventory source group. Only this partner has write access to this group.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.delete
+  /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources:
+    post:
+      operationId: inventorySourceGroupsAssignedInventorySourcesCreate
+      summary: Creates an assignment between an inventory source and an inventory source group.
+      description: Creates an assignment between an inventory source and an inventory source group.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: inventorySourceGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the inventory source group to which the assignment will be assigned.
+        required: true
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent inventory source group. The parent partner will not have access to this assigned inventory source.
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent inventory source group. Only this partner will have write access to this assigned inventory source.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignedInventorySource'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignedInventorySource'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.assignedInventorySources.create
+    get:
+      operationId: inventorySourceGroupsAssignedInventorySourcesList
+      summary: Lists inventory sources assigned to an inventory source group.
+      description: Lists inventory sources assigned to an inventory source group.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: inventorySourceGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the inventory source group to which these assignments are assigned.
+        required: true
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that has access to the assignment. If the parent inventory source group is partner-owned, only advertisers to which the parent group is explicitly shared can access the assigned inventory source.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: 'Field by which to sort the list. Acceptable values are: * `assignedInventorySourceId` (default) The default sorting order is ascending. To specify descending order for a field, a suffix " desc" should be added to the field name. Example: `assignedInventorySourceId desc`.'
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that has access to the assignment. If the parent inventory source group is advertiser-owned, the assignment cannot be accessed via a partner.
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+        description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: 'Allows filtering by assigned inventory source fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by the `OR` logical operator. * A restriction has the form of `{field} {operator} {value}`. * All fields must use the `EQUALS (=)` operator. Supported fields: * `assignedInventorySourceId` The length of this field should be no more than 500 characters. Reference our [filter `LIST` requests](/display-video/api/guides/how-tos/filters) guide for more information.'
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+        description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListAssignedInventorySources` method. If not specified, the first page of results will be returned.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssignedInventorySourcesResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.assignedInventorySources.list
+  /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources/{assignedInventorySourcesId}:
+    delete:
+      operationId: inventorySourceGroupsAssignedInventorySourcesDelete
+      summary: Deletes the assignment between an inventory source and an inventory source group.
+      description: Deletes the assignment between an inventory source and an inventory source group.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: inventorySourceGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the inventory source group to which this assignment is assigned.
+        required: true
+      - name: assignedInventorySourceId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the assigned inventory source to delete.
+        required: true
+      - name: partnerId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the partner that owns the parent inventory source group. Only this partner has write access to this assigned inventory source.
+      - name: advertiserId
+        in: query
+        schema:
+          type: string
+          format: int64
+        description: The ID of the advertiser that owns the parent inventory source group. The parent partner does not have access to this assigned inventory source.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.assignedInventorySources.delete
+  /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources:bulkEdit:
+    post:
+      operationId: inventorySourceGroupsAssignedInventorySourcesBulkEdit
+      summary: Bulk edits multiple assignments between inventory sources and a single inventory source group.
+      description: Bulk edits multiple assignments between inventory sources and a single inventory source group. The operation will delete the assigned inventory sources provided in BulkEditAssignedInventorySourcesRequest.deleted_assigned_inventory_sources and then create the assigned inventory sources provided in BulkEditAssignedInventorySourcesRequest.created_assigned_inventory_sources.
+      tags:
+      - Inventory Source Groups
+      parameters:
+      - name: inventorySourceGroupId
+        in: path
+        schema:
+          type: string
+          format: int64
+          pattern: ^[^/]+$
+        description: Required. The ID of the inventory source group to which the assignments are assigned.
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkEditAssignedInventorySourcesRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkEditAssignedInventorySourcesResponse'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/display-video
+      x-google-method-id: displayvideo.inventorySourceGroups.assignedInventorySources.bulkEdit
+components:
+  schemas:
+    ListInventorySourceGroupsResponse:
+      type: object
+      description: Response message for InventorySourceGroupService.ListInventorySourceGroups.
+      properties:
+        inventorySourceGroups:
+          type: array
+          description: The list of inventory source groups. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/InventorySourceGroup'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListInventorySourceGroups` method to retrieve the next page of results.
+    BulkEditAssignedInventorySourcesResponse:
+      type: object
+      description: Response message for AssignedInventorySourceService.BulkEdit.
+      properties:
+        assignedInventorySources:
+          type: array
+          description: The list of assigned inventory sources that have been successfully created. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/AssignedInventorySource'
+    AssignedInventorySource:
+      type: object
+      description: An assignment between a targetable inventory source and an inventory source group.
+      properties:
+        inventorySourceId:
+          type: string
+          description: Required. The ID of the inventory source entity being targeted.
+        assignedInventorySourceId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the assigned inventory source. The ID is only unique within a given inventory source group. It may be reused in other contexts.
+          readOnly: true
+        name:
+          type: string
+          description: Output only. The resource name of the assigned inventory source.
+          readOnly: true
+    BulkEditAssignedInventorySourcesRequest:
+      type: object
+      description: Request message for AssignedInventorySourceService.BulkEdit.
+      properties:
+        createdAssignedInventorySources:
+          type: array
+          description: The assigned inventory sources to create in bulk, specified as a list of AssignedInventorySources.
+          items:
+            $ref: '#/components/schemas/AssignedInventorySource'
+        partnerId:
+          type: string
+          format: int64
+          description: The ID of the partner that owns the inventory source group. Only this partner has write access to these assigned inventory sources.
+        advertiserId:
+          type: string
+          format: int64
+          description: The ID of the advertiser that owns the parent inventory source group. The parent partner does not have access to these assigned inventory sources.
+        deletedAssignedInventorySources:
+          type: array
+          description: The IDs of the assigned inventory sources to delete in bulk, specified as a list of assigned_inventory_source_ids.
+          items:
+            type: string
+            format: int64
+    InventorySourceGroup:
+      type: object
+      description: A collection of targetable inventory sources.
+      properties:
+        name:
+          type: string
+          description: Output only. The resource name of the inventory source group.
+          readOnly: true
+        inventorySourceGroupId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the inventory source group. Assigned by the system.
+          readOnly: true
+        displayName:
+          type: string
+          description: Required. The display name of the inventory source group. Must be UTF-8 encoded with a maximum size of 240 bytes.
+    Empty:
+      type: object
+      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
+    ListAssignedInventorySourcesResponse:
+      type: object
+      description: Response message for AssignedInventorySourceService.ListAssignedInventorySources.
+      properties:
+        assignedInventorySources:
+          type: array
+          description: The list of assigned inventory sources. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/AssignedInventorySource'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListAssignedInventorySources` method to retrieve the next page of results.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Google OAuth 2.0. Authorization and token endpoints read from https://accounts.google.com/.well-known/openid-configuration.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          refreshUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+            https://www.googleapis.com/auth/display-video-user-management: 'Private Service: https://www.googleapis.com/auth/display-video-user-management'
+            https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
+            https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices
