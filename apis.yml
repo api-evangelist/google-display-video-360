@@ -388,6 +388,8 @@ apis:
   - type: GettingStarted
     url: https://developers.google.com/display-video/api/guides/getting-started/overview
 common:
+- type: Website
+  url: https://www.google.com/
 - type: Overlay
   url: overlays/google-display-video-360-api-overlay.yaml
 - type: PostmanWorkspace
@@ -515,3 +517,5 @@ x-pointer-notes:
   Authentication: The previous docs pointer, /display-video/api/guides/authentication, returned
     404 on 2026-08-13 and was corrected to the live guide at
     /display-video/api/guides/how-tos/authorizing.
+x-parent: google
+x-relationship: product
