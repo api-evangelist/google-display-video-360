@@ -24,7 +24,7 @@ paths:
   /v4/combinedAudiences/{combinedAudiencesId}:
     get:
       operationId: combinedAudiencesGet
-      summary: Gets a combined audience.
+      summary: Gets a combined audience
       description: Gets a combined audience.
       tags:
       - Combined Audiences
@@ -63,7 +63,7 @@ paths:
   /v4/combinedAudiences:
     get:
       operationId: combinedAudiencesList
-      summary: Lists combined audiences.
+      summary: Lists combined audiences
       description: Lists combined audiences. The order is defined by the order_by parameter.
       tags:
       - Combined Audiences

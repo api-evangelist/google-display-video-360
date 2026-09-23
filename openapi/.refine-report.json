@@ -29,7 +29,8 @@
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "google-display-video-360-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Advertisers' spans 2 source specs (google-display-video-360-api-openapi.yml, openapi.yml): per-path servers applied"
+    "tag 'Advertisers' spans 2 source specs (google-display-video-360-api-openapi.yml, openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "google-display-video-360-advertisers-api-openapi.yml: previously refined output, superseded by openapi/_original/",

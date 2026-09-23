@@ -24,7 +24,7 @@ paths:
   /media/{mediaId}:
     post:
       operationId: mediaUpload
-      summary: Uploads media.
+      summary: Uploads media
       description: 'Uploads media. Upload is supported on the URI `/upload/media/{resource_name=**}?upload_type=media.` **Note**: Upload requests will not be successful without including `upload_type=media` query string.'
       tags:
       - Media
@@ -58,7 +58,7 @@ paths:
   /download/{downloadId}:
     get:
       operationId: mediaDownload
-      summary: Downloads media.
+      summary: Downloads media
       description: 'Downloads media. Download is supported on the URI `/download/{resource_name=**}?alt=media.` **Note**: Download requests will not be successful without including `alt=media` query string.'
       tags:
       - Media

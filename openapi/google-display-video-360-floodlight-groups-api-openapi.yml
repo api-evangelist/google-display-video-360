@@ -24,7 +24,7 @@ paths:
   /v4/floodlightGroups/{floodlightGroupId}:
     patch:
       operationId: floodlightGroupsPatch
-      summary: Updates an existing Floodlight group.
+      summary: Updates an existing Floodlight group
       description: Updates an existing Floodlight group. Returns the updated Floodlight group if successful.
       tags:
       - Floodlight Groups
@@ -68,7 +68,7 @@ paths:
   /v4/floodlightGroups/{floodlightGroupsId}:
     get:
       operationId: floodlightGroupsGet
-      summary: Gets a Floodlight group.
+      summary: Gets a Floodlight group
       description: Gets a Floodlight group.
       tags:
       - Floodlight Groups
@@ -101,7 +101,7 @@ paths:
   /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities/{floodlightActivitiesId}:
     get:
       operationId: floodlightGroupsFloodlightActivitiesGet
-      summary: Gets a Floodlight activity.
+      summary: Gets a Floodlight activity
       description: Gets a Floodlight activity.
       tags:
       - Floodlight Groups
@@ -142,7 +142,7 @@ paths:
   /v4/floodlightGroups/{floodlightGroupsId}/floodlightActivities:
     get:
       operationId: floodlightGroupsFloodlightActivitiesList
-      summary: Lists Floodlight activities in a Floodlight group.
+      summary: Lists Floodlight activities in a Floodlight group
       description: Lists Floodlight activities in a Floodlight group.
       tags:
       - Floodlight Groups
@@ -190,73 +190,6 @@ paths:
       x-google-method-id: displayvideo.floodlightGroups.floodlightActivities.list
 components:
   schemas:
-    LookbackWindow:
-      type: object
-      description: Specifies how many days into the past to look when determining whether to record a conversion.
-      properties:
-        clickDays:
-          type: integer
-          format: int32
-          description: Lookback window, in days, from the last time a given user clicked on one of your ads.
-        impressionDays:
-          type: integer
-          format: int32
-          description: Lookback window, in days, from the last time a given user viewed one of your ads.
-    ListFloodlightActivitiesResponse:
-      type: object
-      properties:
-        floodlightActivities:
-          type: array
-          description: The list of Floodlight activities. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/FloodlightActivity'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFloodlightActivities` method to retrieve the next page of results.
-    FloodlightActivity:
-      type: object
-      description: A single Floodlight activity.
-      properties:
-        name:
-          type: string
-          description: Output only. The resource name of the Floodlight activity.
-          readOnly: true
-        advertiserIds:
-          type: array
-          description: Output only. IDs of the advertisers that have access to the parent Floodlight group. Only advertisers under the provided partner ID will be listed in this field.
-          readOnly: true
-          items:
-            type: string
-            format: int64
-        servingStatus:
-          type: string
-          description: 'Optional. Whether the Floodlight activity is served. Allowed values — `FLOODLIGHT_ACTIVITY_SERVING_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `FLOODLIGHT_ACTIVITY_SERVING_STATUS_ENABLED`: Enabled.; `FLOODLIGHT_ACTIVITY_SERVING_STATUS_DISABLED`: Disabled.'
-          enum:
-          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_UNSPECIFIED
-          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_ENABLED
-          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_DISABLED
-        floodlightActivityId:
-          type: string
-          format: int64
-          description: Output only. The unique ID of the Floodlight activity. Assigned by the system.
-          readOnly: true
-        displayName:
-          type: string
-          description: Required. The display name of the Floodlight activity.
-        sslRequired:
-          type: boolean
-          description: Output only. Whether tags are required to be compliant.
-          readOnly: true
-        floodlightGroupId:
-          type: string
-          format: int64
-          description: Required. Immutable. The ID of the parent Floodlight group.
-        remarketingConfigs:
-          type: array
-          description: Output only. A list of configuration objects designating whether remarketing for this Floodlight Activity is enabled and available for a specifc advertiser. If enabled, this Floodlight Activity generates a remarketing user list that is able to be used in targeting under the advertiser.
-          readOnly: true
-          items:
-            $ref: '#/components/schemas/RemarketingConfig'
     RemarketingConfig:
       type: object
       description: Settings that control the whether remarketing is enabled for the given identified advertiser.
@@ -329,6 +262,62 @@ components:
           - VIEWABILITY_PERCENT_50
           - VIEWABILITY_PERCENT_75
           - VIEWABILITY_PERCENT_100
+    LookbackWindow:
+      type: object
+      description: Specifies how many days into the past to look when determining whether to record a conversion.
+      properties:
+        clickDays:
+          type: integer
+          format: int32
+          description: Lookback window, in days, from the last time a given user clicked on one of your ads.
+        impressionDays:
+          type: integer
+          format: int32
+          description: Lookback window, in days, from the last time a given user viewed one of your ads.
+    FloodlightActivity:
+      type: object
+      description: A single Floodlight activity.
+      properties:
+        name:
+          type: string
+          description: Output only. The resource name of the Floodlight activity.
+          readOnly: true
+        advertiserIds:
+          type: array
+          description: Output only. IDs of the advertisers that have access to the parent Floodlight group. Only advertisers under the provided partner ID will be listed in this field.
+          readOnly: true
+          items:
+            type: string
+            format: int64
+        servingStatus:
+          type: string
+          description: 'Optional. Whether the Floodlight activity is served. Allowed values — `FLOODLIGHT_ACTIVITY_SERVING_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `FLOODLIGHT_ACTIVITY_SERVING_STATUS_ENABLED`: Enabled.; `FLOODLIGHT_ACTIVITY_SERVING_STATUS_DISABLED`: Disabled.'
+          enum:
+          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_UNSPECIFIED
+          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_ENABLED
+          - FLOODLIGHT_ACTIVITY_SERVING_STATUS_DISABLED
+        floodlightActivityId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the Floodlight activity. Assigned by the system.
+          readOnly: true
+        displayName:
+          type: string
+          description: Required. The display name of the Floodlight activity.
+        sslRequired:
+          type: boolean
+          description: Output only. Whether tags are required to be compliant.
+          readOnly: true
+        floodlightGroupId:
+          type: string
+          format: int64
+          description: Required. Immutable. The ID of the parent Floodlight group.
+        remarketingConfigs:
+          type: array
+          description: Output only. A list of configuration objects designating whether remarketing for this Floodlight Activity is enabled and available for a specifc advertiser. If enabled, this Floodlight Activity generates a remarketing user list that is able to be used in targeting under the advertiser.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/RemarketingConfig'
     FloodlightGroup:
       type: object
       description: A single Floodlight group.
@@ -362,6 +351,17 @@ components:
           readOnly: true
         activeViewConfig:
           $ref: '#/components/schemas/ActiveViewVideoViewabilityMetricConfig'
+    ListFloodlightActivitiesResponse:
+      type: object
+      properties:
+        floodlightActivities:
+          type: array
+          description: The list of Floodlight activities. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/FloodlightActivity'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFloodlightActivities` method to retrieve the next page of results.
   securitySchemes:
     oauth2:
       type: oauth2

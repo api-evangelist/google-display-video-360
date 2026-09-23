@@ -24,7 +24,7 @@ paths:
   /v4/sdfuploadtasks/operations/{operationsId}:
     get:
       operationId: sdfuploadtasksOperationsGet
-      summary: Gets the latest state of an asynchronous SDF download task operation.
+      summary: Gets the latest state of an asynchronous SDF download task operation
       description: Gets the latest state of an asynchronous SDF download task operation. Clients should poll this method at intervals of 30 seconds.
       tags:
       - SDF Upload Tasks

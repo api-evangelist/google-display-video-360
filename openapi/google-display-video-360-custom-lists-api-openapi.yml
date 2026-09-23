@@ -24,7 +24,7 @@ paths:
   /v4/customLists/{customListsId}:
     get:
       operationId: customListsGet
-      summary: Gets a custom list.
+      summary: Gets a custom list
       description: Gets a custom list.
       tags:
       - Custom Lists
@@ -57,7 +57,7 @@ paths:
   /v4/customLists:
     get:
       operationId: customListsList
-      summary: Lists custom lists.
+      summary: Lists custom lists
       description: Lists custom lists. The order is defined by the order_by parameter.
       tags:
       - Custom Lists
@@ -102,6 +102,17 @@ paths:
       x-google-method-id: displayvideo.customLists.list
 components:
   schemas:
+    ListCustomListsResponse:
+      type: object
+      properties:
+        customLists:
+          type: array
+          description: The list of custom lists. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/CustomList'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomLists` method to retrieve the next page of results.
     CustomList:
       type: object
       description: Describes a custom list entity, such as a custom affinity or custom intent audience list.
@@ -119,17 +130,6 @@ components:
           type: string
           description: Output only. The display name of the custom list. .
           readOnly: true
-    ListCustomListsResponse:
-      type: object
-      properties:
-        customLists:
-          type: array
-          description: The list of custom lists. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/CustomList'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomLists` method to retrieve the next page of results.
   securitySchemes:
     oauth2:
       type: oauth2

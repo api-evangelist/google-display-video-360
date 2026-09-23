@@ -24,8 +24,8 @@ paths:
   /v4/users:
     get:
       operationId: usersList
-      summary: Lists users that are accessible to the current user.
-      description: Lists users that are accessible to the current user. If two users have user roles on the same partner or advertiser, they can access each other. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      summary: Lists users that are accessible to the current user
+      description: Lists users that are accessible to the current user. If two users have user roles on the same partner or advertiser, they can access each other. This method has unique authentication requirements. Read the prerequisites in our Managing Users guide before using this method. The "Try this method" feature does not work for this method.
       tags:
       - Users
       parameters:
@@ -63,8 +63,8 @@ paths:
       x-google-method-id: displayvideo.users.list
     post:
       operationId: usersCreate
-      summary: Creates a new user.
-      description: Creates a new user. Returns the newly created user if successful. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      summary: Creates a new user
+      description: Creates a new user. Returns the newly created user if successful. This method has unique authentication requirements. Read the prerequisites in our Managing Users guide before using this method. The "Try this method" feature does not work for this method.
       tags:
       - Users
       requestBody:
@@ -87,8 +87,8 @@ paths:
   /v4/users/{usersId}:bulkEditAssignedUserRoles:
     post:
       operationId: usersBulkEditAssignedUserRoles
-      summary: Bulk edits user roles for a user.
-      description: Bulk edits user roles for a user. The operation will delete the assigned user roles provided in BulkEditAssignedUserRolesRequest.deletedAssignedUserRoles and then assign the user roles provided in BulkEditAssignedUserRolesRequest.createdAssignedUserRoles. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      summary: Bulk edits user roles for a user
+      description: Bulk edits user roles for a user. The operation will delete the assigned user roles provided in BulkEditAssignedUserRolesRequest.deletedAssignedUserRoles and then assign the user roles provided in BulkEditAssignedUserRolesRequest.createdAssignedUserRoles. This method has unique authentication requirements. Read the prerequisites in our Managing Users guide before using this method. The "Try this method" feature does not work for this method.
       tags:
       - Users
       parameters:
@@ -120,8 +120,8 @@ paths:
   /v4/users/{usersId}:
     patch:
       operationId: usersPatch
-      summary: Updates an existing user.
-      description: Updates an existing user. Returns the updated user if successful. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      summary: Updates an existing user
+      description: Updates an existing user. Returns the updated user if successful. This method has unique authentication requirements. Read the prerequisites in our Managing Users guide before using this method. The "Try this method" feature does not work for this method.
       tags:
       - Users
       parameters:
@@ -158,8 +158,8 @@ paths:
       x-google-method-id: displayvideo.users.patch
     get:
       operationId: usersGet
-      summary: Gets a user.
-      description: Gets a user. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      summary: Gets a user
+      description: Gets a user. This method has unique authentication requirements. Read the prerequisites in our Managing Users guide before using this method. The "Try this method" feature does not work for this method.
       tags:
       - Users
       parameters:
@@ -184,8 +184,8 @@ paths:
       x-google-method-id: displayvideo.users.get
     delete:
       operationId: usersDelete
-      summary: Deletes a user.
-      description: Deletes a user. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
+      summary: Deletes a user
+      description: Deletes a user. This method has unique authentication requirements. Read the prerequisites in our Managing Users guide before using this method. The "Try this method" feature does not work for this method.
       tags:
       - Users
       parameters:
@@ -210,17 +210,17 @@ paths:
       x-google-method-id: displayvideo.users.delete
 components:
   schemas:
-    ListUsersResponse:
+    BulkEditAssignedUserRolesResponse:
       type: object
       properties:
-        users:
+        createdAssignedUserRoles:
           type: array
-          description: The list of users. This list will be absent if empty.
+          description: The list of assigned user roles that have been successfully created. This list will be absent if empty.
           items:
-            $ref: '#/components/schemas/User'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListUsers` method to retrieve the next page of results. This token will be absent if there are no more results to return.
+            $ref: '#/components/schemas/AssignedUserRole'
+    Empty:
+      type: object
+      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
     User:
       type: object
       description: A single user in Display & Video 360.
@@ -250,14 +250,17 @@ components:
         displayName:
           type: string
           description: Required. The display name of the user. Must be UTF-8 encoded with a maximum size of 240 bytes.
-    BulkEditAssignedUserRolesResponse:
+    ListUsersResponse:
       type: object
       properties:
-        createdAssignedUserRoles:
+        users:
           type: array
-          description: The list of assigned user roles that have been successfully created. This list will be absent if empty.
+          description: The list of users. This list will be absent if empty.
           items:
-            $ref: '#/components/schemas/AssignedUserRole'
+            $ref: '#/components/schemas/User'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListUsers` method to retrieve the next page of results. This token will be absent if there are no more results to return.
     BulkEditAssignedUserRolesRequest:
       type: object
       description: Request message for BulkEditAssignedUserRoles.
@@ -272,9 +275,6 @@ components:
           description: The assigned user roles to create in batch, specified as a list of AssignedUserRoles.
           items:
             $ref: '#/components/schemas/AssignedUserRole'
-    Empty:
-      type: object
-      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
     AssignedUserRole:
       type: object
       description: A single assigned user role, which defines a user's authorized interaction with a specified partner or advertiser.

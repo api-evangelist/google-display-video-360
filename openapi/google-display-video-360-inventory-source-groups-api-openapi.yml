@@ -24,7 +24,7 @@ paths:
   /v4/inventorySourceGroups/{inventorySourceGroupId}:
     patch:
       operationId: inventorySourceGroupsPatch
-      summary: Updates an inventory source group.
+      summary: Updates an inventory source group
       description: Updates an inventory source group. Returns the updated inventory source group if successful.
       tags:
       - Inventory Source Groups
@@ -74,7 +74,7 @@ paths:
   /v4/inventorySourceGroups:
     get:
       operationId: inventorySourceGroupsList
-      summary: Lists inventory source groups that are accessible to the current user.
+      summary: Lists inventory source groups that are accessible to the current user
       description: Lists inventory source groups that are accessible to the current user. The order is defined by the order_by parameter.
       tags:
       - Inventory Source Groups
@@ -125,7 +125,7 @@ paths:
       x-google-method-id: displayvideo.inventorySourceGroups.list
     post:
       operationId: inventorySourceGroupsCreate
-      summary: Creates a new inventory source group.
+      summary: Creates a new inventory source group
       description: Creates a new inventory source group. Returns the newly created inventory source group if successful.
       tags:
       - Inventory Source Groups
@@ -162,7 +162,7 @@ paths:
   /v4/inventorySourceGroups/{inventorySourceGroupsId}:
     get:
       operationId: inventorySourceGroupsGet
-      summary: Gets an inventory source group.
+      summary: Gets an inventory source group
       description: Gets an inventory source group.
       tags:
       - Inventory Source Groups
@@ -200,7 +200,7 @@ paths:
       x-google-method-id: displayvideo.inventorySourceGroups.get
     delete:
       operationId: inventorySourceGroupsDelete
-      summary: Deletes an inventory source group.
+      summary: Deletes an inventory source group
       description: Deletes an inventory source group.
       tags:
       - Inventory Source Groups
@@ -239,7 +239,7 @@ paths:
   /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources:
     post:
       operationId: inventorySourceGroupsAssignedInventorySourcesCreate
-      summary: Creates an assignment between an inventory source and an inventory source group.
+      summary: Creates an assignment between an inventory source and an inventory source group
       description: Creates an assignment between an inventory source and an inventory source group.
       tags:
       - Inventory Source Groups
@@ -283,7 +283,7 @@ paths:
       x-google-method-id: displayvideo.inventorySourceGroups.assignedInventorySources.create
     get:
       operationId: inventorySourceGroupsAssignedInventorySourcesList
-      summary: Lists inventory sources assigned to an inventory source group.
+      summary: Lists inventory sources assigned to an inventory source group
       description: Lists inventory sources assigned to an inventory source group.
       tags:
       - Inventory Source Groups
@@ -343,7 +343,7 @@ paths:
   /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources/{assignedInventorySourcesId}:
     delete:
       operationId: inventorySourceGroupsAssignedInventorySourcesDelete
-      summary: Deletes the assignment between an inventory source and an inventory source group.
+      summary: Deletes the assignment between an inventory source and an inventory source group
       description: Deletes the assignment between an inventory source and an inventory source group.
       tags:
       - Inventory Source Groups
@@ -390,7 +390,7 @@ paths:
   /v4/inventorySourceGroups/{inventorySourceGroupsId}/assignedInventorySources:bulkEdit:
     post:
       operationId: inventorySourceGroupsAssignedInventorySourcesBulkEdit
-      summary: Bulk edits multiple assignments between inventory sources and a single inventory source group.
+      summary: Bulk edits multiple assignments between inventory sources and a single…
       description: Bulk edits multiple assignments between inventory sources and a single inventory source group. The operation will delete the assigned inventory sources provided in BulkEditAssignedInventorySourcesRequest.deleted_assigned_inventory_sources and then create the assigned inventory sources provided in BulkEditAssignedInventorySourcesRequest.created_assigned_inventory_sources.
       tags:
       - Inventory Source Groups
@@ -422,6 +422,18 @@ paths:
       x-google-method-id: displayvideo.inventorySourceGroups.assignedInventorySources.bulkEdit
 components:
   schemas:
+    ListAssignedInventorySourcesResponse:
+      type: object
+      description: Response message for AssignedInventorySourceService.ListAssignedInventorySources.
+      properties:
+        assignedInventorySources:
+          type: array
+          description: The list of assigned inventory sources. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/AssignedInventorySource'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListAssignedInventorySources` method to retrieve the next page of results.
     ListInventorySourceGroupsResponse:
       type: object
       description: Response message for InventorySourceGroupService.ListInventorySourceGroups.
@@ -434,6 +446,48 @@ components:
         nextPageToken:
           type: string
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListInventorySourceGroups` method to retrieve the next page of results.
+    InventorySourceGroup:
+      type: object
+      description: A collection of targetable inventory sources.
+      properties:
+        name:
+          type: string
+          description: Output only. The resource name of the inventory source group.
+          readOnly: true
+        inventorySourceGroupId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the inventory source group. Assigned by the system.
+          readOnly: true
+        displayName:
+          type: string
+          description: Required. The display name of the inventory source group. Must be UTF-8 encoded with a maximum size of 240 bytes.
+    Empty:
+      type: object
+      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
+    BulkEditAssignedInventorySourcesRequest:
+      type: object
+      description: Request message for AssignedInventorySourceService.BulkEdit.
+      properties:
+        createdAssignedInventorySources:
+          type: array
+          description: The assigned inventory sources to create in bulk, specified as a list of AssignedInventorySources.
+          items:
+            $ref: '#/components/schemas/AssignedInventorySource'
+        partnerId:
+          type: string
+          format: int64
+          description: The ID of the partner that owns the inventory source group. Only this partner has write access to these assigned inventory sources.
+        advertiserId:
+          type: string
+          format: int64
+          description: The ID of the advertiser that owns the parent inventory source group. The parent partner does not have access to these assigned inventory sources.
+        deletedAssignedInventorySources:
+          type: array
+          description: The IDs of the assigned inventory sources to delete in bulk, specified as a list of assigned_inventory_source_ids.
+          items:
+            type: string
+            format: int64
     BulkEditAssignedInventorySourcesResponse:
       type: object
       description: Response message for AssignedInventorySourceService.BulkEdit.
@@ -459,60 +513,6 @@ components:
           type: string
           description: Output only. The resource name of the assigned inventory source.
           readOnly: true
-    BulkEditAssignedInventorySourcesRequest:
-      type: object
-      description: Request message for AssignedInventorySourceService.BulkEdit.
-      properties:
-        createdAssignedInventorySources:
-          type: array
-          description: The assigned inventory sources to create in bulk, specified as a list of AssignedInventorySources.
-          items:
-            $ref: '#/components/schemas/AssignedInventorySource'
-        partnerId:
-          type: string
-          format: int64
-          description: The ID of the partner that owns the inventory source group. Only this partner has write access to these assigned inventory sources.
-        advertiserId:
-          type: string
-          format: int64
-          description: The ID of the advertiser that owns the parent inventory source group. The parent partner does not have access to these assigned inventory sources.
-        deletedAssignedInventorySources:
-          type: array
-          description: The IDs of the assigned inventory sources to delete in bulk, specified as a list of assigned_inventory_source_ids.
-          items:
-            type: string
-            format: int64
-    InventorySourceGroup:
-      type: object
-      description: A collection of targetable inventory sources.
-      properties:
-        name:
-          type: string
-          description: Output only. The resource name of the inventory source group.
-          readOnly: true
-        inventorySourceGroupId:
-          type: string
-          format: int64
-          description: Output only. The unique ID of the inventory source group. Assigned by the system.
-          readOnly: true
-        displayName:
-          type: string
-          description: Required. The display name of the inventory source group. Must be UTF-8 encoded with a maximum size of 240 bytes.
-    Empty:
-      type: object
-      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
-    ListAssignedInventorySourcesResponse:
-      type: object
-      description: Response message for AssignedInventorySourceService.ListAssignedInventorySources.
-      properties:
-        assignedInventorySources:
-          type: array
-          description: The list of assigned inventory sources. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/AssignedInventorySource'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListAssignedInventorySources` method to retrieve the next page of results.
   securitySchemes:
     oauth2:
       type: oauth2

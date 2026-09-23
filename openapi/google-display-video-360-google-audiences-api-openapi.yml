@@ -24,7 +24,7 @@ paths:
   /v4/googleAudiences/{googleAudiencesId}:
     get:
       operationId: googleAudiencesGet
-      summary: Gets a Google audience.
+      summary: Gets a Google audience
       description: Gets a Google audience.
       tags:
       - Google Audiences
@@ -63,7 +63,7 @@ paths:
   /v4/googleAudiences:
     get:
       operationId: googleAudiencesList
-      summary: Lists Google audiences.
+      summary: Lists Google audiences
       description: Lists Google audiences. The order is defined by the order_by parameter.
       tags:
       - Google Audiences
