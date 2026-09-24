@@ -99,8 +99,6 @@ apis:
     url: json-schema/json-schema.yml
   - type: JSONLD
     url: json-ld/json-ld.yml
-  - type: GraphQL
-    url: graphql/google-display-video-360-graphql.md
 - aid: google-display-video-360:google-display-video-360-combined-audiences-api
   name: Google Display & Video 360 Combined Audiences API
   description: >-
