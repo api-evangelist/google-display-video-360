@@ -114,17 +114,6 @@ paths:
       x-google-method-id: displayvideo.combinedAudiences.list
 components:
   schemas:
-    ListCombinedAudiencesResponse:
-      type: object
-      properties:
-        combinedAudiences:
-          type: array
-          description: The list of combined audiences. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/CombinedAudience'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCombinedAudiences` method to retrieve the next page of results.
     CombinedAudience:
       type: object
       description: Describes a combined audience resource.
@@ -142,6 +131,17 @@ components:
           format: int64
           description: Output only. The unique ID of the combined audience. Assigned by the system.
           readOnly: true
+    ListCombinedAudiencesResponse:
+      type: object
+      properties:
+        combinedAudiences:
+          type: array
+          description: The list of combined audiences. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/CombinedAudience'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCombinedAudiences` method to retrieve the next page of results.
   securitySchemes:
     oauth2:
       type: oauth2

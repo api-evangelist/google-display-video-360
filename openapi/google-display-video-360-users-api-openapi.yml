@@ -210,46 +210,6 @@ paths:
       x-google-method-id: displayvideo.users.delete
 components:
   schemas:
-    BulkEditAssignedUserRolesResponse:
-      type: object
-      properties:
-        createdAssignedUserRoles:
-          type: array
-          description: The list of assigned user roles that have been successfully created. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/AssignedUserRole'
-    Empty:
-      type: object
-      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
-    User:
-      type: object
-      description: A single user in Display & Video 360.
-      properties:
-        userId:
-          type: string
-          format: int64
-          description: Output only. The unique ID of the user. Assigned by the system.
-          readOnly: true
-        email:
-          type: string
-          description: Required. Immutable. The email address used to identify the user.
-        name:
-          type: string
-          description: Output only. The resource name of the user.
-          readOnly: true
-        assignedUserRoles:
-          type: array
-          description: The assigned user roles. Required in CreateUser. Output only in UpdateUser. Can only be updated through BulkEditAssignedUserRoles.
-          items:
-            $ref: '#/components/schemas/AssignedUserRole'
-        lastLoginTime:
-          type: string
-          format: google-datetime
-          description: Output only. The timestamp when the user last logged in DV360 UI.
-          readOnly: true
-        displayName:
-          type: string
-          description: Required. The display name of the user. Must be UTF-8 encoded with a maximum size of 240 bytes.
     ListUsersResponse:
       type: object
       properties:
@@ -307,6 +267,46 @@ components:
           type: string
           format: int64
           description: The ID of the advertiser that the assigend user role applies to.
+    User:
+      type: object
+      description: A single user in Display & Video 360.
+      properties:
+        userId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the user. Assigned by the system.
+          readOnly: true
+        email:
+          type: string
+          description: Required. Immutable. The email address used to identify the user.
+        name:
+          type: string
+          description: Output only. The resource name of the user.
+          readOnly: true
+        assignedUserRoles:
+          type: array
+          description: The assigned user roles. Required in CreateUser. Output only in UpdateUser. Can only be updated through BulkEditAssignedUserRoles.
+          items:
+            $ref: '#/components/schemas/AssignedUserRole'
+        lastLoginTime:
+          type: string
+          format: google-datetime
+          description: Output only. The timestamp when the user last logged in DV360 UI.
+          readOnly: true
+        displayName:
+          type: string
+          description: Required. The display name of the user. Must be UTF-8 encoded with a maximum size of 240 bytes.
+    BulkEditAssignedUserRolesResponse:
+      type: object
+      properties:
+        createdAssignedUserRoles:
+          type: array
+          description: The list of assigned user roles that have been successfully created. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/AssignedUserRole'
+    Empty:
+      type: object
+      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
   securitySchemes:
     oauth2:
       type: oauth2

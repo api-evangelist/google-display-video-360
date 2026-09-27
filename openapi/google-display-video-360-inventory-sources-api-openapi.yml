@@ -233,18 +233,28 @@ paths:
       x-google-method-id: displayvideo.inventorySources.get
 components:
   schemas:
-    TimeRange:
+    RateDetails:
       type: object
-      description: A time range.
+      description: The rate related settings of the inventory source.
       properties:
-        startTime:
+        inventorySourceRateType:
           type: string
-          format: google-datetime
-          description: Required. The lower bound of a time range, inclusive.
-        endTime:
+          description: 'The rate type. Acceptable values are `INVENTORY_SOURCE_RATE_TYPE_CPM_FIXED`, `INVENTORY_SOURCE_RATE_TYPE_CPM_FLOOR`, and `INVENTORY_SOURCE_RATE_TYPE_CPD`. Allowed values — `INVENTORY_SOURCE_RATE_TYPE_UNSPECIFIED`: The rate type is not specified or is unknown in this version.; `INVENTORY_SOURCE_RATE_TYPE_CPM_FIXED`: The rate type is CPM (Fixed).; `INVENTORY_SOURCE_RATE_TYPE_CPM_FLOOR`: The rate type is CPM (Floor).; `INVENTORY_SOURCE_RATE_TYPE_CPD`: The rate type is Cost per Day.; `INVENTORY_SOURCE_RATE_TYPE_CPH`: The rate type is Cost per Hour.; `INVENTORY_SOURCE_RATE_TYPE_FLAT`: The rate type is Flat.'
+          enum:
+          - INVENTORY_SOURCE_RATE_TYPE_UNSPECIFIED
+          - INVENTORY_SOURCE_RATE_TYPE_CPM_FIXED
+          - INVENTORY_SOURCE_RATE_TYPE_CPM_FLOOR
+          - INVENTORY_SOURCE_RATE_TYPE_CPD
+          - INVENTORY_SOURCE_RATE_TYPE_CPH
+          - INVENTORY_SOURCE_RATE_TYPE_FLAT
+        unitsPurchased:
           type: string
-          format: google-datetime
-          description: Required. The upper bound of a time range, inclusive.
+          format: int64
+          description: Required for guaranteed inventory sources. The number of impressions guaranteed by the seller.
+        minimumSpend:
+          $ref: '#/components/schemas/Money'
+        rate:
+          $ref: '#/components/schemas/Money'
     InventorySource:
       type: object
       description: An inventory source.
@@ -432,73 +442,6 @@ components:
           items:
             type: string
             format: int64
-    InventorySourceVideoCreativeConfig:
-      type: object
-      description: The configuration for video creatives.
-      properties:
-        duration:
-          type: string
-          format: google-duration
-          description: The duration requirements for the video creatives that can be assigned to the inventory source.
-    RateDetails:
-      type: object
-      description: The rate related settings of the inventory source.
-      properties:
-        inventorySourceRateType:
-          type: string
-          description: 'The rate type. Acceptable values are `INVENTORY_SOURCE_RATE_TYPE_CPM_FIXED`, `INVENTORY_SOURCE_RATE_TYPE_CPM_FLOOR`, and `INVENTORY_SOURCE_RATE_TYPE_CPD`. Allowed values — `INVENTORY_SOURCE_RATE_TYPE_UNSPECIFIED`: The rate type is not specified or is unknown in this version.; `INVENTORY_SOURCE_RATE_TYPE_CPM_FIXED`: The rate type is CPM (Fixed).; `INVENTORY_SOURCE_RATE_TYPE_CPM_FLOOR`: The rate type is CPM (Floor).; `INVENTORY_SOURCE_RATE_TYPE_CPD`: The rate type is Cost per Day.; `INVENTORY_SOURCE_RATE_TYPE_CPH`: The rate type is Cost per Hour.; `INVENTORY_SOURCE_RATE_TYPE_FLAT`: The rate type is Flat.'
-          enum:
-          - INVENTORY_SOURCE_RATE_TYPE_UNSPECIFIED
-          - INVENTORY_SOURCE_RATE_TYPE_CPM_FIXED
-          - INVENTORY_SOURCE_RATE_TYPE_CPM_FLOOR
-          - INVENTORY_SOURCE_RATE_TYPE_CPD
-          - INVENTORY_SOURCE_RATE_TYPE_CPH
-          - INVENTORY_SOURCE_RATE_TYPE_FLAT
-        unitsPurchased:
-          type: string
-          format: int64
-          description: Required for guaranteed inventory sources. The number of impressions guaranteed by the seller.
-        minimumSpend:
-          $ref: '#/components/schemas/Money'
-        rate:
-          $ref: '#/components/schemas/Money'
-    InventorySourceAccessors:
-      type: object
-      description: The partner or advertisers with access to the inventory source.
-      properties:
-        advertisers:
-          $ref: '#/components/schemas/InventorySourceAccessorsAdvertiserAccessors'
-        partner:
-          $ref: '#/components/schemas/InventorySourceAccessorsPartnerAccessor'
-    InventorySourceAccessorsAdvertiserAccessors:
-      type: object
-      description: The advertisers with access to the inventory source.
-      properties:
-        advertiserIds:
-          type: array
-          description: The IDs of the advertisers.
-          items:
-            type: string
-            format: int64
-    EditInventorySourceReadWriteAccessorsRequest:
-      type: object
-      description: Request message for InventorySourceService.EditInventorySourceReadWriteAccessors.
-      properties:
-        assignPartner:
-          type: boolean
-          description: Set the partner context as read/write accessor of the inventory source. This will remove all other current read/write advertiser accessors.
-        advertisersUpdate:
-          $ref: '#/components/schemas/EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate'
-        partnerId:
-          type: string
-          format: int64
-          description: Required. The partner context by which the accessors change is being made.
-    InventorySourceDisplayCreativeConfig:
-      type: object
-      description: The configuration for display creatives.
-      properties:
-        creativeSize:
-          $ref: '#/components/schemas/Dimensions'
     InventorySourceStatus:
       type: object
       description: The status related settings of the inventory source.
@@ -539,34 +482,18 @@ components:
           - INVENTORY_SOURCE_CONFIG_STATUS_PENDING
           - INVENTORY_SOURCE_CONFIG_STATUS_COMPLETED
           readOnly: true
-    EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate:
+    TimeRange:
       type: object
-      description: Update to the list of advertisers with read/write access to the inventory source.
+      description: A time range.
       properties:
-        addedAdvertisers:
-          type: array
-          description: The advertisers to add.
-          items:
-            type: string
-            format: int64
-        removedAdvertisers:
-          type: array
-          description: The advertisers to remove.
-          items:
-            type: string
-            format: int64
-    Dimensions:
-      type: object
-      description: Dimensions.
-      properties:
-        widthPixels:
-          type: integer
-          format: int32
-          description: The width in pixels.
-        heightPixels:
-          type: integer
-          format: int32
-          description: The height in pixels.
+        startTime:
+          type: string
+          format: google-datetime
+          description: Required. The lower bound of a time range, inclusive.
+        endTime:
+          type: string
+          format: google-datetime
+          description: Required. The upper bound of a time range, inclusive.
     CreativeConfig:
       type: object
       description: Creative requirements configuration for the inventory source.
@@ -610,6 +537,14 @@ components:
           type: integer
           format: int32
           description: Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+    InventorySourceAccessorsPartnerAccessor:
+      type: object
+      description: The partner with access to the inventory source.
+      properties:
+        partnerId:
+          type: string
+          format: int64
+          description: The ID of the partner.
     ListInventorySourcesResponse:
       type: object
       properties:
@@ -621,14 +556,79 @@ components:
           description: The list of inventory sources. This list will be absent if empty.
           items:
             $ref: '#/components/schemas/InventorySource'
-    InventorySourceAccessorsPartnerAccessor:
+    InventorySourceVideoCreativeConfig:
       type: object
-      description: The partner with access to the inventory source.
+      description: The configuration for video creatives.
       properties:
+        duration:
+          type: string
+          format: google-duration
+          description: The duration requirements for the video creatives that can be assigned to the inventory source.
+    InventorySourceDisplayCreativeConfig:
+      type: object
+      description: The configuration for display creatives.
+      properties:
+        creativeSize:
+          $ref: '#/components/schemas/Dimensions'
+    InventorySourceAccessors:
+      type: object
+      description: The partner or advertisers with access to the inventory source.
+      properties:
+        advertisers:
+          $ref: '#/components/schemas/InventorySourceAccessorsAdvertiserAccessors'
+        partner:
+          $ref: '#/components/schemas/InventorySourceAccessorsPartnerAccessor'
+    Dimensions:
+      type: object
+      description: Dimensions.
+      properties:
+        widthPixels:
+          type: integer
+          format: int32
+          description: The width in pixels.
+        heightPixels:
+          type: integer
+          format: int32
+          description: The height in pixels.
+    InventorySourceAccessorsAdvertiserAccessors:
+      type: object
+      description: The advertisers with access to the inventory source.
+      properties:
+        advertiserIds:
+          type: array
+          description: The IDs of the advertisers.
+          items:
+            type: string
+            format: int64
+    EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate:
+      type: object
+      description: Update to the list of advertisers with read/write access to the inventory source.
+      properties:
+        addedAdvertisers:
+          type: array
+          description: The advertisers to add.
+          items:
+            type: string
+            format: int64
+        removedAdvertisers:
+          type: array
+          description: The advertisers to remove.
+          items:
+            type: string
+            format: int64
+    EditInventorySourceReadWriteAccessorsRequest:
+      type: object
+      description: Request message for InventorySourceService.EditInventorySourceReadWriteAccessors.
+      properties:
+        assignPartner:
+          type: boolean
+          description: Set the partner context as read/write accessor of the inventory source. This will remove all other current read/write advertiser accessors.
+        advertisersUpdate:
+          $ref: '#/components/schemas/EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate'
         partnerId:
           type: string
           format: int64
-          description: The ID of the partner.
+          description: Required. The partner context by which the accessors change is being made.
   securitySchemes:
     oauth2:
       type: oauth2

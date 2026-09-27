@@ -221,6 +221,61 @@ paths:
       x-google-method-id: displayvideo.firstPartyAndPartnerAudiences.get
 components:
   schemas:
+    ContactInfo:
+      type: object
+      description: Contact information defining a Customer Match audience member.
+      properties:
+        hashedFirstName:
+          type: string
+          description: 'Optional. SHA256 hashed first name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_last_name * zip_codes'
+        hashedEmails:
+          type: array
+          description: Optional. A list of SHA256 hashed email of the member. Before hashing, remove all whitespace and make sure the string is all lowercase.
+          items:
+            type: string
+        hashedPhoneNumbers:
+          type: array
+          description: Optional. A list of SHA256 hashed phone numbers of the member. Before hashing, all phone numbers must be formatted using the [E.164 format](https://en.wikipedia.org/wiki/E.164) and include the country calling code.
+          items:
+            type: string
+        countryCode:
+          type: string
+          description: 'Optional. Country code of the member. Must also be set with the following fields: * hashed_first_name * hashed_last_name * zip_codes'
+        hashedLastName:
+          type: string
+          description: 'Optional. SHA256 hashed last name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_first_name * zip_codes'
+        zipCodes:
+          type: array
+          description: 'Optional. A list of zip codes of the member. Must also be set with the following fields: * country_code * hashed_first_name * hashed_last_name'
+          items:
+            type: string
+    ContactInfoList:
+      type: object
+      description: Wrapper message for a list of contact information defining Customer Match audience members.
+      properties:
+        contactInfos:
+          type: array
+          description: Optional. A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
+          items:
+            $ref: '#/components/schemas/ContactInfo'
+        consent:
+          $ref: '#/components/schemas/Consent'
+    EditCustomerMatchMembersRequest:
+      type: object
+      description: Request message for FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
+      properties:
+        removedContactInfoList:
+          $ref: '#/components/schemas/ContactInfoList'
+        addedMobileDeviceIdList:
+          $ref: '#/components/schemas/MobileDeviceIdList'
+        addedContactInfoList:
+          $ref: '#/components/schemas/ContactInfoList'
+        advertiserId:
+          type: string
+          format: int64
+          description: Required. The ID of the owner advertiser of the updated Customer Match FirstAndThirdPartyAudience.
+        removedMobileDeviceIdList:
+          $ref: '#/components/schemas/MobileDeviceIdList'
     FirstPartyAndPartnerAudience:
       type: object
       description: Describes a first or partner audience list used for targeting. First party audiences are created via usage of client data. Partner audiences are provided by Third Party data providers and can only be licensed to customers.
@@ -321,34 +376,6 @@ components:
           readOnly: true
         mobileDeviceIdList:
           $ref: '#/components/schemas/MobileDeviceIdList'
-    ContactInfo:
-      type: object
-      description: Contact information defining a Customer Match audience member.
-      properties:
-        hashedFirstName:
-          type: string
-          description: 'Optional. SHA256 hashed first name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_last_name * zip_codes'
-        hashedEmails:
-          type: array
-          description: Optional. A list of SHA256 hashed email of the member. Before hashing, remove all whitespace and make sure the string is all lowercase.
-          items:
-            type: string
-        hashedPhoneNumbers:
-          type: array
-          description: Optional. A list of SHA256 hashed phone numbers of the member. Before hashing, all phone numbers must be formatted using the [E.164 format](https://en.wikipedia.org/wiki/E.164) and include the country calling code.
-          items:
-            type: string
-        countryCode:
-          type: string
-          description: 'Optional. Country code of the member. Must also be set with the following fields: * hashed_first_name * hashed_last_name * zip_codes'
-        hashedLastName:
-          type: string
-          description: 'Optional. SHA256 hashed last name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_first_name * zip_codes'
-        zipCodes:
-          type: array
-          description: 'Optional. A list of zip codes of the member. Must also be set with the following fields: * country_code * hashed_first_name * hashed_last_name'
-          items:
-            type: string
     MobileDeviceIdList:
       type: object
       description: Wrapper message for a list of mobile device IDs defining Customer Match audience members.
@@ -360,25 +387,17 @@ components:
             type: string
         consent:
           $ref: '#/components/schemas/Consent'
-    ContactInfoList:
+    ListFirstPartyAndPartnerAudiencesResponse:
       type: object
-      description: Wrapper message for a list of contact information defining Customer Match audience members.
       properties:
-        contactInfos:
+        firstPartyAndPartnerAudiences:
           type: array
-          description: Optional. A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
+          description: The list of first party and partner audiences. Audience size properties will not be included. This list will be absent if empty.
           items:
-            $ref: '#/components/schemas/ContactInfo'
-        consent:
-          $ref: '#/components/schemas/Consent'
-    EditCustomerMatchMembersResponse:
-      type: object
-      description: The response of FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
-      properties:
-        firstPartyAndPartnerAudienceId:
+            $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
+        nextPageToken:
           type: string
-          format: int64
-          description: Required. The ID of the updated Customer Match FirstPartyAndPartnerAudience.
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFirstPartyAndPartnerAudiences` method to retrieve the next page of results.
     Consent:
       type: object
       description: User consent status.
@@ -397,33 +416,14 @@ components:
           - CONSENT_STATUS_UNSPECIFIED
           - CONSENT_STATUS_GRANTED
           - CONSENT_STATUS_DENIED
-    ListFirstPartyAndPartnerAudiencesResponse:
+    EditCustomerMatchMembersResponse:
       type: object
+      description: The response of FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
       properties:
-        firstPartyAndPartnerAudiences:
-          type: array
-          description: The list of first party and partner audiences. Audience size properties will not be included. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/FirstPartyAndPartnerAudience'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFirstPartyAndPartnerAudiences` method to retrieve the next page of results.
-    EditCustomerMatchMembersRequest:
-      type: object
-      description: Request message for FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
-      properties:
-        removedContactInfoList:
-          $ref: '#/components/schemas/ContactInfoList'
-        addedMobileDeviceIdList:
-          $ref: '#/components/schemas/MobileDeviceIdList'
-        addedContactInfoList:
-          $ref: '#/components/schemas/ContactInfoList'
-        advertiserId:
+        firstPartyAndPartnerAudienceId:
           type: string
           format: int64
-          description: Required. The ID of the owner advertiser of the updated Customer Match FirstAndThirdPartyAudience.
-        removedMobileDeviceIdList:
-          $ref: '#/components/schemas/MobileDeviceIdList'
+          description: Required. The ID of the updated Customer Match FirstPartyAndPartnerAudience.
   securitySchemes:
     oauth2:
       type: oauth2
