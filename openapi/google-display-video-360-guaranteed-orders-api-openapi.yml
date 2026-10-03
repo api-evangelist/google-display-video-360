@@ -230,29 +230,6 @@ paths:
       x-google-method-id: displayvideo.guaranteedOrders.patch
 components:
   schemas:
-    EditGuaranteedOrderReadAccessorsRequest:
-      type: object
-      description: Request message for GuaranteedOrderService.EditGuaranteedOrderReadAccessors.
-      properties:
-        partnerId:
-          type: string
-          format: int64
-          description: Required. The partner context in which the change is being made.
-        readAccessInherited:
-          type: boolean
-          description: Whether to give all advertisers of the read/write accessor partner read access to the guaranteed order. Only applicable if read_write_partner_id is set in the guaranteed order.
-        addedAdvertisers:
-          type: array
-          description: The advertisers to add as read accessors to the guaranteed order.
-          items:
-            type: string
-            format: int64
-        removedAdvertisers:
-          type: array
-          description: The advertisers to remove as read accessors to the guaranteed order.
-          items:
-            type: string
-            format: int64
     EditGuaranteedOrderReadAccessorsResponse:
       type: object
       properties:
@@ -265,17 +242,6 @@ components:
           items:
             type: string
             format: int64
-    ListGuaranteedOrdersResponse:
-      type: object
-      properties:
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListGuaranteedOrders` method to retrieve the next page of results.
-        guaranteedOrders:
-          type: array
-          description: The list of guaranteed orders. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/GuaranteedOrder'
     GuaranteedOrderStatus:
       type: object
       description: The status settings of the guaranteed order.
@@ -450,6 +416,40 @@ components:
           format: int64
           description: Output only. The ID of default advertiser of the guaranteed order. The default advertiser is either the read_write_advertiser_id or, if that is not set, the first advertiser listed in read_advertiser_ids. Otherwise, there is no default advertiser.
           readOnly: true
+    EditGuaranteedOrderReadAccessorsRequest:
+      type: object
+      description: Request message for GuaranteedOrderService.EditGuaranteedOrderReadAccessors.
+      properties:
+        partnerId:
+          type: string
+          format: int64
+          description: Required. The partner context in which the change is being made.
+        readAccessInherited:
+          type: boolean
+          description: Whether to give all advertisers of the read/write accessor partner read access to the guaranteed order. Only applicable if read_write_partner_id is set in the guaranteed order.
+        addedAdvertisers:
+          type: array
+          description: The advertisers to add as read accessors to the guaranteed order.
+          items:
+            type: string
+            format: int64
+        removedAdvertisers:
+          type: array
+          description: The advertisers to remove as read accessors to the guaranteed order.
+          items:
+            type: string
+            format: int64
+    ListGuaranteedOrdersResponse:
+      type: object
+      properties:
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListGuaranteedOrders` method to retrieve the next page of results.
+        guaranteedOrders:
+          type: array
+          description: The list of guaranteed orders. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/GuaranteedOrder'
   securitySchemes:
     oauth2:
       type: oauth2

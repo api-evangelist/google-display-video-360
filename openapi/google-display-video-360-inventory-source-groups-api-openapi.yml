@@ -434,6 +434,9 @@ components:
         nextPageToken:
           type: string
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListInventorySourceGroups` method to retrieve the next page of results.
+    Empty:
+      type: object
+      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
     BulkEditAssignedInventorySourcesRequest:
       type: object
       description: Request message for AssignedInventorySourceService.BulkEdit.
@@ -457,6 +460,15 @@ components:
           items:
             type: string
             format: int64
+    BulkEditAssignedInventorySourcesResponse:
+      type: object
+      description: Response message for AssignedInventorySourceService.BulkEdit.
+      properties:
+        assignedInventorySources:
+          type: array
+          description: The list of assigned inventory sources that have been successfully created. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/AssignedInventorySource'
     AssignedInventorySource:
       type: object
       description: An assignment between a targetable inventory source and an inventory source group.
@@ -473,6 +485,18 @@ components:
           type: string
           description: Output only. The resource name of the assigned inventory source.
           readOnly: true
+    ListAssignedInventorySourcesResponse:
+      type: object
+      description: Response message for AssignedInventorySourceService.ListAssignedInventorySources.
+      properties:
+        assignedInventorySources:
+          type: array
+          description: The list of assigned inventory sources. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/AssignedInventorySource'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListAssignedInventorySources` method to retrieve the next page of results.
     InventorySourceGroup:
       type: object
       description: A collection of targetable inventory sources.
@@ -489,30 +513,6 @@ components:
         displayName:
           type: string
           description: Required. The display name of the inventory source group. Must be UTF-8 encoded with a maximum size of 240 bytes.
-    ListAssignedInventorySourcesResponse:
-      type: object
-      description: Response message for AssignedInventorySourceService.ListAssignedInventorySources.
-      properties:
-        assignedInventorySources:
-          type: array
-          description: The list of assigned inventory sources. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/AssignedInventorySource'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListAssignedInventorySources` method to retrieve the next page of results.
-    Empty:
-      type: object
-      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }'
-    BulkEditAssignedInventorySourcesResponse:
-      type: object
-      description: Response message for AssignedInventorySourceService.BulkEdit.
-      properties:
-        assignedInventorySources:
-          type: array
-          description: The list of assigned inventory sources that have been successfully created. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/AssignedInventorySource'
   securitySchemes:
     oauth2:
       type: oauth2

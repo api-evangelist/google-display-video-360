@@ -233,6 +233,14 @@ paths:
       x-google-method-id: displayvideo.inventorySources.get
 components:
   schemas:
+    InventorySourceAccessors:
+      type: object
+      description: The partner or advertisers with access to the inventory source.
+      properties:
+        advertisers:
+          $ref: '#/components/schemas/InventorySourceAccessorsAdvertiserAccessors'
+        partner:
+          $ref: '#/components/schemas/InventorySourceAccessorsPartnerAccessor'
     RateDetails:
       type: object
       description: The rate related settings of the inventory source.
@@ -255,6 +263,78 @@ components:
           $ref: '#/components/schemas/Money'
         rate:
           $ref: '#/components/schemas/Money'
+    Dimensions:
+      type: object
+      description: Dimensions.
+      properties:
+        widthPixels:
+          type: integer
+          format: int32
+          description: The width in pixels.
+        heightPixels:
+          type: integer
+          format: int32
+          description: The height in pixels.
+    ListInventorySourcesResponse:
+      type: object
+      properties:
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListInventorySources` method to retrieve the next page of results.
+        inventorySources:
+          type: array
+          description: The list of inventory sources. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/InventorySource'
+    EditInventorySourceReadWriteAccessorsRequest:
+      type: object
+      description: Request message for InventorySourceService.EditInventorySourceReadWriteAccessors.
+      properties:
+        assignPartner:
+          type: boolean
+          description: Set the partner context as read/write accessor of the inventory source. This will remove all other current read/write advertiser accessors.
+        advertisersUpdate:
+          $ref: '#/components/schemas/EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate'
+        partnerId:
+          type: string
+          format: int64
+          description: Required. The partner context by which the accessors change is being made.
+    CreativeConfig:
+      type: object
+      description: Creative requirements configuration for the inventory source.
+      properties:
+        displayCreativeConfig:
+          $ref: '#/components/schemas/InventorySourceDisplayCreativeConfig'
+        videoCreativeConfig:
+          $ref: '#/components/schemas/InventorySourceVideoCreativeConfig'
+        creativeType:
+          type: string
+          description: 'The type of creative that can be assigned to the inventory source. Only the following types are supported: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_VIDEO` Allowed values — `CREATIVE_TYPE_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CREATIVE_TYPE_STANDARD`: Standard display creative. Create and update methods are supported for this creative type if the hosting_source is one of the following: * `HOSTING_SOURCE_HOSTED` * `HOSTING_SOURCE_THIRD_PARTY`; `CREATIVE_TYPE_EXPANDABLE`: Expandable creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_THIRD_PARTY`; `CREATIVE_TYPE_VIDEO`: Video creative. Create and update methods are supported for this creative type if the hosting_source is one of the following: * `HOSTING_SOURCE_HOSTED` * `HOSTING_SOURCE_THIRD_PARTY`; `CREATIVE_TYPE_NATIVE`: Native creative rendered by publishers with assets from advertiser. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_TEMPLATED_APP_INSTALL`: Templated app install mobile creative (banner). Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_SITE_SQUARE`: Square native creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_TEMPLATED_APP_INSTALL_INTERSTITIAL`: Interstitial creative including both display and video. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_LIGHTBOX`: Responsive and expandable Lightbox creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_APP_INSTALL`: Native app install creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_APP_INSTALL_SQUARE`: Square native app install creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_AUDIO`: Audio creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_PUBLISHER_HOSTED`: Publisher hosted creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_VIDEO`: Native video creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_TEMPLATED_APP_INSTALL_VIDEO`: Templated app install mobile video creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_ASSET_BASED_CREATIVE`: Asset-based creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`.'
+          enum:
+          - CREATIVE_TYPE_UNSPECIFIED
+          - CREATIVE_TYPE_STANDARD
+          - CREATIVE_TYPE_EXPANDABLE
+          - CREATIVE_TYPE_VIDEO
+          - CREATIVE_TYPE_NATIVE
+          - CREATIVE_TYPE_TEMPLATED_APP_INSTALL
+          - CREATIVE_TYPE_NATIVE_SITE_SQUARE
+          - CREATIVE_TYPE_TEMPLATED_APP_INSTALL_INTERSTITIAL
+          - CREATIVE_TYPE_LIGHTBOX
+          - CREATIVE_TYPE_NATIVE_APP_INSTALL
+          - CREATIVE_TYPE_NATIVE_APP_INSTALL_SQUARE
+          - CREATIVE_TYPE_AUDIO
+          - CREATIVE_TYPE_PUBLISHER_HOSTED
+          - CREATIVE_TYPE_NATIVE_VIDEO
+          - CREATIVE_TYPE_TEMPLATED_APP_INSTALL_VIDEO
+          - CREATIVE_TYPE_ASSET_BASED_CREATIVE
+    InventorySourceVideoCreativeConfig:
+      type: object
+      description: The configuration for video creatives.
+      properties:
+        duration:
+          type: string
+          format: google-duration
+          description: The duration requirements for the video creatives that can be assigned to the inventory source.
     InventorySource:
       type: object
       description: An inventory source.
@@ -442,6 +522,35 @@ components:
           items:
             type: string
             format: int64
+    InventorySourceDisplayCreativeConfig:
+      type: object
+      description: The configuration for display creatives.
+      properties:
+        creativeSize:
+          $ref: '#/components/schemas/Dimensions'
+    InventorySourceAccessorsPartnerAccessor:
+      type: object
+      description: The partner with access to the inventory source.
+      properties:
+        partnerId:
+          type: string
+          format: int64
+          description: The ID of the partner.
+    Money:
+      type: object
+      description: Represents an amount of money with its currency type.
+      properties:
+        currencyCode:
+          type: string
+          description: The three-letter currency code defined in ISO 4217.
+        units:
+          type: string
+          format: int64
+          description: The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+        nanos:
+          type: integer
+          format: int32
+          description: Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
     InventorySourceStatus:
       type: object
       description: The status related settings of the inventory source.
@@ -482,124 +591,6 @@ components:
           - INVENTORY_SOURCE_CONFIG_STATUS_PENDING
           - INVENTORY_SOURCE_CONFIG_STATUS_COMPLETED
           readOnly: true
-    TimeRange:
-      type: object
-      description: A time range.
-      properties:
-        startTime:
-          type: string
-          format: google-datetime
-          description: Required. The lower bound of a time range, inclusive.
-        endTime:
-          type: string
-          format: google-datetime
-          description: Required. The upper bound of a time range, inclusive.
-    CreativeConfig:
-      type: object
-      description: Creative requirements configuration for the inventory source.
-      properties:
-        displayCreativeConfig:
-          $ref: '#/components/schemas/InventorySourceDisplayCreativeConfig'
-        videoCreativeConfig:
-          $ref: '#/components/schemas/InventorySourceVideoCreativeConfig'
-        creativeType:
-          type: string
-          description: 'The type of creative that can be assigned to the inventory source. Only the following types are supported: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_VIDEO` Allowed values — `CREATIVE_TYPE_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CREATIVE_TYPE_STANDARD`: Standard display creative. Create and update methods are supported for this creative type if the hosting_source is one of the following: * `HOSTING_SOURCE_HOSTED` * `HOSTING_SOURCE_THIRD_PARTY`; `CREATIVE_TYPE_EXPANDABLE`: Expandable creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_THIRD_PARTY`; `CREATIVE_TYPE_VIDEO`: Video creative. Create and update methods are supported for this creative type if the hosting_source is one of the following: * `HOSTING_SOURCE_HOSTED` * `HOSTING_SOURCE_THIRD_PARTY`; `CREATIVE_TYPE_NATIVE`: Native creative rendered by publishers with assets from advertiser. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_TEMPLATED_APP_INSTALL`: Templated app install mobile creative (banner). Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_SITE_SQUARE`: Square native creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_TEMPLATED_APP_INSTALL_INTERSTITIAL`: Interstitial creative including both display and video. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_LIGHTBOX`: Responsive and expandable Lightbox creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_APP_INSTALL`: Native app install creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_APP_INSTALL_SQUARE`: Square native app install creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_AUDIO`: Audio creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_PUBLISHER_HOSTED`: Publisher hosted creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_NATIVE_VIDEO`: Native video creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`; `CREATIVE_TYPE_TEMPLATED_APP_INSTALL_VIDEO`: Templated app install mobile video creative. Create and update methods are **not** supported for this creative type.; `CREATIVE_TYPE_ASSET_BASED_CREATIVE`: Asset-based creative. Create and update methods are supported for this creative type if the hosting_source is `HOSTING_SOURCE_HOSTED`.'
-          enum:
-          - CREATIVE_TYPE_UNSPECIFIED
-          - CREATIVE_TYPE_STANDARD
-          - CREATIVE_TYPE_EXPANDABLE
-          - CREATIVE_TYPE_VIDEO
-          - CREATIVE_TYPE_NATIVE
-          - CREATIVE_TYPE_TEMPLATED_APP_INSTALL
-          - CREATIVE_TYPE_NATIVE_SITE_SQUARE
-          - CREATIVE_TYPE_TEMPLATED_APP_INSTALL_INTERSTITIAL
-          - CREATIVE_TYPE_LIGHTBOX
-          - CREATIVE_TYPE_NATIVE_APP_INSTALL
-          - CREATIVE_TYPE_NATIVE_APP_INSTALL_SQUARE
-          - CREATIVE_TYPE_AUDIO
-          - CREATIVE_TYPE_PUBLISHER_HOSTED
-          - CREATIVE_TYPE_NATIVE_VIDEO
-          - CREATIVE_TYPE_TEMPLATED_APP_INSTALL_VIDEO
-          - CREATIVE_TYPE_ASSET_BASED_CREATIVE
-    Money:
-      type: object
-      description: Represents an amount of money with its currency type.
-      properties:
-        currencyCode:
-          type: string
-          description: The three-letter currency code defined in ISO 4217.
-        units:
-          type: string
-          format: int64
-          description: The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
-        nanos:
-          type: integer
-          format: int32
-          description: Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
-    InventorySourceAccessorsPartnerAccessor:
-      type: object
-      description: The partner with access to the inventory source.
-      properties:
-        partnerId:
-          type: string
-          format: int64
-          description: The ID of the partner.
-    ListInventorySourcesResponse:
-      type: object
-      properties:
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListInventorySources` method to retrieve the next page of results.
-        inventorySources:
-          type: array
-          description: The list of inventory sources. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/InventorySource'
-    InventorySourceVideoCreativeConfig:
-      type: object
-      description: The configuration for video creatives.
-      properties:
-        duration:
-          type: string
-          format: google-duration
-          description: The duration requirements for the video creatives that can be assigned to the inventory source.
-    InventorySourceDisplayCreativeConfig:
-      type: object
-      description: The configuration for display creatives.
-      properties:
-        creativeSize:
-          $ref: '#/components/schemas/Dimensions'
-    InventorySourceAccessors:
-      type: object
-      description: The partner or advertisers with access to the inventory source.
-      properties:
-        advertisers:
-          $ref: '#/components/schemas/InventorySourceAccessorsAdvertiserAccessors'
-        partner:
-          $ref: '#/components/schemas/InventorySourceAccessorsPartnerAccessor'
-    Dimensions:
-      type: object
-      description: Dimensions.
-      properties:
-        widthPixels:
-          type: integer
-          format: int32
-          description: The width in pixels.
-        heightPixels:
-          type: integer
-          format: int32
-          description: The height in pixels.
-    InventorySourceAccessorsAdvertiserAccessors:
-      type: object
-      description: The advertisers with access to the inventory source.
-      properties:
-        advertiserIds:
-          type: array
-          description: The IDs of the advertisers.
-          items:
-            type: string
-            format: int64
     EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate:
       type: object
       description: Update to the list of advertisers with read/write access to the inventory source.
@@ -616,19 +607,28 @@ components:
           items:
             type: string
             format: int64
-    EditInventorySourceReadWriteAccessorsRequest:
+    InventorySourceAccessorsAdvertiserAccessors:
       type: object
-      description: Request message for InventorySourceService.EditInventorySourceReadWriteAccessors.
+      description: The advertisers with access to the inventory source.
       properties:
-        assignPartner:
-          type: boolean
-          description: Set the partner context as read/write accessor of the inventory source. This will remove all other current read/write advertiser accessors.
-        advertisersUpdate:
-          $ref: '#/components/schemas/EditInventorySourceReadWriteAccessorsRequestAdvertisersUpdate'
-        partnerId:
+        advertiserIds:
+          type: array
+          description: The IDs of the advertisers.
+          items:
+            type: string
+            format: int64
+    TimeRange:
+      type: object
+      description: A time range.
+      properties:
+        startTime:
           type: string
-          format: int64
-          description: Required. The partner context by which the accessors change is being made.
+          format: google-datetime
+          description: Required. The lower bound of a time range, inclusive.
+        endTime:
+          type: string
+          format: google-datetime
+          description: Required. The upper bound of a time range, inclusive.
   securitySchemes:
     oauth2:
       type: oauth2
