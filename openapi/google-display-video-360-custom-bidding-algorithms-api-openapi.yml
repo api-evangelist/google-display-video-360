@@ -545,67 +545,56 @@ paths:
       x-google-method-id: displayvideo.customBiddingAlgorithms.scripts.get
 components:
   schemas:
-    CustomBiddingModelDetails:
+    CustomBiddingAlgorithmRules:
       type: object
-      description: The details of a custom bidding algorithm model for a single shared advertiser.
+      description: A single custom bidding algorithm rules.
       properties:
-        advertiserId:
-          type: string
-          format: int64
-          description: The unique ID of the relevant advertiser.
-        readinessState:
-          type: string
-          description: 'The readiness state of custom bidding model. Allowed values — `READINESS_STATE_UNSPECIFIED`: State is not specified or is unknown in this version.; `READINESS_STATE_ACTIVE`: The model is trained and ready for serving.; `READINESS_STATE_INSUFFICIENT_DATA`: There is not enough data to train the serving model.; `READINESS_STATE_TRAINING`: The model is training and not ready for serving.; `READINESS_STATE_NO_VALID_SCRIPT`: A valid custom bidding script has not been provided with which to train the model. This state will only be applied to algorithms whose `custom_bidding_algorithm_type` is `SCRIPT_BASED`.; `READINESS_STATE_EVALUATION_FAILURE`: A valid script was provided but failed evaluation. This is applicable for scripts that could not be evaluated in the alloted time.'
-          enum:
-          - READINESS_STATE_UNSPECIFIED
-          - READINESS_STATE_ACTIVE
-          - READINESS_STATE_INSUFFICIENT_DATA
-          - READINESS_STATE_TRAINING
-          - READINESS_STATE_NO_VALID_SCRIPT
-          - READINESS_STATE_EVALUATION_FAILURE
-        suspensionState:
-          type: string
-          description: 'Output only. The suspension state of custom bidding model. Allowed values — `SUSPENSION_STATE_UNSPECIFIED`: State is not specified or is unknown in this version.; `SUSPENSION_STATE_ENABLED`: Model is enabled, either recently used, currently used or scheduled to be used. The algorithm is actively scoring impressions for this advertiser.; `SUSPENSION_STATE_DORMANT`: Model has not been used recently. Although the model still acts as `ENABLED`, it will eventually be suspended if not used.; `SUSPENSION_STATE_SUSPENDED`: Model is suspended from scoring impressions and cannot serve. If the algorithm is assigned to a line item under this advertiser or otherwise updated, it will switch back to the `ENABLED` state and require time to prepare the serving model again.'
-          enum:
-          - SUSPENSION_STATE_UNSPECIFIED
-          - SUSPENSION_STATE_ENABLED
-          - SUSPENSION_STATE_DORMANT
-          - SUSPENSION_STATE_SUSPENDED
+        active:
+          type: boolean
+          description: Output only. Whether the rules resource is currently being used for scoring by the parent algorithm.
           readOnly: true
-    ScriptError:
-      type: object
-      description: An error message for a custom bidding script.
-      properties:
-        column:
+        error:
+          $ref: '#/components/schemas/CustomBiddingAlgorithmRulesError'
+        name:
+          type: string
+          description: Output only. The resource name of the rules resource.
+          readOnly: true
+        customBiddingAlgorithmId:
           type: string
           format: int64
-          description: The column number in the script where the error was thrown.
-        line:
+          description: Output only. The unique ID of the custom bidding algorithm that the rules resource belongs to.
+          readOnly: true
+        createTime:
           type: string
-          format: int64
-          description: The line number in the script where the error was thrown.
-        errorMessage:
+          format: google-datetime
+          description: Output only. The time when the rules resource was created.
+          readOnly: true
+        state:
           type: string
-          description: The detailed error message.
-        errorCode:
-          type: string
-          description: 'The type of error. Allowed values — `ERROR_CODE_UNSPECIFIED`: The script error is not specified or is unknown in this version.; `SYNTAX_ERROR`: The script has a syntax error.; `DEPRECATED_SYNTAX`: The script uses deprecated syntax.; `INTERNAL_ERROR`: Internal errors were thrown while processing the script.'
+          description: 'Output only. The state of the rules resource. Allowed values — `STATE_UNSPECIFIED`: The rules state are unspecified or unknown in this version.; `ACCEPTED`: The rules have been accepted for scoring impressions.; `REJECTED`: The rules have been rejected by backend pipelines. They may have errors.'
           enum:
-          - ERROR_CODE_UNSPECIFIED
-          - SYNTAX_ERROR
-          - DEPRECATED_SYNTAX
-          - INTERNAL_ERROR
-    ListCustomBiddingAlgorithmRulesResponse:
+          - STATE_UNSPECIFIED
+          - ACCEPTED
+          - REJECTED
+          readOnly: true
+        customBiddingAlgorithmRulesId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the rules resource.
+          readOnly: true
+        rules:
+          $ref: '#/components/schemas/CustomBiddingAlgorithmRulesRef'
+    ListCustomBiddingAlgorithmsResponse:
       type: object
       properties:
-        customBiddingRules:
+        customBiddingAlgorithms:
           type: array
-          description: The list of CustomBiddingAlgorithmRules resources. This list will be absent if empty.
+          description: The list of custom bidding algorithms. This list will be absent if empty.
           items:
-            $ref: '#/components/schemas/CustomBiddingAlgorithmRules'
+            $ref: '#/components/schemas/CustomBiddingAlgorithm'
         nextPageToken:
           type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmRulesRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
     CustomBiddingAlgorithm:
       type: object
       description: A single custom bidding algorithm.
@@ -666,6 +655,36 @@ components:
           - ENTITY_STATUS_DRAFT
           - ENTITY_STATUS_PAUSED
           - ENTITY_STATUS_SCHEDULED_FOR_DELETION
+    ScriptError:
+      type: object
+      description: An error message for a custom bidding script.
+      properties:
+        column:
+          type: string
+          format: int64
+          description: The column number in the script where the error was thrown.
+        line:
+          type: string
+          format: int64
+          description: The line number in the script where the error was thrown.
+        errorMessage:
+          type: string
+          description: The detailed error message.
+        errorCode:
+          type: string
+          description: 'The type of error. Allowed values — `ERROR_CODE_UNSPECIFIED`: The script error is not specified or is unknown in this version.; `SYNTAX_ERROR`: The script has a syntax error.; `DEPRECATED_SYNTAX`: The script uses deprecated syntax.; `INTERNAL_ERROR`: Internal errors were thrown while processing the script.'
+          enum:
+          - ERROR_CODE_UNSPECIFIED
+          - SYNTAX_ERROR
+          - DEPRECATED_SYNTAX
+          - INTERNAL_ERROR
+    CustomBiddingAlgorithmRulesRef:
+      type: object
+      description: The reference to the uploaded AlgorithmRules file. Retrieve the location to upload new AlgorithmRules file to using customBiddingAlgorithms.uploadRules.
+      properties:
+        resourceName:
+          type: string
+          description: A resource name to be used in media.download to download the rules files. Or media.upload to upload the rules files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/rulesRef/{ref_id}`.
     ListCustomBiddingScriptsResponse:
       type: object
       properties:
@@ -677,13 +696,6 @@ components:
         nextPageToken:
           type: string
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingScriptsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
-    CustomBiddingScriptRef:
-      type: object
-      description: The reference to the uploaded custom bidding script file.
-      properties:
-        resourceName:
-          type: string
-          description: A resource name to be used in media.download to Download the script files. Or media.upload to Upload the script files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/scriptRef/{ref_id}`.
     CustomBiddingScript:
       type: object
       description: A single custom bidding script.
@@ -728,6 +740,51 @@ components:
           format: int64
           description: Output only. The unique ID of the custom bidding algorithm the script belongs to.
           readOnly: true
+    CustomBiddingModelDetails:
+      type: object
+      description: The details of a custom bidding algorithm model for a single shared advertiser.
+      properties:
+        advertiserId:
+          type: string
+          format: int64
+          description: The unique ID of the relevant advertiser.
+        readinessState:
+          type: string
+          description: 'The readiness state of custom bidding model. Allowed values — `READINESS_STATE_UNSPECIFIED`: State is not specified or is unknown in this version.; `READINESS_STATE_ACTIVE`: The model is trained and ready for serving.; `READINESS_STATE_INSUFFICIENT_DATA`: There is not enough data to train the serving model.; `READINESS_STATE_TRAINING`: The model is training and not ready for serving.; `READINESS_STATE_NO_VALID_SCRIPT`: A valid custom bidding script has not been provided with which to train the model. This state will only be applied to algorithms whose `custom_bidding_algorithm_type` is `SCRIPT_BASED`.; `READINESS_STATE_EVALUATION_FAILURE`: A valid script was provided but failed evaluation. This is applicable for scripts that could not be evaluated in the alloted time.'
+          enum:
+          - READINESS_STATE_UNSPECIFIED
+          - READINESS_STATE_ACTIVE
+          - READINESS_STATE_INSUFFICIENT_DATA
+          - READINESS_STATE_TRAINING
+          - READINESS_STATE_NO_VALID_SCRIPT
+          - READINESS_STATE_EVALUATION_FAILURE
+        suspensionState:
+          type: string
+          description: 'Output only. The suspension state of custom bidding model. Allowed values — `SUSPENSION_STATE_UNSPECIFIED`: State is not specified or is unknown in this version.; `SUSPENSION_STATE_ENABLED`: Model is enabled, either recently used, currently used or scheduled to be used. The algorithm is actively scoring impressions for this advertiser.; `SUSPENSION_STATE_DORMANT`: Model has not been used recently. Although the model still acts as `ENABLED`, it will eventually be suspended if not used.; `SUSPENSION_STATE_SUSPENDED`: Model is suspended from scoring impressions and cannot serve. If the algorithm is assigned to a line item under this advertiser or otherwise updated, it will switch back to the `ENABLED` state and require time to prepare the serving model again.'
+          enum:
+          - SUSPENSION_STATE_UNSPECIFIED
+          - SUSPENSION_STATE_ENABLED
+          - SUSPENSION_STATE_DORMANT
+          - SUSPENSION_STATE_SUSPENDED
+          readOnly: true
+    ListCustomBiddingAlgorithmRulesResponse:
+      type: object
+      properties:
+        customBiddingRules:
+          type: array
+          description: The list of CustomBiddingAlgorithmRules resources. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/CustomBiddingAlgorithmRules'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmRulesRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
+    CustomBiddingScriptRef:
+      type: object
+      description: The reference to the uploaded custom bidding script file.
+      properties:
+        resourceName:
+          type: string
+          description: A resource name to be used in media.download to Download the script files. Or media.upload to Upload the script files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/scriptRef/{ref_id}`.
     CustomBiddingAlgorithmRulesError:
       type: object
       description: An error message for a CustomBiddingAlgorithmRules resource.
@@ -740,63 +797,6 @@ components:
           - SYNTAX_ERROR
           - CONSTRAINT_VIOLATION_ERROR
           - INTERNAL_ERROR
-    ListCustomBiddingAlgorithmsResponse:
-      type: object
-      properties:
-        customBiddingAlgorithms:
-          type: array
-          description: The list of custom bidding algorithms. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/CustomBiddingAlgorithm'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
-    CustomBiddingAlgorithmRulesRef:
-      type: object
-      description: The reference to the uploaded AlgorithmRules file. Retrieve the location to upload new AlgorithmRules file to using customBiddingAlgorithms.uploadRules.
-      properties:
-        resourceName:
-          type: string
-          description: A resource name to be used in media.download to download the rules files. Or media.upload to upload the rules files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/rulesRef/{ref_id}`.
-    CustomBiddingAlgorithmRules:
-      type: object
-      description: A single custom bidding algorithm rules.
-      properties:
-        active:
-          type: boolean
-          description: Output only. Whether the rules resource is currently being used for scoring by the parent algorithm.
-          readOnly: true
-        error:
-          $ref: '#/components/schemas/CustomBiddingAlgorithmRulesError'
-        name:
-          type: string
-          description: Output only. The resource name of the rules resource.
-          readOnly: true
-        customBiddingAlgorithmId:
-          type: string
-          format: int64
-          description: Output only. The unique ID of the custom bidding algorithm that the rules resource belongs to.
-          readOnly: true
-        createTime:
-          type: string
-          format: google-datetime
-          description: Output only. The time when the rules resource was created.
-          readOnly: true
-        state:
-          type: string
-          description: 'Output only. The state of the rules resource. Allowed values — `STATE_UNSPECIFIED`: The rules state are unspecified or unknown in this version.; `ACCEPTED`: The rules have been accepted for scoring impressions.; `REJECTED`: The rules have been rejected by backend pipelines. They may have errors.'
-          enum:
-          - STATE_UNSPECIFIED
-          - ACCEPTED
-          - REJECTED
-          readOnly: true
-        customBiddingAlgorithmRulesId:
-          type: string
-          format: int64
-          description: Output only. The unique ID of the rules resource.
-          readOnly: true
-        rules:
-          $ref: '#/components/schemas/CustomBiddingAlgorithmRulesRef'
   securitySchemes:
     oauth2:
       type: oauth2

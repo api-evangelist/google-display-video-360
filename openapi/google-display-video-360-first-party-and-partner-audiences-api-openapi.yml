@@ -221,14 +221,6 @@ paths:
       x-google-method-id: displayvideo.firstPartyAndPartnerAudiences.get
 components:
   schemas:
-    EditCustomerMatchMembersResponse:
-      type: object
-      description: The response of FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
-      properties:
-        firstPartyAndPartnerAudienceId:
-          type: string
-          format: int64
-          description: Required. The ID of the updated Customer Match FirstPartyAndPartnerAudience.
     ListFirstPartyAndPartnerAudiencesResponse:
       type: object
       properties:
@@ -240,6 +232,71 @@ components:
         nextPageToken:
           type: string
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFirstPartyAndPartnerAudiences` method to retrieve the next page of results.
+    Consent:
+      type: object
+      description: User consent status.
+      properties:
+        adPersonalization:
+          type: string
+          description: 'Represents consent for ad personalization. Allowed values — `CONSENT_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CONSENT_STATUS_GRANTED`: Consent is granted.; `CONSENT_STATUS_DENIED`: Consent is denied.'
+          enum:
+          - CONSENT_STATUS_UNSPECIFIED
+          - CONSENT_STATUS_GRANTED
+          - CONSENT_STATUS_DENIED
+        adUserData:
+          type: string
+          description: 'Represents consent for ad user data. Allowed values — `CONSENT_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CONSENT_STATUS_GRANTED`: Consent is granted.; `CONSENT_STATUS_DENIED`: Consent is denied.'
+          enum:
+          - CONSENT_STATUS_UNSPECIFIED
+          - CONSENT_STATUS_GRANTED
+          - CONSENT_STATUS_DENIED
+    EditCustomerMatchMembersResponse:
+      type: object
+      description: The response of FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
+      properties:
+        firstPartyAndPartnerAudienceId:
+          type: string
+          format: int64
+          description: Required. The ID of the updated Customer Match FirstPartyAndPartnerAudience.
+    ContactInfo:
+      type: object
+      description: Contact information defining a Customer Match audience member.
+      properties:
+        hashedFirstName:
+          type: string
+          description: 'Optional. SHA256 hashed first name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_last_name * zip_codes'
+        hashedEmails:
+          type: array
+          description: Optional. A list of SHA256 hashed email of the member. Before hashing, remove all whitespace and make sure the string is all lowercase.
+          items:
+            type: string
+        hashedPhoneNumbers:
+          type: array
+          description: Optional. A list of SHA256 hashed phone numbers of the member. Before hashing, all phone numbers must be formatted using the [E.164 format](https://en.wikipedia.org/wiki/E.164) and include the country calling code.
+          items:
+            type: string
+        countryCode:
+          type: string
+          description: 'Optional. Country code of the member. Must also be set with the following fields: * hashed_first_name * hashed_last_name * zip_codes'
+        hashedLastName:
+          type: string
+          description: 'Optional. SHA256 hashed last name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_first_name * zip_codes'
+        zipCodes:
+          type: array
+          description: 'Optional. A list of zip codes of the member. Must also be set with the following fields: * country_code * hashed_first_name * hashed_last_name'
+          items:
+            type: string
+    ContactInfoList:
+      type: object
+      description: Wrapper message for a list of contact information defining Customer Match audience members.
+      properties:
+        contactInfos:
+          type: array
+          description: Optional. A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
+          items:
+            $ref: '#/components/schemas/ContactInfo'
+        consent:
+          $ref: '#/components/schemas/Consent'
     EditCustomerMatchMembersRequest:
       type: object
       description: Request message for FirstPartyAndPartnerAudienceService.EditCustomerMatchMembers.
@@ -356,17 +413,6 @@ components:
           readOnly: true
         mobileDeviceIdList:
           $ref: '#/components/schemas/MobileDeviceIdList'
-    ContactInfoList:
-      type: object
-      description: Wrapper message for a list of contact information defining Customer Match audience members.
-      properties:
-        contactInfos:
-          type: array
-          description: Optional. A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
-          items:
-            $ref: '#/components/schemas/ContactInfo'
-        consent:
-          $ref: '#/components/schemas/Consent'
     MobileDeviceIdList:
       type: object
       description: Wrapper message for a list of mobile device IDs defining Customer Match audience members.
@@ -378,52 +424,6 @@ components:
             type: string
         consent:
           $ref: '#/components/schemas/Consent'
-    ContactInfo:
-      type: object
-      description: Contact information defining a Customer Match audience member.
-      properties:
-        hashedFirstName:
-          type: string
-          description: 'Optional. SHA256 hashed first name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_last_name * zip_codes'
-        hashedEmails:
-          type: array
-          description: Optional. A list of SHA256 hashed email of the member. Before hashing, remove all whitespace and make sure the string is all lowercase.
-          items:
-            type: string
-        hashedPhoneNumbers:
-          type: array
-          description: Optional. A list of SHA256 hashed phone numbers of the member. Before hashing, all phone numbers must be formatted using the [E.164 format](https://en.wikipedia.org/wiki/E.164) and include the country calling code.
-          items:
-            type: string
-        countryCode:
-          type: string
-          description: 'Optional. Country code of the member. Must also be set with the following fields: * hashed_first_name * hashed_last_name * zip_codes'
-        hashedLastName:
-          type: string
-          description: 'Optional. SHA256 hashed last name of the member. Before hashing, remove all whitespace and make sure the string is all lowercase. Must also be set with the following fields: * country_code * hashed_first_name * zip_codes'
-        zipCodes:
-          type: array
-          description: 'Optional. A list of zip codes of the member. Must also be set with the following fields: * country_code * hashed_first_name * hashed_last_name'
-          items:
-            type: string
-    Consent:
-      type: object
-      description: User consent status.
-      properties:
-        adPersonalization:
-          type: string
-          description: 'Represents consent for ad personalization. Allowed values — `CONSENT_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CONSENT_STATUS_GRANTED`: Consent is granted.; `CONSENT_STATUS_DENIED`: Consent is denied.'
-          enum:
-          - CONSENT_STATUS_UNSPECIFIED
-          - CONSENT_STATUS_GRANTED
-          - CONSENT_STATUS_DENIED
-        adUserData:
-          type: string
-          description: 'Represents consent for ad user data. Allowed values — `CONSENT_STATUS_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `CONSENT_STATUS_GRANTED`: Consent is granted.; `CONSENT_STATUS_DENIED`: Consent is denied.'
-          enum:
-          - CONSENT_STATUS_UNSPECIFIED
-          - CONSENT_STATUS_GRANTED
-          - CONSENT_STATUS_DENIED
   securitySchemes:
     oauth2:
       type: oauth2

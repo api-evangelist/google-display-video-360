@@ -190,39 +190,29 @@ paths:
       x-google-method-id: displayvideo.floodlightGroups.floodlightActivities.list
 components:
   schemas:
-    FloodlightGroup:
+    ListFloodlightActivitiesResponse:
       type: object
-      description: A single Floodlight group.
       properties:
-        floodlightGroupId:
+        floodlightActivities:
+          type: array
+          description: The list of Floodlight activities. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/FloodlightActivity'
+        nextPageToken:
           type: string
-          format: int64
-          description: Output only. The unique ID of the Floodlight group. Assigned by the system.
-          readOnly: true
-        lookbackWindow:
-          $ref: '#/components/schemas/LookbackWindow'
-        webTagType:
-          type: string
-          description: 'Required. The web tag type enabled for the Floodlight group. Allowed values — `WEB_TAG_TYPE_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `WEB_TAG_TYPE_NONE`: No tag type.; `WEB_TAG_TYPE_IMAGE`: Image tag.; `WEB_TAG_TYPE_DYNAMIC`: Dynamic tag.'
-          enum:
-          - WEB_TAG_TYPE_UNSPECIFIED
-          - WEB_TAG_TYPE_NONE
-          - WEB_TAG_TYPE_IMAGE
-          - WEB_TAG_TYPE_DYNAMIC
-        customVariables:
-          type: object
-          description: 'User-defined custom variables owned by the Floodlight group. Use custom Floodlight variables to create reporting data that is tailored to your unique business needs. Custom Floodlight variables use the keys `U1=`, `U2=`, and so on, and can take any values that you choose to pass to them. You can use them to track virtually any type of data that you collect about your customers, such as the genre of movie that a customer purchases, the country to which the item is shipped, and so on. Custom Floodlight variables may not be used to pass any data that could be used or recognized as personally identifiable information (PII). Example: `custom_variables { fields { "U1": value { number_value: 123.4 }, "U2": value { string_value: "MyVariable2" }, "U3": value { string_value: "MyVariable3" } } }` Acceptable values for keys are "U1" through "U100", inclusive. String values must be less than 64 characters long, and cannot contain the following characters: `"<>`.'
-          additionalProperties:
-            description: Properties of the object.
-        displayName:
-          type: string
-          description: Required. The display name of the Floodlight group.
-        name:
-          type: string
-          description: Output only. The resource name of the Floodlight group.
-          readOnly: true
-        activeViewConfig:
-          $ref: '#/components/schemas/ActiveViewVideoViewabilityMetricConfig'
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFloodlightActivities` method to retrieve the next page of results.
+    LookbackWindow:
+      type: object
+      description: Specifies how many days into the past to look when determining whether to record a conversion.
+      properties:
+        clickDays:
+          type: integer
+          format: int32
+          description: Lookback window, in days, from the last time a given user clicked on one of your ads.
+        impressionDays:
+          type: integer
+          format: int32
+          description: Lookback window, in days, from the last time a given user viewed one of your ads.
     ActiveViewVideoViewabilityMetricConfig:
       type: object
       description: Configuration for custom Active View video viewability metrics.
@@ -282,19 +272,6 @@ components:
           - VIEWABILITY_PERCENT_50
           - VIEWABILITY_PERCENT_75
           - VIEWABILITY_PERCENT_100
-    RemarketingConfig:
-      type: object
-      description: Settings that control the whether remarketing is enabled for the given identified advertiser.
-      properties:
-        advertiserId:
-          type: string
-          format: int64
-          description: Output only. The ID of the advertiser.
-          readOnly: true
-        remarketingEnabled:
-          type: boolean
-          description: Output only. Whether the Floodlight activity remarketing user list is available to the identified advertiser.
-          readOnly: true
     FloodlightActivity:
       type: object
       description: A single Floodlight activity.
@@ -339,29 +316,52 @@ components:
           readOnly: true
           items:
             $ref: '#/components/schemas/RemarketingConfig'
-    LookbackWindow:
+    RemarketingConfig:
       type: object
-      description: Specifies how many days into the past to look when determining whether to record a conversion.
+      description: Settings that control the whether remarketing is enabled for the given identified advertiser.
       properties:
-        clickDays:
-          type: integer
-          format: int32
-          description: Lookback window, in days, from the last time a given user clicked on one of your ads.
-        impressionDays:
-          type: integer
-          format: int32
-          description: Lookback window, in days, from the last time a given user viewed one of your ads.
-    ListFloodlightActivitiesResponse:
-      type: object
-      properties:
-        floodlightActivities:
-          type: array
-          description: The list of Floodlight activities. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/FloodlightActivity'
-        nextPageToken:
+        advertiserId:
           type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFloodlightActivities` method to retrieve the next page of results.
+          format: int64
+          description: Output only. The ID of the advertiser.
+          readOnly: true
+        remarketingEnabled:
+          type: boolean
+          description: Output only. Whether the Floodlight activity remarketing user list is available to the identified advertiser.
+          readOnly: true
+    FloodlightGroup:
+      type: object
+      description: A single Floodlight group.
+      properties:
+        floodlightGroupId:
+          type: string
+          format: int64
+          description: Output only. The unique ID of the Floodlight group. Assigned by the system.
+          readOnly: true
+        lookbackWindow:
+          $ref: '#/components/schemas/LookbackWindow'
+        webTagType:
+          type: string
+          description: 'Required. The web tag type enabled for the Floodlight group. Allowed values — `WEB_TAG_TYPE_UNSPECIFIED`: Type value is not specified or is unknown in this version.; `WEB_TAG_TYPE_NONE`: No tag type.; `WEB_TAG_TYPE_IMAGE`: Image tag.; `WEB_TAG_TYPE_DYNAMIC`: Dynamic tag.'
+          enum:
+          - WEB_TAG_TYPE_UNSPECIFIED
+          - WEB_TAG_TYPE_NONE
+          - WEB_TAG_TYPE_IMAGE
+          - WEB_TAG_TYPE_DYNAMIC
+        customVariables:
+          type: object
+          description: 'User-defined custom variables owned by the Floodlight group. Use custom Floodlight variables to create reporting data that is tailored to your unique business needs. Custom Floodlight variables use the keys `U1=`, `U2=`, and so on, and can take any values that you choose to pass to them. You can use them to track virtually any type of data that you collect about your customers, such as the genre of movie that a customer purchases, the country to which the item is shipped, and so on. Custom Floodlight variables may not be used to pass any data that could be used or recognized as personally identifiable information (PII). Example: `custom_variables { fields { "U1": value { number_value: 123.4 }, "U2": value { string_value: "MyVariable2" }, "U3": value { string_value: "MyVariable3" } } }` Acceptable values for keys are "U1" through "U100", inclusive. String values must be less than 64 characters long, and cannot contain the following characters: `"<>`.'
+          additionalProperties:
+            description: Properties of the object.
+        displayName:
+          type: string
+          description: Required. The display name of the Floodlight group.
+        name:
+          type: string
+          description: Output only. The resource name of the Floodlight group.
+          readOnly: true
+        activeViewConfig:
+          $ref: '#/components/schemas/ActiveViewVideoViewabilityMetricConfig'
   securitySchemes:
     oauth2:
       type: oauth2

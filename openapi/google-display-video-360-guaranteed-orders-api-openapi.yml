@@ -230,43 +230,29 @@ paths:
       x-google-method-id: displayvideo.guaranteedOrders.patch
 components:
   schemas:
-    EditGuaranteedOrderReadAccessorsResponse:
+    EditGuaranteedOrderReadAccessorsRequest:
       type: object
+      description: Request message for GuaranteedOrderService.EditGuaranteedOrderReadAccessors.
       properties:
+        partnerId:
+          type: string
+          format: int64
+          description: Required. The partner context in which the change is being made.
         readAccessInherited:
           type: boolean
-          description: Whether all advertisers of read_write_partner_id have read access to the guaranteed order.
-        readAdvertiserIds:
+          description: Whether to give all advertisers of the read/write accessor partner read access to the guaranteed order. Only applicable if read_write_partner_id is set in the guaranteed order.
+        addedAdvertisers:
           type: array
-          description: The IDs of advertisers with read access to the guaranteed order.
+          description: The advertisers to add as read accessors to the guaranteed order.
           items:
             type: string
             format: int64
-    GuaranteedOrderStatus:
-      type: object
-      description: The status settings of the guaranteed order.
-      properties:
-        entityPauseReason:
-          type: string
-          description: The user-provided reason for pausing this guaranteed order. Must be UTF-8 encoded with a maximum length of 100 bytes. Only applicable when entity_status is set to `ENTITY_STATUS_PAUSED`.
-        entityStatus:
-          type: string
-          description: 'Whether or not the guaranteed order is servable. Acceptable values are `ENTITY_STATUS_ACTIVE`, `ENTITY_STATUS_ARCHIVED`, and `ENTITY_STATUS_PAUSED`. Default value is `ENTITY_STATUS_ACTIVE`. Allowed values — `ENTITY_STATUS_UNSPECIFIED`: Default value when status is not specified or is unknown in this version.; `ENTITY_STATUS_ACTIVE`: The entity is enabled to bid and spend budget.; `ENTITY_STATUS_ARCHIVED`: The entity is archived. Bidding and budget spending are disabled. An entity can be deleted after archived. Deleted entities cannot be retrieved.; `ENTITY_STATUS_DRAFT`: The entity is under draft. Bidding and budget spending are disabled.; `ENTITY_STATUS_PAUSED`: Bidding and budget spending are paused for the entity.; `ENTITY_STATUS_SCHEDULED_FOR_DELETION`: The entity is scheduled for deletion.'
-          enum:
-          - ENTITY_STATUS_UNSPECIFIED
-          - ENTITY_STATUS_ACTIVE
-          - ENTITY_STATUS_ARCHIVED
-          - ENTITY_STATUS_DRAFT
-          - ENTITY_STATUS_PAUSED
-          - ENTITY_STATUS_SCHEDULED_FOR_DELETION
-        configStatus:
-          type: string
-          description: 'Output only. The configuration status of the guaranteed order. Acceptable values are `PENDING` and `COMPLETED`. A guaranteed order must be configured (fill in the required fields, choose creatives, and select a default campaign) before it can serve. Currently the configuration action can only be performed via UI. Allowed values — `GUARANTEED_ORDER_CONFIG_STATUS_UNSPECIFIED`: The approval status is not specified or is unknown in this version.; `PENDING`: The beginning state of a guaranteed order. The guaranteed order in this state needs to be configured before it can serve.; `COMPLETED`: The state after the buyer configures a guaranteed order.'
-          enum:
-          - GUARANTEED_ORDER_CONFIG_STATUS_UNSPECIFIED
-          - PENDING
-          - COMPLETED
-          readOnly: true
+        removedAdvertisers:
+          type: array
+          description: The advertisers to remove as read accessors to the guaranteed order.
+          items:
+            type: string
+            format: int64
     GuaranteedOrder:
       type: object
       description: A guaranteed order. Guaranteed orders are parent entity of guaranteed inventory sources. When creating a guaranteed inventory source, a guaranteed order ID must be assigned to the inventory source.
@@ -416,29 +402,43 @@ components:
           format: int64
           description: Output only. The ID of default advertiser of the guaranteed order. The default advertiser is either the read_write_advertiser_id or, if that is not set, the first advertiser listed in read_advertiser_ids. Otherwise, there is no default advertiser.
           readOnly: true
-    EditGuaranteedOrderReadAccessorsRequest:
+    EditGuaranteedOrderReadAccessorsResponse:
       type: object
-      description: Request message for GuaranteedOrderService.EditGuaranteedOrderReadAccessors.
       properties:
-        partnerId:
-          type: string
-          format: int64
-          description: Required. The partner context in which the change is being made.
         readAccessInherited:
           type: boolean
-          description: Whether to give all advertisers of the read/write accessor partner read access to the guaranteed order. Only applicable if read_write_partner_id is set in the guaranteed order.
-        addedAdvertisers:
+          description: Whether all advertisers of read_write_partner_id have read access to the guaranteed order.
+        readAdvertiserIds:
           type: array
-          description: The advertisers to add as read accessors to the guaranteed order.
+          description: The IDs of advertisers with read access to the guaranteed order.
           items:
             type: string
             format: int64
-        removedAdvertisers:
-          type: array
-          description: The advertisers to remove as read accessors to the guaranteed order.
-          items:
-            type: string
-            format: int64
+    GuaranteedOrderStatus:
+      type: object
+      description: The status settings of the guaranteed order.
+      properties:
+        entityPauseReason:
+          type: string
+          description: The user-provided reason for pausing this guaranteed order. Must be UTF-8 encoded with a maximum length of 100 bytes. Only applicable when entity_status is set to `ENTITY_STATUS_PAUSED`.
+        entityStatus:
+          type: string
+          description: 'Whether or not the guaranteed order is servable. Acceptable values are `ENTITY_STATUS_ACTIVE`, `ENTITY_STATUS_ARCHIVED`, and `ENTITY_STATUS_PAUSED`. Default value is `ENTITY_STATUS_ACTIVE`. Allowed values — `ENTITY_STATUS_UNSPECIFIED`: Default value when status is not specified or is unknown in this version.; `ENTITY_STATUS_ACTIVE`: The entity is enabled to bid and spend budget.; `ENTITY_STATUS_ARCHIVED`: The entity is archived. Bidding and budget spending are disabled. An entity can be deleted after archived. Deleted entities cannot be retrieved.; `ENTITY_STATUS_DRAFT`: The entity is under draft. Bidding and budget spending are disabled.; `ENTITY_STATUS_PAUSED`: Bidding and budget spending are paused for the entity.; `ENTITY_STATUS_SCHEDULED_FOR_DELETION`: The entity is scheduled for deletion.'
+          enum:
+          - ENTITY_STATUS_UNSPECIFIED
+          - ENTITY_STATUS_ACTIVE
+          - ENTITY_STATUS_ARCHIVED
+          - ENTITY_STATUS_DRAFT
+          - ENTITY_STATUS_PAUSED
+          - ENTITY_STATUS_SCHEDULED_FOR_DELETION
+        configStatus:
+          type: string
+          description: 'Output only. The configuration status of the guaranteed order. Acceptable values are `PENDING` and `COMPLETED`. A guaranteed order must be configured (fill in the required fields, choose creatives, and select a default campaign) before it can serve. Currently the configuration action can only be performed via UI. Allowed values — `GUARANTEED_ORDER_CONFIG_STATUS_UNSPECIFIED`: The approval status is not specified or is unknown in this version.; `PENDING`: The beginning state of a guaranteed order. The guaranteed order in this state needs to be configured before it can serve.; `COMPLETED`: The state after the buyer configures a guaranteed order.'
+          enum:
+          - GUARANTEED_ORDER_CONFIG_STATUS_UNSPECIFIED
+          - PENDING
+          - COMPLETED
+          readOnly: true
     ListGuaranteedOrdersResponse:
       type: object
       properties:

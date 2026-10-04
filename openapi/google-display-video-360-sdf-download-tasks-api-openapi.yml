@@ -74,46 +74,16 @@ paths:
       x-google-method-id: displayvideo.sdfdownloadtasks.operations.get
 components:
   schemas:
-    Status:
+    InventorySourceFilter:
       type: object
-      description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+      description: A filtering option for filtering on Inventory Source entities.
       properties:
-        message:
-          type: string
-          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of google.rpc.Code.
-        details:
+        inventorySourceIds:
           type: array
-          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          description: Inventory Sources to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Leave empty to download all Inventory Sources for the selected Advertiser or Partner.
           items:
-            type: object
-            additionalProperties:
-              description: Properties of the object. Contains field @type with type URL.
-    Operation:
-      type: object
-      description: This resource represents a long-running operation that is the result of a network API call.
-      properties:
-        name:
-          type: string
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
-        done:
-          type: boolean
-          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
-        error:
-          $ref: '#/components/schemas/Status'
-        response:
-          type: object
-          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-        metadata:
-          type: object
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
+            type: string
+            format: int64
     ParentEntityFilter:
       type: object
       description: A filtering option that filters on selected file types belonging to a chosen set of filter entities.
@@ -151,16 +121,6 @@ components:
           - FILTER_TYPE_MEDIA_PRODUCT_ID
           - FILTER_TYPE_INSERTION_ORDER_ID
           - FILTER_TYPE_LINE_ITEM_ID
-    InventorySourceFilter:
-      type: object
-      description: A filtering option for filtering on Inventory Source entities.
-      properties:
-        inventorySourceIds:
-          type: array
-          description: Inventory Sources to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Leave empty to download all Inventory Sources for the selected Advertiser or Partner.
-          items:
-            type: string
-            format: int64
     CreateSdfDownloadTaskRequest:
       type: object
       description: Request message for [SdfDownloadTaskService.CreateSdfDownloadTask].
@@ -204,6 +164,46 @@ components:
           - SDF_VERSION_9_2
           - SDF_VERSION_10
           - SDF_VERSION_10_1
+    Status:
+      type: object
+      description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+      properties:
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of google.rpc.Code.
+        details:
+          type: array
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            type: object
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+    Operation:
+      type: object
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        name:
+          type: string
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+        done:
+          type: boolean
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+        error:
+          $ref: '#/components/schemas/Status'
+        response:
+          type: object
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+        metadata:
+          type: object
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
     IdFilter:
       type: object
       description: A filtering option that filters entities by their entity IDs.
