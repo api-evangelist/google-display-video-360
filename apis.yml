@@ -386,6 +386,9 @@ apis:
   - type: GettingStarted
     url: https://developers.google.com/display-video/api/guides/getting-started/overview
 common:
+- type: CapabilityMap
+  url: capabilities/google-display-video-360-capability-edges.yml
+  name: Google Display & Video 360 Business Capability Map
 - type: Website
   url: https://www.google.com/
 - type: Overlay

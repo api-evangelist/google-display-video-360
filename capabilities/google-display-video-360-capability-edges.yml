@@ -1,0 +1,79 @@
+slug: google-display-video-360
+provider: Google Display & Video 360
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Advertisers
+  spec_file: google-display-video-360-advertisers-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.85
+  evidence: '"Creates a new advertiser"; "Edits targeting options under a single advertiser"; "Creates
+    a new ad group"'
+  reason: Operations manage advertisers, ad groups, ad assets and assigned targeting options inside a
+    programmatic demand-side platform — this is paid-media/digital advertising execution, squarely Digital
+    Marketing Management.
+- tag: Custom Bidding Algorithms
+  spec_file: google-display-video-360-custom-bidding-algorithms-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.8
+  evidence: '"Creates a new custom bidding algorithm"; "Creates a new custom bidding script"; schema CustomBiddingAlgorithmRules'
+  reason: Custom bidding algorithms and scripts control programmatic media bidding in the DSP — an execution
+    mechanism of paid digital media buying, i.e. Digital Marketing Management.
+- tag: Targeting Types
+  spec_file: google-display-video-360-targeting-types-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.78
+  evidence: targetingTypesTargetingOptionsSearch  Searches for targeting options of a given type based
+    on the given search terms; schemas AgeRangeTargetingOptionDetails, GeoRegionTargetingOptionDetails,
+    AppCategoryTargetingOptionDetails
+  reason: Enumerating and searching audience/placement targeting options (geo, age range, device make-model,
+    app category, exchange) is the configuration surface for programmatic paid-media targeting, which
+    sits under digital marketing management. Thin only in that it is read-only reference data.
+- tag: Partners
+  spec_file: google-display-video-360-partners-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: POST /v4/partners/{partnersId}:editAssignedTargetingOptions  Edits targeting options under
+    a single partner; partnersChannelsSitesBulkEdit  Bulk edits sites under a single channel
+  reason: 'Operations manage the top-level buying entity of a programmatic DSP together with channels/sites
+    used for ad placement inclusion-exclusion and assigned targeting options. That is paid-media/programmatic
+    buying administration, i.e. digital marketing management. Not Channel Sales (BC-410.60): ''partner''
+    here is an ad-buying account hierarchy node, not a reseller relationship.'
+- tag: Users
+  spec_file: google-display-video-360-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /v4/users  Creates a new user; POST /v4/users/{usersId}:bulkEditAssignedUserRoles  Bulk
+    edits user roles for a user; schema AssignedUserRole
+  reason: 'Create/update/delete platform user accounts and bulk-assign roles is user provisioning and
+    role-based access administration, i.e. identity and access management. It is not HR employee records:
+    the entities are platform login accounts with role assignments.'
+- tag: First Party and Partner Audiences
+  spec_file: google-display-video-360-first-party-and-partner-audiences-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: '"Updates the member list of a Customer Match audience"; schemas ContactInfoList, MobileDeviceIdList'
+  reason: Customer Match audience membership and first-party audience creation are used to target paid
+    media campaigns in the DSP — digital marketing audience activation rather than CRM master data.
