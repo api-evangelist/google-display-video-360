@@ -114,6 +114,17 @@ paths:
       x-google-method-id: displayvideo.googleAudiences.list
 components:
   schemas:
+    ListGoogleAudiencesResponse:
+      type: object
+      properties:
+        googleAudiences:
+          type: array
+          description: The list of Google audiences. This list will be absent if empty.
+          items:
+            $ref: '#/components/schemas/GoogleAudience'
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListGoogleAudiences` method to retrieve the next page of results.
     GoogleAudience:
       type: object
       description: Describes a Google audience resource. Includes Google audience lists.
@@ -143,17 +154,6 @@ components:
           - GOOGLE_AUDIENCE_TYPE_LIFE_EVENT
           - GOOGLE_AUDIENCE_TYPE_EXTENDED_DEMOGRAPHIC
           readOnly: true
-    ListGoogleAudiencesResponse:
-      type: object
-      properties:
-        googleAudiences:
-          type: array
-          description: The list of Google audiences. This list will be absent if empty.
-          items:
-            $ref: '#/components/schemas/GoogleAudience'
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListGoogleAudiences` method to retrieve the next page of results.
   securitySchemes:
     oauth2:
       type: oauth2

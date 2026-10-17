@@ -74,13 +74,73 @@ paths:
       x-google-method-id: displayvideo.sdfdownloadtasks.operations.get
 components:
   schemas:
-    InventorySourceFilter:
+    Status:
       type: object
-      description: A filtering option for filtering on Inventory Source entities.
+      description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
       properties:
-        inventorySourceIds:
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of google.rpc.Code.
+        details:
           type: array
-          description: Inventory Sources to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Leave empty to download all Inventory Sources for the selected Advertiser or Partner.
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            type: object
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+    IdFilter:
+      type: object
+      description: A filtering option that filters entities by their entity IDs.
+      properties:
+        mediaProductIds:
+          type: array
+          description: Media Products to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        lineItemIds:
+          type: array
+          description: Line Items to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        adGroupIds:
+          type: array
+          description: YouTube Ad Groups to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        lineItemQaIds:
+          type: array
+          description: Optional. Line Items, by ID, to download in QA format. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        campaignIds:
+          type: array
+          description: Campaigns to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        adGroupAdIds:
+          type: array
+          description: YouTube Ads to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        adGroupQaIds:
+          type: array
+          description: Optional. YouTube Ad Groups, by ID, to download in QA format. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
+          items:
+            type: string
+            format: int64
+        insertionOrderIds:
+          type: array
+          description: Insertion Orders to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
           items:
             type: string
             format: int64
@@ -164,24 +224,16 @@ components:
           - SDF_VERSION_9_2
           - SDF_VERSION_10
           - SDF_VERSION_10_1
-    Status:
+    InventorySourceFilter:
       type: object
-      description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+      description: A filtering option for filtering on Inventory Source entities.
       properties:
-        message:
-          type: string
-          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of google.rpc.Code.
-        details:
+        inventorySourceIds:
           type: array
-          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          description: Inventory Sources to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest. Leave empty to download all Inventory Sources for the selected Advertiser or Partner.
           items:
-            type: object
-            additionalProperties:
-              description: Properties of the object. Contains field @type with type URL.
+            type: string
+            format: int64
     Operation:
       type: object
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -204,58 +256,6 @@ components:
           description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-    IdFilter:
-      type: object
-      description: A filtering option that filters entities by their entity IDs.
-      properties:
-        mediaProductIds:
-          type: array
-          description: Media Products to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
-        lineItemIds:
-          type: array
-          description: Line Items to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
-        adGroupIds:
-          type: array
-          description: YouTube Ad Groups to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
-        lineItemQaIds:
-          type: array
-          description: Optional. Line Items, by ID, to download in QA format. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
-        campaignIds:
-          type: array
-          description: Campaigns to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
-        adGroupAdIds:
-          type: array
-          description: YouTube Ads to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
-        adGroupQaIds:
-          type: array
-          description: Optional. YouTube Ad Groups, by ID, to download in QA format. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
-        insertionOrderIds:
-          type: array
-          description: Insertion Orders to download by ID. All IDs must belong to the same Advertiser or Partner specified in CreateSdfDownloadTaskRequest.
-          items:
-            type: string
-            format: int64
   securitySchemes:
     oauth2:
       type: oauth2
