@@ -5,8 +5,15 @@
       "source": "https://ads-developers.googleblog.com/search/label/display_video_360",
       "feed_url": "http://ads-developers.googleblog.com/feeds/posts/default",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
+    },
+    {
+      "source": "http://ads-developers.googleblog.com/feeds/posts/default",
+      "feed_url": "http://ads-developers.googleblog.com/feeds/posts/default",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     },
     {
       "source": "https://developers.google.com/display-video/api/guides/how-tos/authorizing",
@@ -16,8 +23,8 @@
       "method": "none"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-10-10T13:15:00Z",
+  "post_count": 25,
+  "fetched": "2026-10-17T14:53:57Z",
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
   "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
